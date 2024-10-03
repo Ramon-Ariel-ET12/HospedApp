@@ -51,7 +51,7 @@ CREATE TABLE Bed(
 CREATE TABLE Room(
 	IdRoom INT,
 	Garage ENUM,
-	PriceNight DECIMAL(10_2),
+	PriceNight DECIMAL(10 ,2),
 	Description VARCHAR(45),
 	CONSTRAINT PK_Room PRIMARY KEY (IdRoom)
 );
@@ -66,33 +66,36 @@ CREATE TABLE Hotel(
 	CONSTRAINT PK_Hotel PRIMARY KEY (IdHotel)
 );
 
-CREATE TABLE ();
-
-
-
-
-create table Tarjeta(
-	idTarjeta INT not null auto_increment,
-	Dni INT UNSIGNED,
-	Saldo DECIMAL(7,2),
-	CONSTRAINT PK_Tarjeta PRIMARY KEY (idTarjeta)
+CREATE TABLE RoomBed(
+	IdRoom INT,
+	IdBed INT,
+	BedQuantity TINYINT,
+	CONSTRAINT PK_RoomBed PRIMARY KEY (IdRoom),
+	CONSTRAINT PK_RoomBed PRIMARY KEY (IdBed),
+	CONSTRAINT FK_RoomBed_Room FOREIGN KEY(IdRoom)
+	REFERENCES Room (IdRoom),
+	CONSTRAINT FK_RoomBed_Bed FOREIGN KEY(IdBed)
+	REFERENCES Bed (IdBed)
 );
 
+CREATE TABLE Adress(
+	IdAdress INT,
+	IdHotel INT,
+	Domicile VARCHAR(45),
+	PostalCode TINYINT,
+	CONSTRAINT PK_Adress PRIMARY KEY (IdAdress),
+	CONSTRAINT FK_Adress_Hotel FOREIGN KEY(IdHotel)
+	REFERENCES Hotel (IdHotel)
+);
 
-
-
-create table JuegaFichin(
-	idJuegaFichin INT not null auto_increment,
-	Dni INT UNSIGNED,
-	idTarjeta INT not null,
-	idFichin INT not null,
-	FechayHora DATETIME,
-	Gasto DECIMAL(7,2),
-	CONSTRAINT PK_JuegaFichin PRIMARY KEY (idJuegaFichin),
-	CONSTRAINT FK_JuegaFichin_Cliente FOREIGN KEY (Dni)
-	REFERENCES Cliente (Dni),
-	CONSTRAINT FK_JuegaFichin_Tarjeta FOREIGN KEY (idTarjeta)
-	REFERENCES Tarjeta (idTarjeta),
-	CONSTRAINT FK_JuegaFichin_Fichin FOREIGN KEY (idFichin)
-	REFERENCES Fichin (idFichin)
+CREATE TABLE HotelRoom(
+	IdHotel INT,
+	IdRoom INT,
+	Number TINYINT,
+	CONSTRAINT PK_HotelRoom PRIMARY KEY (IdHotel),
+	CONSTRAINT PK_HotelRoom PRIMARY KEY (IdRoom),
+	CONSTRAINT FK_HotelRoom_Hotel FOREIGN KEY(IdHotel)
+	REFERENCES Hotel (IdHotel)
+	CONSTRAINT FK_HotelRoom_Room FOREIGN KEY(IdRoom)
+	REFERENCES Room (IdRoom)
 );

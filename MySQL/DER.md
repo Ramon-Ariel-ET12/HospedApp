@@ -53,7 +53,7 @@ Hotel{
     tinyint Star
 }
 
-Room_Bed{
+RoomBed{
     int IdRoom PK,FK
     int IdBed PK,FK
     tinyint BedQuantity
@@ -66,16 +66,16 @@ Address{
     tinyint PostalCode 
 }
 
-Hotel_Room{
-    int IdHotel FK
-    int IdRoom FK
+HotelRoom{
+    int IdHotel PK, FK
+    int IdRoom PK, FK
     tinyint Number
 }
 
-Room_Bed ||--o{ Bed: ""
-Room_Bed ||--o{ Room : ""
-Hotel_Room ||--o{ Hotel : ""
-Hotel_Room ||--o{ Room : ""
+RoomBed ||--o{ Bed: ""
+RoomBed ||--o{ Room : ""
+HotelRoom ||--o{ Hotel : ""
+HotelRoom ||--o{ Room : ""
 Reservation ||--o{ Room : ""
 Reservation ||--o{ Hotel : ""
 Reservation ||--o{ Client : ""
