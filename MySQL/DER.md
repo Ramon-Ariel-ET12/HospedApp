@@ -7,9 +7,9 @@ Reservation{
     int IdClient FK
     int IdHotel FK
     int IdRoom FK
-    date Start_date
-    date End_date
-    varchar Client_comment
+    date StartDate
+    date EndDate
+    varchar ClientComment
     bool Active
 }
 
@@ -24,13 +24,13 @@ User{
 Bed{
     int IdBed PK
     varchar(20) Name UK
-    tinyint Can_sleep
+    tinyint CanSleep
 }
 
 Room{
     int IdRoom PK
     enum Garage
-    decimal(10_2) Price_per_night
+    decimal(10_2) PriceNight
     varchar Description
 }
 
@@ -39,7 +39,6 @@ Client{
     int Dni UK
     varchar(30) Name
     varchar(30) Lastname
-    char(1) Sex
     varchar(14) Phone UK
     varchar(30) Email UK
     char(64) Pass
@@ -54,29 +53,29 @@ Hotel{
     tinyint Star
 }
 
-Room_Bed{
+RoomBed{
     int IdRoom PK,FK
     int IdBed PK,FK
-    tinyint bed_quantity
+    tinyint BedQuantity
 }
 
 Address{
     int IdAddress PK
     int IdHotel FK
     varchar(30) Domicile UK
-    tinyint Postal_code 
+    tinyint PostalCode 
 }
 
-Hotel_Room{
-    int IdHotel FK
-    int IdRoom FK
+HotelRoom{
+    int IdHotel PK, FK
+    int IdRoom PK, FK
     tinyint Number
 }
 
-Room_Bed ||--o{ Bed: ""
-Room_Bed ||--o{ Room : ""
-Hotel_Room ||--o{ Hotel : ""
-Hotel_Room ||--o{ Room : ""
+RoomBed ||--o{ Bed: ""
+RoomBed ||--o{ Room : ""
+HotelRoom ||--o{ Hotel : ""
+HotelRoom ||--o{ Room : ""
 Reservation ||--o{ Room : ""
 Reservation ||--o{ Hotel : ""
 Reservation ||--o{ Client : ""
