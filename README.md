@@ -27,7 +27,7 @@
 ## Comenzando 🚀
 
 ```
-git clone https://github.com/Ramon-Ariel-ET12/HospedApp/tree/HospedApp-Final
+git clone https://github.com/Ramon-Ariel-ET12/HospedApp/
 ```
 
 ### Pre-requisitos 📋
