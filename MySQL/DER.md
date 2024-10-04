@@ -15,9 +15,9 @@ Reservation{
 
 User{
     int IdUser PK
-    varchar(30) Name 
-    varchar(30) Lastname 
-    varchar(30) Email UK
+    varchar(50) Name 
+    varchar(50) Lastname 
+    varchar(50) Email UK
     char(64) Pass
 }
 
@@ -37,18 +37,18 @@ Room{
 Client{
     int IdClient PK
     int Dni UK
-    varchar(30) Name
-    varchar(30) Lastname
+    varchar(50) Name
+    varchar(50) Lastname
     varchar(14) Phone UK
-    varchar(30) Email UK
+    varchar(50) Email UK
     char(64) Pass
 }
 
 Hotel{
     int IdHotel PK
-    varchar(30) Name
+    varchar(50) Name
     varchar(14) Phone UK
-    varchar(30) Email UK
+    varchar(50) Email UK
     varchar(50) Web UK
     tinyint Star
 }
@@ -62,8 +62,8 @@ RoomBed{
 Address{
     int IdAddress PK
     int IdHotel FK
-    varchar(30) Domicile UK
-    tinyint PostalCode 
+    varchar(50) Domicile UK
+    INT PostalCode 
 }
 
 HotelRoom{
