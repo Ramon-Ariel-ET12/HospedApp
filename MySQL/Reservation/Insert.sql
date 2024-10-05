@@ -1,0 +1,22 @@
+use hospedapp;
+
+CALL RegisterReservation(1, 1, 1, '2024-10-01', '2024-10-05', 'Primera visita.');
+CALL RegisterReservation(2, 1, 2, '2024-10-06', '2024-10-10', 'Evento familiar.');
+CALL RegisterReservation(3, 2, 3, '2024-10-11', '2024-10-15', 'Vacaciones en la ciudad.');
+CALL RegisterReservation(4, 3, 4, '2024-10-16', '2024-10-20', 'Luna de miel.');
+CALL RegisterReservation(5, 4, 5, '2024-10-21', '2024-10-25', 'Negocios en la ciudad.');
+CALL RegisterReservation(6, 5, 6, '2024-10-26', '2024-10-30', 'Viaje de aventura.');
+CALL RegisterReservation(7, 6, 7, '2024-11-01', '2024-11-05', 'Descanso.');
+CALL RegisterReservation(8, 7, 8, '2024-11-06', '2024-11-10', 'Visita a familiares.');
+CALL RegisterReservation(9, 8, 9, '2024-11-11', '2024-11-15', 'Escapada romántica.');
+CALL RegisterReservation(10, 9, 10, '2024-11-16', '2024-11-20', 'Conferencia de trabajo.');
+CALL RegisterReservation(11, 10, 11, '2024-11-21', '2024-11-25', 'Cumpleaños.');
+CALL RegisterReservation(12, 1, 12, '2024-11-26', '2024-11-30', 'Reunión familiar.');
+CALL RegisterReservation(13, 2, 1, '2024-12-01', '2024-12-05', 'Festival en la ciudad.');
+CALL RegisterReservation(14, 3, 2, '2024-12-06', '2024-12-10', 'Fin de semana de relax.');
+CALL RegisterReservation(15, 4, 3, '2024-12-11', '2024-12-15', 'Visita de trabajo.');
+CALL RegisterReservation(16, 5, 4, '2024-12-16', '2024-12-20', 'Escapada de invierno.');
+CALL RegisterReservation(17, 6, 5, '2024-12-21', '2024-12-25', 'Navidad en familia.');
+CALL RegisterReservation(18, 7, 6, '2024-12-26', '2024-12-30', 'Fiesta de Año Nuevo.');
+CALL RegisterReservation(19, 8, 7, '2025-01-01', '2025-01-05', 'Inicio de año.');
+CALL RegisterReservation(20, 9, 8, '2025-01-06', '2025-01-10', 'Descanso de enero.');
