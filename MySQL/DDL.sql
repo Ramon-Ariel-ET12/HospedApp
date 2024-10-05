@@ -9,6 +9,7 @@ CREATE TABLE Client (
     Dni INT UNIQUE NOT NULL,
     Name Varchar(50) NOT NULL,
     LastName Varchar(50) NOT NULL,
+    Sex ENUM('M', 'F') NOT NULL,
     Phone Varchar(14) UNIQUE NOT NULL,
     Email Varchar(50) UNIQUE NOT NULL,
     Pass CHAR(64) NOT NULL
@@ -19,18 +20,18 @@ CREATE TABLE User (
     Name Varchar(50) NOT NULL,
     LastName Varchar(50) NOT NULL,
     Email Varchar(50) UNIQUE NOT NULL,
-    Pass CHAR NOT NULL
+    Pass CHAR(64) NOT NULL
 );
 
 CREATE TABLE Bed (
     IdBed INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(50) NOT NULL,
+    Name VARCHAR(50) UNIQUE NOT NULL,
     CanSleep TINYINT NOT NULL
 );
 
 CREATE TABLE Room (
     IdRoom INT PRIMARY KEY AUTO_INCREMENT,
-    Garage ENUM('M', 'F') NOT NULL,
+    Garage ENUM('CON', 'SIN') NOT NULL,
     PriceNight DECIMAL(10, 2) NOT NULL,
     Description TEXT NOT NULL
 );
@@ -64,7 +65,7 @@ CREATE TABLE Address (
 CREATE TABLE HotelRoom (
     IdHotel INT NOT NULL,
     IdRoom INT NOT NULL,
-    Number TINYINT NOT NULL,
+    Number TINYINT,
     CONSTRAINT FK_HotelRoom_Hotel FOREIGN KEY (IdHotel) REFERENCES Hotel (IdHotel),
     CONSTRAINT FK_HotelRoom_Room FOREIGN KEY (IdRoom) REFERENCES Room (IdRoom)
 );

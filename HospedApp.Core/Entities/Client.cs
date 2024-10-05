@@ -2,8 +2,8 @@ namespace HospedApp.Core.Entities;
 
 public class Client
 {
-    public int? IdClient { get; set; }
-    public int? Dni { get; set; }
+    public int IdClient { get; set; }
+    public int Dni { get; set; }
     public string? Name { get; set; }
     public string? LastName { get; set; }
     public string? Sex { get; set; }
