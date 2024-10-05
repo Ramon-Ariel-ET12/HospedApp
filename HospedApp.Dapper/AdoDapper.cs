@@ -1,139 +1,114 @@
 ﻿using System.Data;
-using Dapper;
 using HospedApp.Core;
 using HospedApp.Core.Entities;
+using HospedApp.Core.Entities.Relations;
+using HospedApp.Dapper.Repositories;
 using MySqlConnector;
-namespace HospedApp.Dapper;
 
-public class AdoDapper : IAdo
+namespace HospedApp.Dapper
 {
-    private readonly IDbConnection _conexion;
-    //Este constructor usa por defecto la cadena para un conector MySQL
-    public AdoDapper(string cadena) => _conexion = new MySqlConnection(cadena);
-    public AdoDapper(IDbConnection conexion) => this._conexion = conexion;
-
-    #region 'Hotel'
-    private readonly string _HotelQuery
-        = @"SELECT * FROM Hotel";
-    private readonly string _HotelDelete
-        = @"DELETE FROM Hotel WHERE IdHotel = @unIdHotel";
-
-    /***************************************************************************************/
-    public List<Hotel> GetHotels()
+    public class AdoDapper : IAdo
     {
-        var hotel = _conexion.Query<Hotel>(_HotelQuery).ToList();
-        return hotel;
-    }
-    /***************************************************************************************/
-    public void CreateHotel(Hotel hotel)
-    {
-        var parameters = ParametersHotel(hotel);
-        try
+        private readonly IDbConnection _conexion;
+        private readonly UserDapper _userDapper;
+        private readonly HotelDapper _hotelDapper;
+        private readonly ClientDapper _clientDapper;
+        private readonly BedDapper _bedDapper;
+        private readonly RoomDapper _roomDapper;
+        private readonly AddressDapper _addressDapper;
+        private readonly ReservationDapper _reservationDapper;
+        private readonly HotelRoomDapper _hotelroomDapper;
+        private readonly RoomBedDapper _roombedDapper;
+
+        public AdoDapper(string cadena)
         {
-            _conexion.Execute("RegisterHotel", parameters, commandType: CommandType.StoredProcedure);
+            _conexion = new MySqlConnection(cadena);
+            _userDapper = new UserDapper(_conexion);
+            _hotelDapper = new HotelDapper(_conexion);
+            _clientDapper = new ClientDapper(_conexion);
+            _bedDapper = new BedDapper(_conexion);
+            _roomDapper = new RoomDapper(_conexion);
+            _addressDapper = new AddressDapper(_conexion);
+            _reservationDapper = new ReservationDapper(_conexion);
+            _hotelroomDapper = new HotelRoomDapper(_conexion);
+            _roombedDapper = new RoomBedDapper(_conexion);
         }
-        catch (MySqlException error)
+
+        public AdoDapper(IDbConnection conexion)
         {
-            if (error.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
-            {
-                if (error.Message.Contains("Name"))
-                    throw new ConstraintException($"El nombre {hotel.Name} ya existe");
-                if (error.Message.Contains("Phone"))
-                    throw new ConstraintException($"El telefono {hotel.Phone} ya existe");
-                if (error.Message.Contains("Email"))
-                    throw new ConstraintException($"El correo {hotel.Email} ya existe");
-            }
-            throw;
+            _conexion = conexion;
+            _userDapper = new UserDapper(_conexion);
+            _userDapper = new UserDapper(_conexion);
+            _hotelDapper = new HotelDapper(_conexion);
+            _clientDapper = new ClientDapper(_conexion);
+            _bedDapper = new BedDapper(_conexion);
+            _roomDapper = new RoomDapper(_conexion);
+            _addressDapper = new AddressDapper(_conexion);
+            _reservationDapper = new ReservationDapper(_conexion);
+            _hotelroomDapper = new HotelRoomDapper(_conexion);
+            _roombedDapper = new RoomBedDapper(_conexion);
         }
+
+
+        #region 'Client'
+        public List<Client> GetClients() => _clientDapper.GetClients();
+        public void CreateClient(Client client) => _clientDapper.CreateClient(client);
+        public void DeleteClient(int IdClient) => _clientDapper.DeleteClient(IdClient);
+        #endregion
+
+
+        #region 'User'
+        public User? Login(string email, string password) => _userDapper.Login(email, password);
+        #endregion
+
+
+        #region 'Bed'
+        public List<Bed> GetBeds() => _bedDapper.GetBeds();
+        public void CreateBed(Bed bed) => _bedDapper.CreateBed(bed);
+        public void DeleteBed(int IdBed) => _bedDapper.DeleteBed(IdBed);
+        #endregion
+
+
+        #region 'Room'
+        public List<Room> GetRooms() => _roomDapper.GetRooms();
+        public void CreateRoom(Room room) => _roomDapper.CreateRoom(room);
+        public void DeleteRoom(int IdRoom) => _roomDapper.DeleteRoom(IdRoom);
+        #endregion
+
+
+        #region 'Hotel'
+        public List<Hotel> GetHotels() => _hotelDapper.GetHotels();
+        public void CreateHotel(Hotel hotel) => _hotelDapper.CreateHotel(hotel);
+        public void DeleteHotel(int IdHotel) => _hotelDapper.DeleteHotel(IdHotel);
+        #endregion
+
+
+        #region 'RoomBed'
+        public List<RoomBed> GetRoomBeds() => _roombedDapper.GetRoomBeds();
+        public void CreateRoomBed(RoomBed roomBed) => _roombedDapper.CreateRoomBed(roomBed);
+        public void DeleteRoomBed(int IdRoom, int IdBed) => _roombedDapper.DeleteRoomBed(IdRoom, IdBed);
+        #endregion
+
+
+        #region  'Address'
+
+        public List<Address> GetAddresses() => _addressDapper.GetAddresses();
+        public void CreateAddress(Address address) => _addressDapper.CreateAddress(address);
+        public void DeleteAddress(int IdAddress) => _addressDapper.DeleteAddress(IdAddress);
+        #endregion
+
+
+        #region 'HotelRoom'
+        public List<HotelRoom> GetHotelRooms() => _hotelroomDapper.GetHotelRooms();
+        public void CreateHotelRoom(HotelRoom hotelRoom) => _hotelroomDapper.CreateHotelRoom(hotelRoom);
+        public void DeleteHotelRoom(int RoomNumber) => _hotelroomDapper.DeleteHotelRoom(RoomNumber);
+        #endregion
+
+
+        #region 'Reservation'
+        public List<Reservation> GetReservations() => _reservationDapper.GetReservations();
+        public void CreateReservation(Reservation reservation) => _reservationDapper.CreateReservation(reservation);
+        public void CancelReservation(int IdReservation) => _reservationDapper.CancelReservation(IdReservation);
+        #endregion
     }
-    /***************************************************************************************/
-    public void DeleteHotel(int? IdHotel)
-    {
-        _conexion.Query(_HotelDelete, new { unIdHotel = IdHotel });
-    }
-    /***************************************************************************************/
-    private static DynamicParameters ParametersHotel(Hotel hotel)
-    {
-        var parameters = new DynamicParameters();
-
-        if (hotel.IdHotel != 0 || hotel.IdHotel != null)
-            parameters.Add("@unIdHotel", hotel.IdHotel);
-        parameters.Add("@unName", hotel.Name);
-        parameters.Add("@unPhone", hotel.Phone);
-        parameters.Add("@unEmail", hotel.Email);
-        parameters.Add("@unWeb", hotel.Web);
-        parameters.Add("@unStar", hotel.Star);
-
-        return parameters;
-    }
-    /***************************************************************************************/
-    #endregion
-
-    #region 'Client'
-    private readonly string _ClientQuery
-        = @"SELECT * FROM Client";
-    private readonly string _ClientDelete
-        = @"DELETE FROM Client WHERE IdClient = @unIdClient";
-    /***************************************************************************************/
-
-    public List<Client> GetClients()
-    {
-        var client = _conexion.Query<Client>(_ClientQuery).ToList();
-        return client;
-    }
-    /***************************************************************************************/
-
-    public void CreateClient(Client client)
-    {
-        var parameters = ParametersClient(client);
-
-        try
-        {
-            _conexion.Execute("RegisterClient", parameters, commandType: CommandType.StoredProcedure);
-        }
-        catch (MySqlException ex)
-        {
-            if (ex.Number == 1644)
-            {
-                if (ex.Message.Contains("dni"))
-                    throw new ConstraintException($"El dni ingresado {client.Dni} es erronea, debe ser de 8 digitos!");
-            }
-            if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
-            {
-                if (ex.Message.Contains("Name"))
-                    throw new ConstraintException($"El nombre {client.Name} ya existe");
-                if (ex.Message.Contains("Phone"))
-                    throw new ConstraintException($"El telefono {client.Phone} ya existe");
-                if (ex.Message.Contains("Email"))
-                    throw new ConstraintException($"El correo {client.Email} ya existe");
-            }
-            throw;
-        }
-    }
-    /***************************************************************************************/
-    public void DeleteClient(int? IdClient)
-    {
-        _conexion.Query(_ClientDelete, new { unIdClient = IdClient });
-    }
-    /***************************************************************************************/
-
-    public static DynamicParameters ParametersClient(Client client)
-    {
-        var parameters = new DynamicParameters();
-
-        if (client.IdClient == 0 || client.IdClient == null)
-            parameters.Add("@unIdClient", client.IdClient);
-
-        parameters.Add("@unDni", client.Dni);
-        parameters.Add("@unName", client.Name);
-        parameters.Add("@unLastName", client.LastName);
-        parameters.Add("@unPhone", client.Phone);
-        parameters.Add("@unEmail", client.Email);
-        parameters.Add("@unPass", client.Pass);
-
-        return parameters;
-    }
-    /***************************************************************************************/
-
-    #endregion
 }
