@@ -27,7 +27,7 @@ namespace HospedApp.Test
             Ado.CreateHotel(hotel);
 
             var hotels = Ado.GetHotels();
-            int? id = hotels.Max(x => x.IdHotel);
+            int id = hotels.Max(x => x.IdHotel);
             Ado.DeleteHotel(id);
         }
     }

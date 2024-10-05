@@ -18,6 +18,7 @@ namespace HospedApp.Test
                 Dni = 19287346,
                 Name = "Roque",
                 LastName = "Rivas",
+                Sex = "M",
                 Phone = "912837",
                 Email = "nose",
                 Pass = "alñskjd",
@@ -25,7 +26,7 @@ namespace HospedApp.Test
             Ado.CreateClient(client);
 
             var clients = Ado.GetClients();
-            int? id = clients.Max(x => x.IdClient);
+            int id = clients.Max(x => x.IdClient);
             Ado.DeleteClient(id);
         }
     }
