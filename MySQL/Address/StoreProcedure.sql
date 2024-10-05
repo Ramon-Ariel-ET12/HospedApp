@@ -25,7 +25,7 @@ END $$
 
 DELIMITER $$
 
-CREATE PROCEDURE SearchHotel (Search varchar(255))
+CREATE PROCEDURE SearchHotel (Search TEXT)
 BEGIN
 	SELECT * FROM hotel
     WHERE 
