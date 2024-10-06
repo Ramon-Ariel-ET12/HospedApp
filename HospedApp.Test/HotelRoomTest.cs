@@ -18,6 +18,7 @@ namespace HospedApp.Test
             var hotelroom = new HotelRoom()
             {
                 Hotel = new (){ IdHotel = 4},
+                Address = new(){ IdAddress = 13},
                 Room = new(){ IdRoom = 10},
             };
 
@@ -25,9 +26,9 @@ namespace HospedApp.Test
 
             var hotelrooms = Ado.GetHotelRooms();
 
-            var number = hotelrooms.Max(x => x.Number);
+            var number = hotelrooms.Where(x => x.Hotel!.IdHotel == hotelroom.Hotel.IdHotel).Max(x => x.Number);
 
-            Ado.DeleteHotelRoom(number);
+            Ado.DeleteHotelRoom(hotelroom.Hotel.IdHotel, number);
         }
     }
 }

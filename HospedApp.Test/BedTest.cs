@@ -18,7 +18,7 @@ namespace HospedApp.Test
             var bed = new Bed()
             {
                 Name = "Camita",
-                CanSleep = 200,
+                CanSleep = 20,
             };
             Ado.CreateBed(bed);
 

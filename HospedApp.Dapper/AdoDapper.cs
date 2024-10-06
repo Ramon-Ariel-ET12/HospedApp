@@ -101,12 +101,13 @@ namespace HospedApp.Dapper
         #region 'HotelRoom'
         public List<HotelRoom> GetHotelRooms() => _hotelroomDapper.GetHotelRooms();
         public void CreateHotelRoom(HotelRoom hotelRoom) => _hotelroomDapper.CreateHotelRoom(hotelRoom);
-        public void DeleteHotelRoom(int RoomNumber) => _hotelroomDapper.DeleteHotelRoom(RoomNumber);
+        public void DeleteHotelRoom(int IdHotel, int RoomNumber) => _hotelroomDapper.DeleteHotelRoom(IdHotel, RoomNumber);
         #endregion
 
 
         #region 'Reservation'
         public List<Reservation> GetReservations() => _reservationDapper.GetReservations();
+        public List<Reservation> GetReservationsCancelled() => _reservationDapper.GetReservationsCancelled();
         public void CreateReservation(Reservation reservation) => _reservationDapper.CreateReservation(reservation);
         public void CancelReservation(int IdReservation) => _reservationDapper.CancelReservation(IdReservation);
         #endregion

@@ -54,12 +54,13 @@ public interface IAdo
     #region 'HotelRoom'
     List<HotelRoom> GetHotelRooms();
     void CreateHotelRoom(HotelRoom hotelRoom);
-    void DeleteHotelRoom(int RoomNumber);
+    void DeleteHotelRoom(int IdHotel, int RoomNumber);
     #endregion
 
 
     #region 'Reservation'
     List<Reservation> GetReservations();
+    List<Reservation> GetReservationsCancelled();
     void CreateReservation(Reservation reservation);
     void CancelReservation(int IdReservation);
     #endregion
