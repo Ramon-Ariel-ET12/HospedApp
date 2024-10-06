@@ -25,15 +25,3 @@ BEGIN
     WHERE IdClient = unIdClient;
 END $$
 #######################################################################################
-DELIMITER $$
-
-CREATE PROCEDURE SearchClient (Search TEXT)
-BEGIN
-    SELECT * FROM Client
-    WHERE
-        Dni LIKE CONCAT('%', Search ,'%')
-        OR Name LIKE CONCAT('%', Search ,'%')
-        OR LastName LIKE CONCAT('%', Search ,'%')
-        OR Email LIKE CONCAT('%', Search ,'%')
-        OR Pass LIKE CONCAT('%', Search ,'%');
-END $$

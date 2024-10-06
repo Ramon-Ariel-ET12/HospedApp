@@ -25,16 +25,3 @@ BEGIN
 END $$
 #######################################################################################
 
-DELIMITER $$
-
-CREATE PROCEDURE SearchHotel (Search TEXT)
-BEGIN
-	SELECT * FROM hotel
-    WHERE 
-        Name LIKE CONCAT('%', Search ,'%') 
-        OR Phone LIKE CONCAT('%', Search ,'%')
-        OR Email LIKE CONCAT('%', Search ,'%')
-        OR Web LIKE CONCAT('%', Search ,'%')
-        OR Star LIKE CONCAT('%', Search ,'%');
-END $$
-#######################################################################################

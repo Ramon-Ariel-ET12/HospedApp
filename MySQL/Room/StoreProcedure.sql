@@ -20,13 +20,3 @@ BEGIN
     WHERE IdRoom = unIdRoom;
 END $$
 
-DELIMITER $$
-
-CREATE PROCEDURE SearchRoom (Search TEXT)
-BEGIN
-    SELECT * FROM Room
-    WHERE
-        Garage LIKE CONCAT('%', Search ,'%') OR
-        PriceNight LIKE CONCAT('%', Search ,'%') OR
-        Description LIKE CONCAT('%', Search ,'%');
-END $$

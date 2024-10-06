@@ -23,14 +23,3 @@ BEGIN
 END $$
 #######################################################################################
 
-DELIMITER $$
-
-CREATE PROCEDURE SearchHotel (Search TEXT)
-BEGIN
-	SELECT * FROM hotel
-    WHERE 
-        IdHotel LIKE CONCAT('%', Search ,'%')
-        OR Domicile LIKE CONCAT('%', Search ,'%')
-        OR PostalCode LIKE CONCAT('%', Search ,'%');
-END $$
-#######################################################################################

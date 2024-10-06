@@ -19,12 +19,3 @@ BEGIN
     WHERE IdBed = unIdBed;
 END $$
 
-DELIMITER $$
-
-CREATE PROCEDURE SearchBed (Search TEXT)
-BEGIN
-    SELECT * FROM Bed 
-    WHERE
-        Name LIKE CONCAT('%', Search, '%')
-        OR CanSleep LIKE CONCAT('%', Search, '%');
-END $$
