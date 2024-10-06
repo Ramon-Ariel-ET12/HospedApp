@@ -11,24 +11,49 @@ public class ReservationDapper
     public ReservationDapper(IDbConnection connection) => _connection = connection;
 
     private readonly string _reservationQuery
-        = @"SELECT r.*, c.*, h.*, ro.* FROM Reservation r
+        = @"SELECT r.*, c.*, h.*, a.*, ro.* FROM Reservation r
             INNER JOIN Client c ON r.IdClient = c.IdClient
             INNER JOIN Hotel h ON r.IdHotel = h.IdHotel
-            INNER JOIN Room ro ON r.IdRoom = ro.IdRoom";
+            INNER JOIN Address a ON a.IdAddress = r.IdAddress
+            INNER JOIN Room ro ON r.IdRoom = ro.IdRoom
+            WHERE r.Active = TRUE";
+    private readonly string _reservationCancelledQuery
+        = @"SELECT r.*, c.*, h.*, a.*, ro.* FROM Reservation r
+            INNER JOIN Client c ON r.IdClient = c.IdClient
+            INNER JOIN Hotel h ON r.IdHotel = h.IdHotel
+            INNER JOIN Address a ON a.IdAddress = r.IdAddress
+            INNER JOIN Room ro ON r.IdRoom = ro.IdRoom
+            WHERE r.Active = FALSE";
     private readonly string _reservationCancel
         = @"UPDATE Reservation SET Active = FALSE WHERE IdReservation = @unIdReservation";
 
     public List<Reservation> GetReservations()
     {
-        var reservation = _connection.Query<Reservation, Client, Hotel, Room, Reservation>(_reservationQuery, 
-        (reservation, client, hotel, room) =>
+        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery, 
+        (reservation, client, hotel, address, room) =>
         {
             reservation.Client = client;
             reservation.Hotel = hotel;
+            reservation.Address = address;
             reservation.Room = room;
             return reservation;
         },
-        splitOn: "IdClient, IdHotel, IdRoom"
+        splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
+        ).ToList();
+        return reservation;
+    }
+    public List<Reservation> GetReservationsCancelled()
+    {
+        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery, 
+        (reservation, client, hotel, address, room) =>
+        {
+            reservation.Client = client;
+            reservation.Hotel = hotel;
+            reservation.Address = address;
+            reservation.Room = room;
+            return reservation;
+        },
+        splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
         ).ToList();
         return reservation;
     }
@@ -62,6 +87,7 @@ public class ReservationDapper
             parameters.Add("@unIdReservation", reservation.IdReservation);
         parameters.Add("@unIdClient", reservation.Client!.IdClient);
         parameters.Add("@unIdHotel", reservation.Hotel!.IdHotel);
+        parameters.Add("@unIdAddress", reservation.Address!.IdAddress);
         parameters.Add("@unIdRoom", reservation.Room!.IdRoom);
         parameters.Add("@unStartDate", reservation.StartDate);
         parameters.Add("@unEndDate", reservation.EndDate);

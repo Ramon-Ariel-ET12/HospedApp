@@ -12,22 +12,24 @@ public class HotelRoomDapper
     public HotelRoomDapper(IDbConnection connection) => _connection = connection;
 
     private readonly string _HotelRoomQuery
-        = @"SELECT hr.*, h.*, r.* FROM HotelRoom hr
+        = @"SELECT hr.*, h.*, a.*, r.* FROM hotelRoom hr
             INNER JOIN Hotel h ON h.IdHotel = hr.IdHotel
+            INNER JOIN Address a ON a.IdAddress = hr.IdAddress
             INNER JOIN Room r ON r.IdRoom = hr.IdRoom";
     private readonly string _HotelRoomDelete
-        = @"DELETE FROM HotelRoom WHERE Number = @unRoomNumber";
+        = @"DELETE FROM HotelRoom WHERE IdHotel = @unIdhotel AND Number = @unRoomNumber";
 
     public List<HotelRoom> GetHotelRooms()
     {
-        var hotelroom = _connection.Query<HotelRoom, Hotel, Room, HotelRoom>(_HotelRoomQuery,
-            (hotelroom, hotel, room) =>
+        var hotelroom = _connection.Query<HotelRoom, Hotel, Address, Room, HotelRoom>(_HotelRoomQuery,
+            (hotelroom, hotel, address, room) =>
             {
                 hotelroom.Hotel = hotel;
+                hotelroom.Address = address;
                 hotelroom.Room = room;
                 return hotelroom;
             },
-            splitOn: "IdHotel, IdRoom"
+            splitOn: "IdHotel, IdAddress, IdRoom"
         ).ToList();
         return hotelroom;
     }
@@ -43,9 +45,9 @@ public class HotelRoomDapper
             throw new ConstraintException(ex.Message); ;
         }
     }
-    public void DeleteHotelRoom(int RoomNumber)
+    public void DeleteHotelRoom(int IdHotel, int RoomNumber)
     {
-        _connection.Execute(_HotelRoomDelete, new { unRoomNumber = RoomNumber });
+        _connection.Execute(_HotelRoomDelete, new { unIdHotel = IdHotel, unRoomNumber = RoomNumber });
     }
 
     public static DynamicParameters ParametersHotelRoom(HotelRoom hotelRoom)
@@ -53,6 +55,7 @@ public class HotelRoomDapper
         var parameters = new DynamicParameters();
 
         parameters.Add("@unIdHotel", hotelRoom.Hotel!.IdHotel);
+        parameters.Add("@unIdAddress", hotelRoom.Address!.IdAddress);
         parameters.Add("@unIdRoom", hotelRoom.Room!.IdRoom);
 
         return parameters;

@@ -17,11 +17,12 @@ public class ReservationTest : AdoTest
     {
         var reservation = new Reservation()
         {
-            Client = new Client(){ IdClient = 1},
-            Hotel = new Hotel(){ IdHotel = 1},
-            Room = new Room(){ IdRoom = 1},
-            StartDate = "2025-12-1",
-            EndDate = "2025-12-1",
+            Client = new Client() { IdClient = 1 },
+            Hotel = new Hotel() { IdHotel = 1 },
+            Address = new Address() { IdAddress = 1 },
+            Room = new Room() { IdRoom = 1 },
+            StartDate = new(3000, 12, 1),
+            EndDate = new(3000, 12, 1),
             ClientComment = "new DateOnly(2026, 12, 1)",
         };
 

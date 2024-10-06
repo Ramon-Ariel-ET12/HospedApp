@@ -64,9 +64,11 @@ CREATE TABLE Address (
 
 CREATE TABLE HotelRoom (
     IdHotel INT NOT NULL,
+    IdAddress INT NOT NULL,
     IdRoom INT NOT NULL,
     Number TINYINT,
     CONSTRAINT FK_HotelRoom_Hotel FOREIGN KEY (IdHotel) REFERENCES Hotel (IdHotel),
+    CONSTRAINT FK_HotelRoom_Address FOREIGN KEY (IdAddress) REFERENCES Address (IdAddress),
     CONSTRAINT FK_HotelRoom_Room FOREIGN KEY (IdRoom) REFERENCES Room (IdRoom)
 );
 
@@ -74,12 +76,14 @@ CREATE TABLE Reservation (
     IdReservation INT PRIMARY KEY AUTO_INCREMENT,
     IdClient INT NOT NULL,
     IdHotel INT NOT NULL,
+    IdAddress INT NOT NULL,
     IdRoom INT NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
-    ClientComment TEXT NOT NULL,
+    ClientComment TEXT,
     Active BOOL DEFAULT TRUE,
     CONSTRAINT FK_Reservation_Client FOREIGN KEY (IdClient) REFERENCES Client (IdClient),
+    CONSTRAINT FK_Reservation_Address FOREIGN KEY (IdAddress) REFERENCES Address (IdAddress),
     CONSTRAINT FK_Reservation_Hotel FOREIGN KEY (IdHotel) REFERENCES Hotel (IdHotel),
     CONSTRAINT FK_Reservation_Room FOREIGN KEY (IdRoom) REFERENCES Room (IdRoom)
 );
