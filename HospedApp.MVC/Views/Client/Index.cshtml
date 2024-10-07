@@ -10,14 +10,12 @@
     </div>
 
     <div>
-        <form asp-controller="Cliente" asp-action="Buscar" method="get">
-            <input type="text" name="busqueda" placeholder="Buscar clientes..." />
-            <button type="submit">Buscar</button>
-        </form>
+        <input type="text" name="busqueda" placeholder="Buscar clientes..." />
+        <button>Buscar</button>
     </div>
 
     <div>
-        @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Busqueda"))
+        @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron clientes.</p>
         }
@@ -47,7 +45,7 @@
                                 <td>@client.Phone</td>
                                 <td>@client.Email</td>
                                 <td>
-                                    <a asp-action="Modificar" asp-route-dni="@client.Dni">Modificar</a>
+                                    <a asp-action="Modificar" asp-route-dni="@client.IdClient">Modificar</a>
                                 </td>
                             </tr>
                         }
