@@ -14,18 +14,18 @@ public class BedDapper
         = @"SELECT * FROM Bed";
     private readonly string _BedDelete
         = @"DELETE FROM Bed WHERE IdBed = @unIdBed";
-    public List<Bed> GetBeds()
+    public async Task<List<Bed>> GetBeds()
     {
-        var bed = _connection.Query<Bed>(_BedQuery).ToList();
+        var bed = (await _connection.QueryAsync<Bed>(_BedQuery)).ToList();
         return bed;
     }
-    public void CreateBed(Bed bed)
+    public async Task CreateBed(Bed bed)
     {
         var parameters = ParametersBed(bed);
 
         try
         {
-            _connection.Execute("RegisterBed", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterBed", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
@@ -38,9 +38,9 @@ public class BedDapper
         }
 
     }
-    public void DeleteBed(int IdBed)
+    public async Task DeleteBed(int IdBed)
     {
-        _connection.Execute(_BedDelete, new { unIdBed = IdBed });
+        await _connection.ExecuteAsync(_BedDelete, new { unIdBed = IdBed });
     }
 
     private static DynamicParameters ParametersBed(Bed bed)

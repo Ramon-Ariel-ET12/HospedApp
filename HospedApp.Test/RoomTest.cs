@@ -5,15 +5,15 @@ namespace HospedApp.Test
     public class RoomTest : AdoTest
     {
         [Fact]
-        public void GetRooms()
+        public async Task GetRooms()
         {
-            var room = Ado.GetRooms();
+            var room = await Ado.GetRooms();
 
             Assert.NotEmpty(room);
         }
 
         [Fact]
-        public void CreateRoom()
+        public async Task CreateRoom()
         {
             var room = new Room()
             {
@@ -22,11 +22,11 @@ namespace HospedApp.Test
                 Description = "Comoda",
             };
 
-            Ado.CreateRoom(room);
+            await Ado.CreateRoom(room);
 
-            var rooms = Ado.GetRooms();
+            var rooms = await Ado.GetRooms();
             var id = rooms.Max(x => x.IdRoom);
-            Ado.DeleteRoom(id);
+            await Ado.DeleteRoom(id);
         }
     }
 }

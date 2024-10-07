@@ -5,15 +5,15 @@ namespace HospedApp.Test
     public class HotelRoomTest : AdoTest
     {
         [Fact]
-        public void GetHotelRooms()
+        public async Task GetHotelRooms()
         {
-            var room = Ado.GetHotelRooms();
+            var room = await Ado.GetHotelRooms();
 
             Assert.NotEmpty(room);
         }
 
         [Fact]
-        public void CreateHotelRoom()
+        public async Task CreateHotelRoom()
         {
             var hotelroom = new HotelRoom()
             {
@@ -22,13 +22,13 @@ namespace HospedApp.Test
                 Room = new(){ IdRoom = 10},
             };
 
-            Ado.CreateHotelRoom(hotelroom);
+            await Ado.CreateHotelRoom(hotelroom);
 
-            var hotelrooms = Ado.GetHotelRooms();
+            var hotelrooms = await Ado.GetHotelRooms();
 
             var number = hotelrooms.Where(x => x.Hotel!.IdHotel == hotelroom.Hotel.IdHotel).Max(x => x.Number);
 
-            Ado.DeleteHotelRoom(hotelroom.Hotel.IdHotel, number);
+            await Ado.DeleteHotelRoom(hotelroom.Hotel.IdHotel, number);
         }
     }
 }

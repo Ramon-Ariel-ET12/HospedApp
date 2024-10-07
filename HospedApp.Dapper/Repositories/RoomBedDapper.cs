@@ -18,9 +18,9 @@ public class RoomBedDapper
     private readonly string _RoomBedDelete
         = @"DELETE FROM RoomBed WHERE IdRoom = @unIdRoom AND IdBed = @unIdBed";
 
-    public List<RoomBed> GetRoomBeds()
+    public async Task<List<RoomBed>> GetRoomBeds()
     {
-        var roombed = _connection.Query<RoomBed, Room, Bed, RoomBed>(_RoomBedQuery,
+        var roombed = (await _connection.QueryAsync<RoomBed, Room, Bed, RoomBed>(_RoomBedQuery,
             (roombed, room, bed) => 
             {
                 roombed.Room = room;
@@ -28,24 +28,24 @@ public class RoomBedDapper
                 return roombed;
             },
             splitOn: "IdRoom, IdBed"
-            ).ToList();
+            )).ToList();
         return roombed;
     }
-    public void CreateRoomBed(RoomBed roomBed)
+    public async Task CreateRoomBed(RoomBed roomBed)
     {
         var parameters = ParametersRoomBed(roomBed);
         try
         {
-            _connection.Execute("RegisterRoomBed", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterRoomBed", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
             throw new ConstraintException(ex.Message);;
         }
     }
-    public void DeleteRoomBed(int IdRoom, int IdBed)
+    public async Task DeleteRoomBed(int IdRoom, int IdBed)
     {
-        _connection.Execute(_RoomBedDelete, new { unIdRoom = IdRoom, unIdBed = IdBed });
+        await _connection.ExecuteAsync(_RoomBedDelete, new { unIdRoom = IdRoom, unIdBed = IdBed });
     }
 
     public static DynamicParameters ParametersRoomBed(RoomBed roomBed)

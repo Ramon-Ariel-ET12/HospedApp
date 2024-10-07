@@ -5,9 +5,9 @@ namespace HospedApp.Test;
 public class ReservationCancelledTest : AdoTest
 {
     [Fact]
-    public void GetReservationsCancelled()
+    public async Task GetReservationsCancelled()
     {
-        var reservationCancelled = Ado.GetReservationsCancelled();
+        var reservationCancelled = await Ado.GetReservationsCancelled();
 
         Assert.NotEmpty(reservationCancelled);
     }

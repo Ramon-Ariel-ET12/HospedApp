@@ -6,15 +6,15 @@ namespace HospedApp.Test
     public class RoomBedTest : AdoTest
     {
         [Fact]
-        public void GetRoomBeds()
+        public async Task GetRoomBeds()
         {
-            var roomBed = Ado.GetRoomBeds();
+            var roomBed = await Ado.GetRoomBeds();
 
             Assert.NotEmpty(roomBed);
         }
 
         [Fact]
-        public void CreateRoomBed()
+        public async Task CreateRoomBed()
         {
             var roombed = new RoomBed()
             {
@@ -23,9 +23,9 @@ namespace HospedApp.Test
                 BedQuantity = 20,
             };
 
-            Ado.CreateRoomBed(roombed);
+            await Ado.CreateRoomBed(roombed);
 
-            Ado.DeleteRoomBed(roombed.Room.IdRoom, roombed.Bed.IdBed);
+            await Ado.DeleteRoomBed(roombed.Room.IdRoom, roombed.Bed.IdBed);
         }
     }
 }

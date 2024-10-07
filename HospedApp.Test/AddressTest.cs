@@ -5,15 +5,15 @@ namespace HospedApp.Test
     public class AddressTest : AdoTest
     {
         [Fact]
-        public void GetAddresses()
+        public async Task GetAddresses()
         {
-            var address = Ado.GetAddresses();
+            var address = await Ado.GetAddresses();
 
             Assert.NotEmpty(address);
         }
 
         [Fact]
-        public void CreateAddress()
+        public async Task CreateAddress()
         {
             var address = new Address()
             {
@@ -22,12 +22,12 @@ namespace HospedApp.Test
                 PostalCode = 1104,
             };
 
-            Ado.CreateAddress(address);
+            await Ado.CreateAddress(address);
 
-            var addresses = Ado.GetAddresses();
+            var addresses = await Ado.GetAddresses();
             var id = addresses.Max(x => x.IdAddress);
 
-            Ado.DeleteAddress(id);
+            await Ado.DeleteAddress(id);
         }
     }
 }

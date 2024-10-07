@@ -12,9 +12,9 @@ public class UserDapper
     private readonly string _UserQueryEmailPass
         = @"CALL GetEmailPass(@unEmail, @unPass)";
 
-    public User? Login(string Email, string Pass)
+    public async Task<User?> Login(string Email, string Pass)
     {
-        var user = _conexion.QueryFirstOrDefault<User>(_UserQueryEmailPass, new { unEmail = Email, unPass = Pass });
+        var user = await _conexion.QueryFirstOrDefaultAsync<User>(_UserQueryEmailPass, new { unEmail = Email, unPass = Pass });
         return user;
     }
 }

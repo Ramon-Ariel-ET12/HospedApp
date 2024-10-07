@@ -3,9 +3,9 @@ namespace HospedApp.Test
     public class UserTest : AdoTest
     {
         [Fact]
-        public void Login()
+        public async Task Login()
         {
-            var user = Ado.Login("eljonsu@gmail.com", "JonAlv");
+            var user = await Ado.Login("eljonsu@gmail.com", "JonAlv");
 
             Assert.NotNull(user);
         }

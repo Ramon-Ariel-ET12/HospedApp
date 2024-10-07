@@ -14,26 +14,26 @@ public class RoomDapper
         = @"SELECT * FROM Room";
     private readonly string _RoomDelete
         = @"DELETE FROM Room WHERE IdRoom = @unIdRoom";
-    public List<Room> GetRooms()
+    public async Task<List<Room>> GetRooms()
     {
-        var room = _connection.Query<Room>(_RoomQuery).ToList();
+        var room = (await _connection.QueryAsync<Room>(_RoomQuery)).ToList();
         return room;
     }
-    public void CreateRoom(Room room)
+    public async Task CreateRoom(Room room)
     {
         var parameters = ParametersRoom(room);
         try
         {
-            _connection.Execute("RegisterRoom", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterRoom", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
             throw new ConstraintException(ex.Message);
         }
     }
-    public void DeleteRoom(int IdRoom)
+    public async Task DeleteRoom(int IdRoom)
     {
-        _connection.Execute(_RoomDelete, new { unIdRoom = IdRoom});
+        await _connection.ExecuteAsync(_RoomDelete, new { unIdRoom = IdRoom});
     }
 
     private static DynamicParameters ParametersRoom(Room room)

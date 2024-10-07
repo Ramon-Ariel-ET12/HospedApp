@@ -27,9 +27,9 @@ public class ReservationDapper
     private readonly string _reservationCancel
         = @"UPDATE Reservation SET Active = FALSE WHERE IdReservation = @unIdReservation";
 
-    public List<Reservation> GetReservations()
+    public async Task<List<Reservation>> GetReservations()
     {
-        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery, 
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery, 
         (reservation, client, hotel, address, room) =>
         {
             reservation.Client = client;
@@ -39,12 +39,12 @@ public class ReservationDapper
             return reservation;
         },
         splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
-        ).ToList();
+        )).ToList();
         return reservation;
     }
-    public List<Reservation> GetReservationsCancelled()
+    public async Task<List<Reservation>> GetReservationsCancelled()
     {
-        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery, 
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery, 
         (reservation, client, hotel, address, room) =>
         {
             reservation.Client = client;
@@ -54,16 +54,16 @@ public class ReservationDapper
             return reservation;
         },
         splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
-        ).ToList();
+        )).ToList();
         return reservation;
     }
-    public void CreateReservation(Reservation reservation)
+    public async Task CreateReservation(Reservation reservation)
     {
         var parameters = ParametersReservation(reservation);
 
         try
         {
-            _connection.Execute("RegisterReservation", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterReservation", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
@@ -74,9 +74,9 @@ public class ReservationDapper
             }
         }
     }
-    public void CancelReservation(int IdReservation)
+    public async Task CancelReservation(int IdReservation)
     {
-        _connection.Execute(_reservationCancel, new { unIdReservation = IdReservation});
+        await _connection.ExecuteAsync(_reservationCancel, new { unIdReservation = IdReservation});
     }
 
     private static DynamicParameters ParametersReservation(Reservation reservation)

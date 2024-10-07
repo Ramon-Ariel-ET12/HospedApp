@@ -17,19 +17,19 @@ public class ClientDapper
     private readonly string _ClientDelete
         = @"DELETE FROM Client WHERE IdClient = @unIdClient";
 
-    public List<Client> GetClients()
+    public async Task<List<Client>> GetClients()
     {
-        var client = _conexion.Query<Client>(_ClientQuery).ToList();
+        var client = (await _conexion.QueryAsync<Client>(_ClientQuery)).ToList();
         return client;
     }
 
-    public void CreateClient(Client client)
+    public async Task CreateClient(Client client)
     {
         var parameters = ParametersClient(client);
 
         try
         {
-            _conexion.Execute("RegisterClient", parameters, commandType: CommandType.StoredProcedure);
+            await _conexion.ExecuteAsync("RegisterClient", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
@@ -52,9 +52,9 @@ public class ClientDapper
             throw;
         }
     }
-    public void DeleteClient(int IdClient)
+    public async Task DeleteClient(int IdClient)
     {
-        _conexion.Execute(_ClientDelete, new { unIdClient = IdClient });
+        await _conexion.ExecuteAsync(_ClientDelete, new { unIdClient = IdClient });
     }
     public static DynamicParameters ParametersClient(Client client)
     {

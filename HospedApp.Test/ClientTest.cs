@@ -5,13 +5,13 @@ namespace HospedApp.Test
     public class ClientTest : AdoTest
     {
         [Fact]
-        public void GetClients()
+        public async Task GetClients()
         {
-            var client = Ado.GetClients();
+            var client = await Ado.GetClients();
             Assert.NotEmpty(client);
         }
         [Fact]
-        public void CreateClients()
+        public async Task CreateClients()
         {
             var client = new Client()
             {
@@ -23,11 +23,11 @@ namespace HospedApp.Test
                 Email = "nose",
                 Pass = "alñskjd",
             };
-            Ado.CreateClient(client);
+            await Ado.CreateClient(client);
 
-            var clients = Ado.GetClients();
+            var clients = await Ado.GetClients();
             int id = clients.Max(x => x.IdClient);
-            Ado.DeleteClient(id);
+            await Ado.DeleteClient(id);
         }
     }
 }

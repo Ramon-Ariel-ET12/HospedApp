@@ -19,9 +19,9 @@ public class HotelRoomDapper
     private readonly string _HotelRoomDelete
         = @"DELETE FROM HotelRoom WHERE IdHotel = @unIdhotel AND Number = @unRoomNumber";
 
-    public List<HotelRoom> GetHotelRooms()
+    public async Task<List<HotelRoom>> GetHotelRooms()
     {
-        var hotelroom = _connection.Query<HotelRoom, Hotel, Address, Room, HotelRoom>(_HotelRoomQuery,
+        var hotelroom = (await _connection.QueryAsync<HotelRoom, Hotel, Address, Room, HotelRoom>(_HotelRoomQuery,
             (hotelroom, hotel, address, room) =>
             {
                 hotelroom.Hotel = hotel;
@@ -30,24 +30,24 @@ public class HotelRoomDapper
                 return hotelroom;
             },
             splitOn: "IdHotel, IdAddress, IdRoom"
-        ).ToList();
+        )).ToList();
         return hotelroom;
     }
-    public void CreateHotelRoom(HotelRoom hotelRoom)
+    public async Task CreateHotelRoom(HotelRoom hotelRoom)
     {
         var parameters = ParametersHotelRoom(hotelRoom);
         try
         {
-            _connection.Execute("RegisterHotelRoom", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterHotelRoom", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
             throw new ConstraintException(ex.Message); ;
         }
     }
-    public void DeleteHotelRoom(int IdHotel, int RoomNumber)
+    public async Task DeleteHotelRoom(int IdHotel, int RoomNumber)
     {
-        _connection.Execute(_HotelRoomDelete, new { unIdHotel = IdHotel, unRoomNumber = RoomNumber });
+        await _connection.ExecuteAsync(_HotelRoomDelete, new { unIdHotel = IdHotel, unRoomNumber = RoomNumber });
     }
 
     public static DynamicParameters ParametersHotelRoom(HotelRoom hotelRoom)

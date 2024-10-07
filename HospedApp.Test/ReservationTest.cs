@@ -5,15 +5,15 @@ namespace HospedApp.Test;
 public class ReservationTest : AdoTest
 {
     [Fact]
-    public void GetReservations()
+    public async Task GetReservations()
     {
-        var reservation = Ado.GetReservations();
+        var reservation = await Ado.GetReservations();
 
         Assert.NotEmpty(reservation);
     }
 
     [Fact]
-    public void CreateReservation()
+    public async Task CreateReservation()
     {
         var reservation = new Reservation()
         {
@@ -26,10 +26,10 @@ public class ReservationTest : AdoTest
             ClientComment = "new DateOnly(2026, 12, 1)",
         };
 
-        Ado.CreateReservation(reservation);
+        await Ado.CreateReservation(reservation);
 
-        var reservations = Ado.GetReservations();
+        var reservations = await Ado.GetReservations();
         var id = reservations.Max(x => x.IdReservation);
-        Ado.CancelReservation(id);
+        await Ado.CancelReservation(id);
     }
 }

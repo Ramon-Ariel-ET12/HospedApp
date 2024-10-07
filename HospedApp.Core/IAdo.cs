@@ -6,63 +6,63 @@ namespace HospedApp.Core;
 public interface IAdo
 {
     #region 'Client'
-    List<Client> GetClients();
-    void CreateClient(Client client);
-    void DeleteClient(int IdClient);
+    Task<List<Client>> GetClients();
+    Task CreateClient(Client client);
+    Task DeleteClient(int IdClient);
     #endregion
 
 
     #region 'User'
-    User? Login(string email, string password);
+    Task<User?> Login(string email, string password);
     #endregion
 
 
     #region 'Bed'
-    List<Bed> GetBeds();
-    void CreateBed(Bed bed);
-    void DeleteBed(int IdBed);
+    Task<List<Bed>> GetBeds();
+    Task CreateBed(Bed bed);
+    Task DeleteBed(int IdBed);
     #endregion
 
 
     #region 'Room'
-    List<Room> GetRooms();
-    void CreateRoom(Room room);
-    void DeleteRoom(int IdRoom);
+    Task<List<Room>> GetRooms();
+    Task CreateRoom(Room room);
+    Task DeleteRoom(int IdRoom);
     #endregion
 
     #region 'Hotel'
-    List<Hotel> GetHotels();
-    void CreateHotel(Hotel hotel);
-    void DeleteHotel(int IdHotel);
+    Task<List<Hotel>> GetHotels();
+    Task CreateHotel(Hotel hotel);
+    Task DeleteHotel(int IdHotel);
     #endregion
 
 
     #region 'RoomBed'
-    List<RoomBed> GetRoomBeds();
-    void CreateRoomBed(RoomBed roomBed);
-    void DeleteRoomBed(int IdRoom, int IdBed);
+    Task<List<RoomBed>> GetRoomBeds();
+    Task CreateRoomBed(RoomBed roomBed);
+    Task DeleteRoomBed(int IdRoom, int IdBed);
     #endregion
 
 
     #region 'Address'
-    List<Address> GetAddresses();
-    void CreateAddress(Address address);
-    void DeleteAddress(int IdAddress);
+    Task<List<Address>> GetAddresses();
+    Task CreateAddress(Address address);
+    Task DeleteAddress(int IdAddress);
     #endregion
 
 
     #region 'HotelRoom'
-    List<HotelRoom> GetHotelRooms();
-    void CreateHotelRoom(HotelRoom hotelRoom);
-    void DeleteHotelRoom(int IdHotel, int RoomNumber);
+    Task<List<HotelRoom>> GetHotelRooms();
+    Task CreateHotelRoom(HotelRoom hotelRoom);
+    Task DeleteHotelRoom(int IdHotel, int RoomNumber);
     #endregion
 
 
     #region 'Reservation'
-    List<Reservation> GetReservations();
-    List<Reservation> GetReservationsCancelled();
-    void CreateReservation(Reservation reservation);
-    void CancelReservation(int IdReservation);
+    Task<List<Reservation>> GetReservations();
+    Task<List<Reservation>> GetReservationsCancelled();
+    Task CreateReservation(Reservation reservation);
+    Task CancelReservation(int IdReservation);
     #endregion
 
 }

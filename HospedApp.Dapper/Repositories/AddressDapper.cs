@@ -15,25 +15,25 @@ public class AddressDapper
             INNER JOIN Hotel h ON a.IdHotel = h.IdHotel";
     private readonly string _addressDelete
         = @"DELETE FROM Address WHERE IdAddress = @unIdAddress";
-    public List<Address> GetAddresses()
+    public async Task<List<Address>> GetAddresses()
     {
-        var address = _connection.Query<Address, Hotel, Address>(_addressQuery,
+        var address = (await _connection.QueryAsync<Address, Hotel, Address>(_addressQuery,
             (address, hotel) =>
             {
                 address.Hotel = hotel;
                 return address;
             },
             splitOn: "IdHotel"
-        ).ToList();
+        )).ToList();
         return address;
     }
-    public void CreateAddress(Address address)
+    public async Task CreateAddress(Address address)
     {
         var parameters = ParametersAddress(address);
 
         try
         {
-            _connection.Execute("RegisterAddress", parameters, commandType: CommandType.StoredProcedure);
+            await _connection.ExecuteAsync("RegisterAddress", parameters, commandType: CommandType.StoredProcedure);
         }
         catch (MySqlException ex)
         {
@@ -44,9 +44,9 @@ public class AddressDapper
             }
         }
     }
-    public void DeleteAddress(int IdAddress)
+    public async Task DeleteAddress(int IdAddress)
     {
-        _connection.Execute(_addressDelete, new{ unIdAddress = IdAddress });
+        await _connection.ExecuteAsync(_addressDelete, new{ unIdAddress = IdAddress });
     }
 
     public static DynamicParameters ParametersAddress(Address address)

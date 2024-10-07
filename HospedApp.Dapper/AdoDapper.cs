@@ -51,65 +51,65 @@ namespace HospedApp.Dapper
 
 
         #region 'Client'
-        public List<Client> GetClients() => _clientDapper.GetClients();
-        public void CreateClient(Client client) => _clientDapper.CreateClient(client);
-        public void DeleteClient(int IdClient) => _clientDapper.DeleteClient(IdClient);
+        public async Task<List<Client>> GetClients() => await _clientDapper.GetClients();
+        public async Task CreateClient(Client client) => await _clientDapper.CreateClient(client);
+        public async Task DeleteClient(int IdClient) => await _clientDapper.DeleteClient(IdClient);
         #endregion
 
 
         #region 'User'
-        public User? Login(string email, string password) => _userDapper.Login(email, password);
+        public async Task<User?> Login(string email, string password) => await _userDapper.Login(email, password);
         #endregion
 
 
         #region 'Bed'
-        public List<Bed> GetBeds() => _bedDapper.GetBeds();
-        public void CreateBed(Bed bed) => _bedDapper.CreateBed(bed);
-        public void DeleteBed(int IdBed) => _bedDapper.DeleteBed(IdBed);
+        public async Task<List<Bed>> GetBeds() => await _bedDapper.GetBeds();
+        public async Task CreateBed(Bed bed) => await _bedDapper.CreateBed(bed);
+        public async Task DeleteBed(int IdBed) => await _bedDapper.DeleteBed(IdBed);
         #endregion
 
 
         #region 'Room'
-        public List<Room> GetRooms() => _roomDapper.GetRooms();
-        public void CreateRoom(Room room) => _roomDapper.CreateRoom(room);
-        public void DeleteRoom(int IdRoom) => _roomDapper.DeleteRoom(IdRoom);
+        public async Task<List<Room>> GetRooms() => await _roomDapper.GetRooms();
+        public async Task CreateRoom(Room room) => await _roomDapper.CreateRoom(room);
+        public async Task DeleteRoom(int IdRoom) => await _roomDapper.DeleteRoom(IdRoom);
         #endregion
 
 
         #region 'Hotel'
-        public List<Hotel> GetHotels() => _hotelDapper.GetHotels();
-        public void CreateHotel(Hotel hotel) => _hotelDapper.CreateHotel(hotel);
-        public void DeleteHotel(int IdHotel) => _hotelDapper.DeleteHotel(IdHotel);
+        public async Task<List<Hotel>> GetHotels() => await _hotelDapper.GetHotels();
+        public async Task CreateHotel(Hotel hotel) => await _hotelDapper.CreateHotel(hotel);
+        public async Task DeleteHotel(int IdHotel) => await _hotelDapper.DeleteHotel(IdHotel);
         #endregion
 
 
         #region 'RoomBed'
-        public List<RoomBed> GetRoomBeds() => _roombedDapper.GetRoomBeds();
-        public void CreateRoomBed(RoomBed roomBed) => _roombedDapper.CreateRoomBed(roomBed);
-        public void DeleteRoomBed(int IdRoom, int IdBed) => _roombedDapper.DeleteRoomBed(IdRoom, IdBed);
+        public async Task<List<RoomBed>> GetRoomBeds() => await _roombedDapper.GetRoomBeds();
+        public async Task CreateRoomBed(RoomBed roomBed) => await _roombedDapper.CreateRoomBed(roomBed);
+        public async Task DeleteRoomBed(int IdRoom, int IdBed) => await _roombedDapper.DeleteRoomBed(IdRoom, IdBed);
         #endregion
 
 
         #region  'Address'
 
-        public List<Address> GetAddresses() => _addressDapper.GetAddresses();
-        public void CreateAddress(Address address) => _addressDapper.CreateAddress(address);
-        public void DeleteAddress(int IdAddress) => _addressDapper.DeleteAddress(IdAddress);
+        public async Task<List<Address>> GetAddresses() => await _addressDapper.GetAddresses();
+        public async Task CreateAddress(Address address) => await _addressDapper.CreateAddress(address);
+        public async Task DeleteAddress(int IdAddress) => await _addressDapper.DeleteAddress(IdAddress);
         #endregion
 
 
         #region 'HotelRoom'
-        public List<HotelRoom> GetHotelRooms() => _hotelroomDapper.GetHotelRooms();
-        public void CreateHotelRoom(HotelRoom hotelRoom) => _hotelroomDapper.CreateHotelRoom(hotelRoom);
-        public void DeleteHotelRoom(int IdHotel, int RoomNumber) => _hotelroomDapper.DeleteHotelRoom(IdHotel, RoomNumber);
+        public async Task<List<HotelRoom>> GetHotelRooms() => await _hotelroomDapper.GetHotelRooms();
+        public async Task CreateHotelRoom(HotelRoom hotelRoom) => await _hotelroomDapper.CreateHotelRoom(hotelRoom);
+        public async Task DeleteHotelRoom(int IdHotel, int RoomNumber) => await _hotelroomDapper.DeleteHotelRoom(IdHotel, RoomNumber);
         #endregion
 
 
         #region 'Reservation'
-        public List<Reservation> GetReservations() => _reservationDapper.GetReservations();
-        public List<Reservation> GetReservationsCancelled() => _reservationDapper.GetReservationsCancelled();
-        public void CreateReservation(Reservation reservation) => _reservationDapper.CreateReservation(reservation);
-        public void CancelReservation(int IdReservation) => _reservationDapper.CancelReservation(IdReservation);
+        public async Task<List<Reservation>> GetReservations() => await _reservationDapper.GetReservations();
+        public async Task<List<Reservation>> GetReservationsCancelled() => await _reservationDapper.GetReservationsCancelled();
+        public async Task CreateReservation(Reservation reservation) => await _reservationDapper.CreateReservation(reservation);
+        public async Task CancelReservation(int IdReservation) => await _reservationDapper.CancelReservation(IdReservation);
         #endregion
     }
 }
