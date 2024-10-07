@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE PROCEDURE RegisterUser (unName VARCHAR(50), unLastName VARCHAR(50), unEmail VARCHAR(50), unPass CHAR(64))

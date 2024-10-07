@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE PROCEDURE RegisterHotelRoom (unIdHotel INT, unIdAddress INT, unIdRoom INT)

@@ -1,5 +1,3 @@
-use hospedapp;
-
 
 CALL RegisterBed('Cama Grande', 2);
 CALL RegisterBed('Cama Mediana', 2);

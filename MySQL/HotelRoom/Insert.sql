@@ -1,5 +1,3 @@
-use hospedapp;
-
 -- Hotel 1 (Hotel Paradise) - Direcciones 1 a 5
 CALL RegisterHotelRoom(1, 1, 1);   -- Hotel 1, Dirección 1, Habitación 1
 CALL RegisterHotelRoom(1, 1, 2);   -- Hotel 1, Dirección 1, Habitación 2

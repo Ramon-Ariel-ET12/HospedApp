@@ -1,4 +1,3 @@
-USE hospedapp;
 
 CALL RegisterHotel('Hotel Paradise', '123-456-7890', 'info@hotelparadise.com', 'www.hotelparadise.com', 5);
 CALL RegisterHotel('Ocean View', '098-765-4321', 'contact@oceanview.com', 'www.oceanview.com', 4);

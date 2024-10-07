@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE PROCEDURE RegisterRoomBed (unIdRoom INT, unIdBed INT, unBedQuantity TINYINT)

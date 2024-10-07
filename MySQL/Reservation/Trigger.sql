@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE TRIGGER BefInsReservation BEFORE INSERT ON Reservation
@@ -13,7 +11,7 @@ BEGIN
 		SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El hotel no tiene esa dirección';
 	END IF;
-	IF (EXISTS(SELECT * FROM Reservation WHERE Active = TRUE IdHotel = NEW.IdHotel AND IdRoom = NEW.IdRoom AND IdAddress = NEW.IdAddress AND StartDate <= NEW.StartDate AND EndDate >= NEW.EndDate))THEN
+	IF (EXISTS(SELECT * FROM Reservation WHERE Active = TRUE AND IdHotel = NEW.IdHotel AND IdRoom = NEW.IdRoom AND IdAddress = NEW.IdAddress AND StartDate <= NEW.StartDate AND EndDate >= NEW.EndDate))THEN
 		SIGNAL SQLSTATE '45000'
 		SET MESSAGE_TEXT = 'Fecha Superpuesta';
 	END IF;

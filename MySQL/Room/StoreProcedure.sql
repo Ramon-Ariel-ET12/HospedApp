@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE PROCEDURE RegisterRoom (unGarage ENUM('CON', 'SIN'), unPriceNight DECIMAL(10, 2), unDescription TEXT)

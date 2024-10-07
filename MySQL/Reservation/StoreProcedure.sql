@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE PROCEDURE RegisterReservation (unIdClient INT, unIdHotel INT, unIdAddress INT, unIdRoom INT, unStartDate DATE, unEndDate DATE, unClientComment TEXT)

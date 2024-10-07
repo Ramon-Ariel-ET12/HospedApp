@@ -1,5 +1,3 @@
-use hospedapp;
-
 -- Direcciones para el Hotel 1
 CALL RegisterAddress(1, 'Avenida Corrientes 1234', 101);  -- Dirección de la familia Argento
 CALL RegisterAddress(1, 'Calle Avellaneda 456', 102);  -- Referencia a Avellaneda

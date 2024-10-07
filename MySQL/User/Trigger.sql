@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 CREATE TRIGGER BefInsUser BEFORE INSERT ON User
 FOR EACH ROW

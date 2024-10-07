@@ -1,4 +1,3 @@
-use hospedapp;
 
 DELIMITER $$
 

@@ -1,5 +1,3 @@
-use hospedapp;
-
 DELIMITER $$
 
 CREATE TRIGGER BefInsHotelRoom BEFORE INSERT ON HotelRoom

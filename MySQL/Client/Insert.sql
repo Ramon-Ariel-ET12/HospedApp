@@ -1,5 +1,3 @@
-use hospedapp;
-
 CALL RegisterClient(12345678, 'Goku', 'Son', 'M', '555-0123', 'goku.son@example.com', 'Kamehameha');
 CALL RegisterClient(98987271, 'Roque', 'Rivas', 'M', '555-9133', 'junior.rivaset12d1@gmail.com', 'Nah bueno!');
 CALL RegisterClient(23456789, 'Vegeta', 'Prince', 'M', '555-0456', 'vegeta.prince@example.com', 'SaiyanPride');

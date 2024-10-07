@@ -12,7 +12,7 @@ public class HotelRoomDapper
     public HotelRoomDapper(IDbConnection connection) => _connection = connection;
 
     private readonly string _HotelRoomQuery
-        = @"SELECT hr.*, h.*, a.*, r.* FROM hotelRoom hr
+        = @"SELECT hr.*, h.*, a.*, r.* FROM HotelRoom hr
             INNER JOIN Hotel h ON h.IdHotel = hr.IdHotel
             INNER JOIN Address a ON a.IdAddress = hr.IdAddress
             INNER JOIN Room r ON r.IdRoom = hr.IdRoom";

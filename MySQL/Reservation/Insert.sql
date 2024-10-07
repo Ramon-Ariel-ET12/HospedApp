@@ -1,4 +1,3 @@
-use hospedapp;
 -- Reservas para los personajes
 CALL RegisterReservation(1, 1, 1, 1, '2024-10-10', '2024-10-15', '¡Este lugar es increíble! No puedo esperar para relajarme aquí, Kamehameha!');
 CALL RegisterReservation(2, 1, 1, 2, '2024-10-18', '2024-10-21', 'Espero que este hotel tenga un buen Wi-Fi, necesito ver mis correos.');
