@@ -1,14 +1,14 @@
 ﻿@{
-    Layout = null;
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Home Page";
 }
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 
-<h1>Bienvenido!</h1>
-
-<form asp-controller="Home" asp-action="Login" method="post">
-    <label for="email">Ingrese su email</label>
-    <input type="text" name="email">
-    <label for="password">Ingrese su contraseña</label>
-    <input type="password" name="password">
-    <button type="submit">Ingresar</button>
-</form>
+@if(!Context.Request.Cookies.ContainsKey("JwtToken"))
+{
+    <form asp-controller="Login" method="get">
+        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+    </form>
+}

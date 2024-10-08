@@ -2,6 +2,9 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using HospedApp.MVC.Models;
 using HospedApp.Core;
+using HospedApp.MVC.Security.JsonWriteToken;
+using HospedApp.MVC.Security.Cookies;
+using HospedApp.MVC.Decorators;
 
 namespace HospedApp.MVC.Controllers;
 
@@ -9,24 +12,18 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IAdo Ado;
+    private readonly Jwt Jwt;
 
-    public HomeController(ILogger<HomeController> logger, IAdo ado)
+    public HomeController(ILogger<HomeController> logger, IAdo ado, Jwt jwt)
     {
-        Ado = ado;
         _logger = logger;
+        Ado = ado;
+        Jwt = jwt;
     }
-        public IActionResult Index() => View();
 
-        [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
-        {
-            var user = await Ado.Login(email, password);
-            if (user == null)
-            {
-                return BadRequest();
-            }
-            return Redirect("/Client");
-        }
+    public IActionResult Index() => View();
+    [AuthToken]
+    public IActionResult Privacy() => View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
