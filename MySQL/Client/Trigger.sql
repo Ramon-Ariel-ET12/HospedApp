@@ -1,6 +1,5 @@
 #######################################################################################
 DELIMITER $$
-DROP TRIGGER IF EXISTS befInsClient $$
 CREATE TRIGGER befInsClient BEFORE INSERT ON Client
 FOR EACH ROW
 BEGIN
