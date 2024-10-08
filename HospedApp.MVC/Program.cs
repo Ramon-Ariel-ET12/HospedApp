@@ -1,5 +1,6 @@
 using HospedApp.Core;
 using HospedApp.Dapper;
+using HospedApp.MVC.Security.JsonWriteToken;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("HospedApp")!;
 
 builder.Services.AddTransient<IAdo, AdoDapper>(s=>new(connectionString));
+builder.Services.AddScoped<Jwt>();
 
 var app = builder.Build();
 
