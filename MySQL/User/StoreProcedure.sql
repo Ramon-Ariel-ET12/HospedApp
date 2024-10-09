@@ -11,5 +11,5 @@ DELIMITER $$
 
 CREATE PROCEDURE GetEmailPass (unEmail VARCHAR(50), unPass VARCHAR(50))
 BEGIN
-    SELECT * FROM User WHERE LOWER(Email) = LOWER(unEmail) AND Pass = SHA2(unPass, 256);
+    SELECT * FROM User WHERE LOWER(Email) = LOWER(unEmail) AND Pass = SHA2(unPass, 256) LIMIT 1;
 END $$
