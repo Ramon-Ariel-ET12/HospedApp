@@ -44,16 +44,29 @@ public class AddressDapper
             }
         }
     }
+    public async Task ModifyAddress(Address address)
+    {
+        var parameters = ParametersAddress(address);
+
+        try
+        {
+            await _connection.ExecuteAsync("ModifyAddress", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+    }
     public async Task DeleteAddress(int IdAddress)
     {
-        await _connection.ExecuteAsync(_addressDelete, new{ unIdAddress = IdAddress });
+        await _connection.ExecuteAsync(_addressDelete, new { unIdAddress = IdAddress });
     }
 
     public static DynamicParameters ParametersAddress(Address address)
     {
         var parameters = new DynamicParameters();
 
-        if (address.IdAddress == 0)
+        if (address.IdAddress != 0)
             parameters.Add("@unIdAddress", address.IdAddress);
         parameters.Add("@unIdHotel", address.Hotel!.IdHotel);
         parameters.Add("@unDomicile", address.Domicile);

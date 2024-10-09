@@ -11,10 +11,10 @@ namespace HospedApp.Dapper.Repositories
 
         public HotelDapper(IDbConnection conexion) => _conexion = conexion;
 
-        private readonly string _HotelQuery 
+        private readonly string _HotelQuery
             = @"SELECT h.*, a.* FROM Hotel h
                 LEFT JOIN Address a ON h.IdHotel = a.IdHotel";
-        private readonly string _HotelDelete 
+        private readonly string _HotelDelete
             = @"DELETE FROM Hotel WHERE IdHotel = @unIdHotel";
 
         public async Task<List<Hotel>> GetHotels()
@@ -29,7 +29,7 @@ namespace HospedApp.Dapper.Repositories
                         currentHotel = hotel;
                         currentHotel.Addresses = new List<Address>();
                         hotelDictionary.Add(hotel.IdHotel, currentHotel);
-                    }                    
+                    }
                     if (address != null)
                     {
                         currentHotel.Addresses!.Add(address);
@@ -63,6 +63,18 @@ namespace HospedApp.Dapper.Repositories
                 throw;
             }
         }
+        public async Task ModifyHotel(Hotel hotel)
+        {
+            var parameters = ParametersHotel(hotel);
+            try
+            {
+                await _conexion.ExecuteAsync("ModifyHotel", parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (MySqlException ex)
+            {
+                throw new ConstraintException(ex.Message);
+            }
+        }
 
         public async Task DeleteHotel(int IdHotel)
         {
@@ -72,7 +84,7 @@ namespace HospedApp.Dapper.Repositories
         private static DynamicParameters ParametersHotel(Hotel hotel)
         {
             var parameters = new DynamicParameters();
-            if (hotel.IdHotel == 0)
+            if (hotel.IdHotel != 0)
                 parameters.Add("@unIdHotel", hotel.IdHotel);
             parameters.Add("@unName", hotel.Name);
             parameters.Add("@unPhone", hotel.Phone);

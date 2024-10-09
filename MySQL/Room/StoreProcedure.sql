@@ -8,7 +8,7 @@ END $$
 
 DELIMITER $$
 
-CREATE PROCEDURE ModifiRoom (unIdRoom INT, unGarage ENUM('CON', 'SIN'), unPriceNight DECIMAL(10, 2), unDescription TEXT)
+CREATE PROCEDURE ModifyRoom (unIdRoom INT, unGarage ENUM('CON', 'SIN'), unPriceNight DECIMAL(10, 2), unDescription TEXT)
 BEGIN
     UPDATE Room
     SET

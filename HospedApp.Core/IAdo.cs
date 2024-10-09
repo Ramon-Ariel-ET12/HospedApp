@@ -8,6 +8,7 @@ public interface IAdo
     #region 'Client'
     Task<List<Client>> GetClients();
     Task CreateClient(Client client);
+    Task ModifyClient(Client client);
     Task DeleteClient(int IdClient);
     #endregion
 
@@ -20,6 +21,7 @@ public interface IAdo
     #region 'Bed'
     Task<List<Bed>> GetBeds();
     Task CreateBed(Bed bed);
+    Task ModifyBed(Bed client);
     Task DeleteBed(int IdBed);
     #endregion
 
@@ -27,12 +29,14 @@ public interface IAdo
     #region 'Room'
     Task<List<Room>> GetRooms();
     Task CreateRoom(Room room);
+    Task ModifyRoom(Room client);
     Task DeleteRoom(int IdRoom);
     #endregion
 
     #region 'Hotel'
     Task<List<Hotel>> GetHotels();
     Task CreateHotel(Hotel hotel);
+    Task ModifyHotel(Hotel client);
     Task DeleteHotel(int IdHotel);
     #endregion
 
@@ -47,6 +51,7 @@ public interface IAdo
     #region 'Address'
     Task<List<Address>> GetAddresses();
     Task CreateAddress(Address address);
+    Task ModifyAddress(Address client);
     Task DeleteAddress(int IdAddress);
     #endregion
 
@@ -62,6 +67,7 @@ public interface IAdo
     Task<List<Reservation>> GetReservations();
     Task<List<Reservation>> GetReservationsCancelled();
     Task CreateReservation(Reservation reservation);
+    Task ModifyReservation(Reservation client);
     Task CancelReservation(int IdReservation);
     #endregion
 

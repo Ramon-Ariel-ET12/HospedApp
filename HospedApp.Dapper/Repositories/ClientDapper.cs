@@ -52,6 +52,24 @@ public class ClientDapper
             throw;
         }
     }
+    public async Task ModifyClient(Client client)
+    {
+        var parameters = ParametersClient(client);
+
+        try
+        {
+            await _conexion.ExecuteAsync("ModifyClient", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            if (ex.Number == 1644)
+            {
+                if (ex.Message.Contains("dni"))
+                    throw new ConstraintException($"El dni ingresado {client.Dni} es erronea, debe ser de 8 digitos!");
+            }
+            throw;
+        }
+    }
     public async Task DeleteClient(int IdClient)
     {
         await _conexion.ExecuteAsync(_ClientDelete, new { unIdClient = IdClient });
@@ -60,7 +78,7 @@ public class ClientDapper
     {
         var parameters = new DynamicParameters();
 
-        if (client.IdClient == 0)
+        if (client.IdClient != 0)
             parameters.Add("@unIdClient", client.IdClient);
 
         parameters.Add("@unDni", client.Dni);

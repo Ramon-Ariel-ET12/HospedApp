@@ -74,6 +74,23 @@ public class ReservationDapper
             }
         }
     }
+    public async Task ModifyReservation(Reservation reservation)
+    {
+        var parameters = ParametersReservation(reservation);
+
+        try
+        {
+            await _connection.ExecuteAsync("ModifyReservation", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            if (ex.Number == 1644)
+            {
+                if (ex.Message.Contains("Superpuesta"))
+                    throw new ConstraintException(ex.Message);
+            }
+        }
+    }
     public async Task CancelReservation(int IdReservation)
     {
         await _connection.ExecuteAsync(_reservationCancel, new { unIdReservation = IdReservation});
@@ -83,7 +100,7 @@ public class ReservationDapper
     {
         var parameters = new DynamicParameters();
 
-        if (reservation.IdReservation == 0)
+        if (reservation.IdReservation != 0)
             parameters.Add("@unIdReservation", reservation.IdReservation);
         parameters.Add("@unIdClient", reservation.Client!.IdClient);
         parameters.Add("@unIdHotel", reservation.Hotel!.IdHotel);
