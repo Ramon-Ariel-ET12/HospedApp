@@ -55,8 +55,6 @@ namespace HospedApp.Dapper.Repositories
                 {
                     if (ex.Message.Contains("Name"))
                         throw new ConstraintException($"El nombre {hotel.Name} ya existe");
-                    if (ex.Message.Contains("Phone"))
-                        throw new ConstraintException($"El telefono {hotel.Phone} ya existe");
                     if (ex.Message.Contains("Email"))
                         throw new ConstraintException($"El correo {hotel.Email} ya existe");
                 }
@@ -87,7 +85,6 @@ namespace HospedApp.Dapper.Repositories
             if (hotel.IdHotel != 0)
                 parameters.Add("@unIdHotel", hotel.IdHotel);
             parameters.Add("@unName", hotel.Name);
-            parameters.Add("@unPhone", hotel.Phone);
             parameters.Add("@unEmail", hotel.Email);
             parameters.Add("@unWeb", hotel.Web);
             parameters.Add("@unStar", hotel.Star);

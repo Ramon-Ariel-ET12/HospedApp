@@ -10,7 +10,6 @@ CREATE TABLE Client (
     Name Varchar(50) NOT NULL,
     LastName Varchar(50) NOT NULL,
     Sex ENUM('M', 'F') NOT NULL,
-    Phone Varchar(14) UNIQUE NOT NULL,
     Email Varchar(50) UNIQUE NOT NULL,
     Pass CHAR(64) NOT NULL
 );
@@ -39,7 +38,6 @@ CREATE TABLE Room (
 CREATE TABLE Hotel (
     IdHotel INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(50) UNIQUE NOT NULL,
-    Phone VARCHAR(14) UNIQUE NOT NULL,
     Email VARCHAR(50) UNIQUE NOT NULL,
     Web VARCHAR(50) NOT NULL,
     Star TINYINT NOT NULL

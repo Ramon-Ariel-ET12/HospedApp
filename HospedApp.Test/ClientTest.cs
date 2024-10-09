@@ -19,7 +19,6 @@ namespace HospedApp.Test
                 Name = "Roque",
                 LastName = "Rivas",
                 Sex = "M",
-                Phone = "912837",
                 Email = "nose",
                 Pass = "alñskjd",
             };
