@@ -29,7 +29,7 @@ public class ReservationDapper
 
     public List<Reservation> GetReservations()
     {
-        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery, 
+        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery,
         (reservation, client, hotel, address, room) =>
         {
             reservation.Client = client;
@@ -44,7 +44,7 @@ public class ReservationDapper
     }
     public List<Reservation> GetReservationsCancelled()
     {
-        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery, 
+        var reservation = _connection.Query<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery,
         (reservation, client, hotel, address, room) =>
         {
             reservation.Client = client;
@@ -74,9 +74,22 @@ public class ReservationDapper
             }
         }
     }
+    public void ModifyReservation(Reservation reservation)
+    {
+        var parameters = ParametersReservation(reservation);
+
+        try
+        {
+            _connection.Execute("ModifyReservation", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+    }
     public void CancelReservation(int IdReservation)
     {
-        _connection.Execute(_reservationCancel, new { unIdReservation = IdReservation});
+        _connection.Execute(_reservationCancel, new { unIdReservation = IdReservation });
     }
 
     private static DynamicParameters ParametersReservation(Reservation reservation)

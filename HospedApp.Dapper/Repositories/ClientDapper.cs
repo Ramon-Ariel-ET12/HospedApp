@@ -50,6 +50,19 @@ public class ClientDapper
             throw;
         }
     }
+    public void ModifyClient(Client client)
+    {
+        var parameters = ParametersClient(client);
+
+        try
+        {
+            _conexion.Execute("ModifyClient", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+    }
     public void DeleteClient(int IdClient)
     {
         _conexion.Execute(_ClientDelete, new { unIdClient = IdClient });
@@ -70,7 +83,7 @@ public class ClientDapper
 
         return parameters;
     }
-    
+
 }
 
-    #endregion
+#endregion

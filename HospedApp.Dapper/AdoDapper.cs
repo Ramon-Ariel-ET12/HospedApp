@@ -53,6 +53,7 @@ namespace HospedApp.Dapper
         #region 'Client'
         public List<Client> GetClients() => _clientDapper.GetClients();
         public void CreateClient(Client client) => _clientDapper.CreateClient(client);
+        public void ModifyClient(Client client) => _clientDapper.ModifyClient(client);
         public void DeleteClient(int IdClient) => _clientDapper.DeleteClient(IdClient);
         #endregion
 
@@ -65,6 +66,7 @@ namespace HospedApp.Dapper
         #region 'Bed'
         public List<Bed> GetBeds() => _bedDapper.GetBeds();
         public void CreateBed(Bed bed) => _bedDapper.CreateBed(bed);
+        public void ModifyBed(Bed bed) => _bedDapper.ModifyBed(bed);
         public void DeleteBed(int IdBed) => _bedDapper.DeleteBed(IdBed);
         #endregion
 
@@ -72,6 +74,7 @@ namespace HospedApp.Dapper
         #region 'Room'
         public List<Room> GetRooms() => _roomDapper.GetRooms();
         public void CreateRoom(Room room) => _roomDapper.CreateRoom(room);
+        public void ModifyRoom(Room room) => _roomDapper.ModifyRoom(room);
         public void DeleteRoom(int IdRoom) => _roomDapper.DeleteRoom(IdRoom);
         #endregion
 
@@ -79,6 +82,7 @@ namespace HospedApp.Dapper
         #region 'Hotel'
         public List<Hotel> GetHotels() => _hotelDapper.GetHotels();
         public void CreateHotel(Hotel hotel) => _hotelDapper.CreateHotel(hotel);
+        public void ModifyHotel(Hotel hotel) => _hotelDapper.ModifyHotel(hotel);
         public void DeleteHotel(int IdHotel) => _hotelDapper.DeleteHotel(IdHotel);
         #endregion
 
@@ -94,6 +98,7 @@ namespace HospedApp.Dapper
 
         public List<Address> GetAddresses() => _addressDapper.GetAddresses();
         public void CreateAddress(Address address) => _addressDapper.CreateAddress(address);
+        public void ModifyAddress(Address address) => _addressDapper.ModifyAddress(address);
         public void DeleteAddress(int IdAddress) => _addressDapper.DeleteAddress(IdAddress);
         #endregion
 
@@ -109,6 +114,7 @@ namespace HospedApp.Dapper
         public List<Reservation> GetReservations() => _reservationDapper.GetReservations();
         public List<Reservation> GetReservationsCancelled() => _reservationDapper.GetReservationsCancelled();
         public void CreateReservation(Reservation reservation) => _reservationDapper.CreateReservation(reservation);
+        public void ModifyReservation(Reservation reservation) => _reservationDapper.ModifyReservation(reservation);
         public void CancelReservation(int IdReservation) => _reservationDapper.CancelReservation(IdReservation);
         #endregion
     }

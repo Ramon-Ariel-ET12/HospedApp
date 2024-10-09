@@ -8,6 +8,7 @@ public interface IAdo
     #region 'Client'
     List<Client> GetClients();
     void CreateClient(Client client);
+    void ModifyClient(Client client);
     void DeleteClient(int IdClient);
     #endregion
 
@@ -20,6 +21,7 @@ public interface IAdo
     #region 'Bed'
     List<Bed> GetBeds();
     void CreateBed(Bed bed);
+    void ModifyBed(Bed bed);
     void DeleteBed(int IdBed);
     #endregion
 
@@ -27,6 +29,7 @@ public interface IAdo
     #region 'Room'
     List<Room> GetRooms();
     void CreateRoom(Room room);
+    void ModifyRoom(Room room);
     void DeleteRoom(int IdRoom);
     #endregion
 
@@ -62,6 +65,7 @@ public interface IAdo
     List<Reservation> GetReservations();
     List<Reservation> GetReservationsCancelled();
     void CreateReservation(Reservation reservation);
+    void ModifyReservation(Reservation reservation);
     void CancelReservation(int IdReservation);
     #endregion
 

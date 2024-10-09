@@ -44,9 +44,22 @@ public class AddressDapper
             }
         }
     }
+    public void ModifyAddress(Address address)
+    {
+        var parameters = ParametersAddress(address);
+
+        try
+        {
+            _connection.Execute("ModifyAddress", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+    }
     public void DeleteAddress(int IdAddress)
     {
-        _connection.Execute(_addressDelete, new{ unIdAddress = IdAddress });
+        _connection.Execute(_addressDelete, new { unIdAddress = IdAddress });
     }
 
     public static DynamicParameters ParametersAddress(Address address)

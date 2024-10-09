@@ -31,6 +31,18 @@ public class RoomDapper
             throw new ConstraintException(ex.Message);
         }
     }
+    public void ModifyRoom(Room room)
+    {
+        var parameters = ParametersRoom(room);
+        try
+        {
+            _connection.Execute("ModifyRoom", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+    }
     public void DeleteRoom(int IdRoom)
     {
         _connection.Execute(_RoomDelete, new { unIdRoom = IdRoom});

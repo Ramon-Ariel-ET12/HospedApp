@@ -38,6 +38,23 @@ public class BedDapper
         }
 
     }
+    public void ModifyBed(Bed bed)
+    {
+        var parameters = ParametersBed(bed);
+
+        try
+        {
+            _connection.Execute("ModifyBed", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
+            {
+                throw new ConstraintException(ex.Message);
+            }
+        }
+
+    }
     public void DeleteBed(int IdBed)
     {
         _connection.Execute(_BedDelete, new { unIdBed = IdBed });

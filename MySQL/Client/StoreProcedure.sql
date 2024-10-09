@@ -9,7 +9,7 @@ END $$
 #######################################################################################
 DELIMITER $$
 
-CREATE PROCEDURE ModifiClient (unIdClient INT, unDni INT, unName Varchar(50), unLastName Varchar(50), unSex ENUM('M', 'F'), unEmail Varchar(50), unPass CHAR(64))
+CREATE PROCEDURE ModifyClient (unIdClient INT, unDni INT, unName Varchar(50), unLastName Varchar(50), unSex ENUM('M', 'F'), unEmail Varchar(50), unPass CHAR(64))
 BEGIN
     UPDATE Client
     SET
