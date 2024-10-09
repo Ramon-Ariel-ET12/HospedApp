@@ -39,7 +39,7 @@ public class RoomDapper
     private static DynamicParameters ParametersRoom(Room room)
     {
         var parameters = new DynamicParameters();
-        if (room.IdRoom == 0)
+        if (room.IdRoom != 0)
             parameters.Add("@unIdRoom", room.IdRoom);
         parameters.Add("@unGarage", room.Garage);
         parameters.Add("@unPriceNight", room.PriceNight);

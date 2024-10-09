@@ -53,7 +53,7 @@ public class AddressDapper
     {
         var parameters = new DynamicParameters();
 
-        if (address.IdAddress == 0)
+        if (address.IdAddress != 0)
             parameters.Add("@unIdAddress", address.IdAddress);
         parameters.Add("@unIdHotel", address.Hotel!.IdHotel);
         parameters.Add("@unDomicile", address.Domicile);

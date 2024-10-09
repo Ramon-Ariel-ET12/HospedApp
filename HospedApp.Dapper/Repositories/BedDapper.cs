@@ -46,7 +46,7 @@ public class BedDapper
     private static DynamicParameters ParametersBed(Bed bed)
     {
         var parameters = new DynamicParameters();
-        if (bed.IdBed == 0)
+        if (bed.IdBed != 0)
             parameters.Add("@unIdBed", bed.IdBed);
         parameters.Add("@unName", bed.Name);
         parameters.Add("@unCanSleep", bed.CanSleep);

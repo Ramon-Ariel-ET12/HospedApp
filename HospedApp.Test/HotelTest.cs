@@ -18,7 +18,6 @@ namespace HospedApp.Test
             var hotel = new Hotel()
             {
                 Name = "Prueba",
-                Phone = "Prueba",
                 Email = "Prueba",
                 Web = "Prueba",
                 Star = 100,
