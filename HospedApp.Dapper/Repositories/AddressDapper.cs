@@ -40,7 +40,7 @@ public class AddressDapper
             if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
             {
                 if (ex.Message.Contains("Domicile"))
-                    throw new ConstraintException($"El Domicilie {address.Domicile} ya está en uso");
+                    throw new Exception($"El Domicilie {address.Domicile} ya está en uso");
             }
         }
     }
@@ -53,7 +53,7 @@ public class AddressDapper
     {
         var parameters = new DynamicParameters();
 
-        if (address.IdAddress == 0)
+        if (address.IdAddress != 0)
             parameters.Add("@unIdAddress", address.IdAddress);
         parameters.Add("@unIdHotel", address.Hotel!.IdHotel);
         parameters.Add("@unDomicile", address.Domicile);

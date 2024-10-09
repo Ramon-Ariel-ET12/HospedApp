@@ -17,14 +17,16 @@ namespace HospedApp.MVC.Security.JsonWriteToken
 
             var IdUser = JsonConvert.SerializeObject(User.IdUser);
             var Name = JsonConvert.SerializeObject(User.Name);
-            var Email = JsonConvert.SerializeObject(User.LastName);
-            var Pass = JsonConvert.SerializeObject(User.Email);
+            var LastName = JsonConvert.SerializeObject(User.LastName);
+            var Email = JsonConvert.SerializeObject(User.Email);
+            var Pass = JsonConvert.SerializeObject(User.Pass);
 
             // Crear los claims
             var claims = new[]
             {
             new Claim("IdUser", IdUser),
             new Claim("Name", Name),
+            new Claim("LastName", LastName),
             new Claim("Email", Email),
             new Claim("Pass", Pass),
         };

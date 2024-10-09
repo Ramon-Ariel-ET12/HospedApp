@@ -42,10 +42,9 @@
                                 <td>@client.Name</td>
                                 <td>@client.LastName</td>
                                 <td>@client.Sex</td>
-                                <td>@client.Phone</td>
                                 <td>@client.Email</td>
                                 <td>
-                                    <a asp-action="Modificar" asp-route-dni="@client.IdClient">Modificar</a>
+                                    <a asp-action="Modify" asp-route-dni="@client.IdClient">Modificar</a>
                                 </td>
                             </tr>
                         }

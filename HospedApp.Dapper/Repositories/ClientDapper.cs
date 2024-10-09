@@ -44,8 +44,6 @@ public class ClientDapper
                     throw new ConstraintException($"El Dni {client.Dni} ya existe");
                 if (ex.Message.Contains("Name"))
                     throw new ConstraintException($"El nombre {client.Name} ya existe");
-                if (ex.Message.Contains("Phone"))
-                    throw new ConstraintException($"El telefono {client.Phone} ya existe");
                 if (ex.Message.Contains("Email"))
                     throw new ConstraintException($"El correo {client.Email} ya existe");
             }
@@ -60,14 +58,13 @@ public class ClientDapper
     {
         var parameters = new DynamicParameters();
 
-        if (client.IdClient == 0)
+        if (client.IdClient != 0)
             parameters.Add("@unIdClient", client.IdClient);
 
         parameters.Add("@unDni", client.Dni);
         parameters.Add("@unName", client.Name);
         parameters.Add("@unLastName", client.LastName);
         parameters.Add("@unSex", client.Sex);
-        parameters.Add("@unPhone", client.Phone);
         parameters.Add("@unEmail", client.Email);
         parameters.Add("@unPass", client.Pass);
 

@@ -1,0 +1,57 @@
+@using HospedApp.Core.Entities;
+@model Client;
+@{
+    var texto = Model is null ? "Modificar Cliente" :  "Alta Cliente";
+    ViewData["Title"] = texto;
+}
+
+<form asp-controller="Client" asp-action="Upsert" method="post">
+    <div asp-validation-summary="All"></div>
+    @if (Model != null)
+    {
+        <div><input type="hidden" asp-for="@Model.IdClient" /></div>
+    }
+    <div class="mb-3">
+        <label asp-for="Dni" class="form-label">DNI</label>
+        <input asp-for="Dni" value="" class="form-control" placeholder="Ingrese su DNI" type="text" minlength="8" maxlength="8" required pattern="\d{8}" title="El dni debe contener 8 digitos" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Nombre</label>
+        <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label">Apellido</label>
+        <input asp-for="LastName" class="form-control" placeholder="Ingrese su Apellido" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Sex" class="form-label">Sexo</label>
+        <select asp-for="Sex" class="form-select">
+            <option selected>Selecione su sexo</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Pass" class="form-label">Contrasena</label>
+        <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" required />
+    </div>
+    <div class="mb-3">
+        @if (Model is null)
+        {
+            <button type="submit" class="btn btn-warning">@texto</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">@texto</button>
+        }
+    </div>
+</form>
+
+@if(TempData["Error"] != null)
+{
+    <p>@TempData["Error"]</p>
+}

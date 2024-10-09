@@ -39,7 +39,6 @@ Client{
     int Dni UK
     varchar(50) Name
     varchar(50) Lastname
-    varchar(14) Phone UK
     varchar(50) Email UK
     char(64) Pass
 }
@@ -47,7 +46,6 @@ Client{
 Hotel{
     int IdHotel PK
     varchar(50) Name
-    varchar(14) Phone UK
     varchar(50) Email UK
     varchar(50) Web UK
     tinyint Star

@@ -27,17 +27,24 @@ namespace HospedApp.MVC.Controllers
         {
             var user = await Ado.Login(email, password);
             if (user == null)
-                return BadRequest();
-            var token = Jwt.ObtenerToken(user);
-            Cookie.CrearCookie(Response, "JwtToken", token);
+            {
+                TempData["Message"] = @"Creo que la contraseña o el email son incorrectos, ¿podrías intentar con otro? 
+                                                    O podrías fijarte si escribiste bien, eso pasa a mucha gente.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var token = Jwt.ObtenerToken(user);
+                Cookie.CrearCookie(Response, "JwtToken", token);
+            }
             return Redirect("/");
         }
 
         [HttpPost]
         public IActionResult Logout()
         {
-                HttpContext.Response.Cookies.Delete("JwtToken");
-                return Redirect("/Login");
+            HttpContext.Response.Cookies.Delete("JwtToken");
+            return Redirect("/Login");
         }
     }
 }

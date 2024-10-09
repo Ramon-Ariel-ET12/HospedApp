@@ -83,7 +83,7 @@ public class ReservationDapper
     {
         var parameters = new DynamicParameters();
 
-        if (reservation.IdReservation == 0)
+        if (reservation.IdReservation != 0)
             parameters.Add("@unIdReservation", reservation.IdReservation);
         parameters.Add("@unIdClient", reservation.Client!.IdClient);
         parameters.Add("@unIdHotel", reservation.Hotel!.IdHotel);
