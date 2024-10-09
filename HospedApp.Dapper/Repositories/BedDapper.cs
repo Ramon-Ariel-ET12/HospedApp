@@ -38,6 +38,20 @@ public class BedDapper
         }
 
     }
+    public async Task ModifyBed(Bed bed)
+    {
+        var parameters = ParametersBed(bed);
+
+        try
+        {
+            await _connection.ExecuteAsync("ModifyBed", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
+        }
+
+    }
     public async Task DeleteBed(int IdBed)
     {
         await _connection.ExecuteAsync(_BedDelete, new { unIdBed = IdBed });

@@ -40,13 +40,26 @@ public class AddressDapper
             if (ex.ErrorCode == MySqlErrorCode.DuplicateKeyEntry)
             {
                 if (ex.Message.Contains("Domicile"))
-                    throw new Exception($"El Domicilie {address.Domicile} ya está en uso");
+                    throw new ConstraintException($"El Domicilie {address.Domicile} ya está en uso");
             }
+        }
+    }
+    public async Task ModifyAddress(Address address)
+    {
+        var parameters = ParametersAddress(address);
+
+        try
+        {
+            await _connection.ExecuteAsync("ModifyAddress", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);
         }
     }
     public async Task DeleteAddress(int IdAddress)
     {
-        await _connection.ExecuteAsync(_addressDelete, new{ unIdAddress = IdAddress });
+        await _connection.ExecuteAsync(_addressDelete, new { unIdAddress = IdAddress });
     }
 
     public static DynamicParameters ParametersAddress(Address address)

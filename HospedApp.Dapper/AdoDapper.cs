@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿﻿using System.Data;
 using HospedApp.Core;
 using HospedApp.Core.Entities;
 using HospedApp.Core.Entities.Relations;
@@ -53,6 +53,7 @@ namespace HospedApp.Dapper
         #region 'Client'
         public async Task<List<Client>> GetClients() => await _clientDapper.GetClients();
         public async Task CreateClient(Client client) => await _clientDapper.CreateClient(client);
+        public async Task ModifyClient(Client client) => await _clientDapper.ModifyClient(client);
         public async Task DeleteClient(int IdClient) => await _clientDapper.DeleteClient(IdClient);
         #endregion
 
@@ -65,6 +66,7 @@ namespace HospedApp.Dapper
         #region 'Bed'
         public async Task<List<Bed>> GetBeds() => await _bedDapper.GetBeds();
         public async Task CreateBed(Bed bed) => await _bedDapper.CreateBed(bed);
+        public async Task ModifyBed(Bed bed) => await _bedDapper.ModifyBed(bed);
         public async Task DeleteBed(int IdBed) => await _bedDapper.DeleteBed(IdBed);
         #endregion
 
@@ -72,6 +74,7 @@ namespace HospedApp.Dapper
         #region 'Room'
         public async Task<List<Room>> GetRooms() => await _roomDapper.GetRooms();
         public async Task CreateRoom(Room room) => await _roomDapper.CreateRoom(room);
+        public async Task ModifyRoom(Room room) => await _roomDapper.ModifyRoom(room);
         public async Task DeleteRoom(int IdRoom) => await _roomDapper.DeleteRoom(IdRoom);
         #endregion
 
@@ -79,6 +82,7 @@ namespace HospedApp.Dapper
         #region 'Hotel'
         public async Task<List<Hotel>> GetHotels() => await _hotelDapper.GetHotels();
         public async Task CreateHotel(Hotel hotel) => await _hotelDapper.CreateHotel(hotel);
+        public async Task ModifyHotel(Hotel hotel) => await _hotelDapper.ModifyHotel(hotel);
         public async Task DeleteHotel(int IdHotel) => await _hotelDapper.DeleteHotel(IdHotel);
         #endregion
 
@@ -94,6 +98,7 @@ namespace HospedApp.Dapper
 
         public async Task<List<Address>> GetAddresses() => await _addressDapper.GetAddresses();
         public async Task CreateAddress(Address address) => await _addressDapper.CreateAddress(address);
+        public async Task ModifyAddress(Address address) => await _addressDapper.ModifyAddress(address);
         public async Task DeleteAddress(int IdAddress) => await _addressDapper.DeleteAddress(IdAddress);
         #endregion
 
@@ -109,6 +114,7 @@ namespace HospedApp.Dapper
         public async Task<List<Reservation>> GetReservations() => await _reservationDapper.GetReservations();
         public async Task<List<Reservation>> GetReservationsCancelled() => await _reservationDapper.GetReservationsCancelled();
         public async Task CreateReservation(Reservation reservation) => await _reservationDapper.CreateReservation(reservation);
+        public async Task ModifyReservation(Reservation reservation) => await _reservationDapper.ModifyReservation(reservation);
         public async Task CancelReservation(int IdReservation) => await _reservationDapper.CancelReservation(IdReservation);
         #endregion
     }
