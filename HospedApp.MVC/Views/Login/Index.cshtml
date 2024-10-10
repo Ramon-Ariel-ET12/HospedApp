@@ -3,19 +3,38 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Bienvenido!</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Mi Proyecto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h1>Bienvenido!</h1>
 
-<form asp-controller="Login" asp-action="Login" method="post">
-    <label for="email">Ingrese su email</label>
-    <input type="text" name="email">
-    <label for="password">Ingrese su contraseña</label>
-    <input type="password" name="password">
-    <button type="submit">Ingresar</button>
-</form>
+        <form asp-controller="Login" asp-action="Login" method="post" class="login-form">
+            <div class="form-group">
+                <label for="email">Ingrese su email</label>
+                <input type="text" name="email" class="form-input" placeholder="Correo electrónico" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Ingrese su contraseña</label>
+                <input type="password" name="password" class="form-input" placeholder="Contraseña" required>
+            </div>
 
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        @TempData["Message"]
+            <button type="submit" class="login-btn">Ingresar</button>
+        </form>
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert" role="alert">
+                @TempData["Message"]
+            </div>
+        }
     </div>
-}
+</body>
+</html>

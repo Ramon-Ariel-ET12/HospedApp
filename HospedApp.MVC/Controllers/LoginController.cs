@@ -30,7 +30,7 @@ namespace HospedApp.MVC.Controllers
             {
                 TempData["Message"] = @"Creo que la contraseña o el email son incorrectos, ¿podrías intentar con otro? 
                                                     O podrías fijarte si escribiste bien, eso pasa a mucha gente.";
-                return RedirectToAction("Index");
+                return Redirect("/Home");
             }
             else
             {
