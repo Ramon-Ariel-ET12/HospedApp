@@ -1,5 +1,8 @@
+/* Estilos Globales */
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,15 +11,134 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+body {
+  margin-bottom: 60px;
+}
+
+/* Efectos de enfoque para botones e inputs */
+.btn:focus, 
+.btn:active:focus, 
+.btn-link.nav-link:focus, 
+.form-control:focus, 
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* -------------------- Login -------------------- */
+
+/* Contenedor principal del login */
+.login-container {
+    max-width: 400px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-body {
-  margin-bottom: 60px;
+/* Título del login */
+.login-container h1 {
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333333;
+    font-size: 1.8rem;
+}
+
+/* Estilo para los grupos de formularios (inputs y etiquetas) */
+.login-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Etiquetas de los inputs */
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555555;
+    font-size: 0.875rem;
+}
+
+/* Inputs del formulario */
+.login-form .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.login-form .form-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botón de enviar */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.login-btn:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+/* Mensaje de alerta en caso de error */
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f8d7da;
+    color: #721c24;
+    font-size: 0.875rem;
+}
+
+/* -------------------- Responsividad -------------------- */
+
+/* Para pantallas pequeñas */
+@media (max-width: 576px) {
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .login-btn {
+        font-size: 1rem;
+    }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1200px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    .login-container h1 {
+        font-size: 2rem;
+    }
+
+    .login-btn {
+        font-size: 1.25rem;
+    }
 }

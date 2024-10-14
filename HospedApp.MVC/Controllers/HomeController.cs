@@ -8,6 +8,7 @@ using HospedApp.MVC.Decorators;
 
 namespace HospedApp.MVC.Controllers;
 
+[AuthToken]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -20,9 +21,7 @@ public class HomeController : Controller
         Ado = ado;
         Jwt = jwt;
     }
-
     public IActionResult Index() => View();
-    [AuthToken]
     public IActionResult Privacy() => View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
