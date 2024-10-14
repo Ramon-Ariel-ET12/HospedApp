@@ -1,0 +1,50 @@
+@using HospedApp.Core.Entities;
+@model IEnumerable<Bed>;
+@{
+    ViewData["Title"] = "Beds";
+}
+
+<div>
+    <div>
+        <h1>Buscar Beds</h1>
+    </div>
+
+    <div>
+        <input type="text" name="busqueda" placeholder="Buscar beds..." />
+        <button>Buscar</button>
+    </div>
+
+    <div>
+        @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
+        {
+            <p>No se encontraron beds.</p>
+        }
+        else
+        {
+            <h3>Lista de Beds</h3>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">CanSleep</th>
+                            <th scope="col">CanSleep</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bed in Model)
+                        {
+                            <tr>
+                                <td>@bed.Name</td>
+                                <td>@bed.CanSleep</td>
+                                <td>
+                                    <a asp-action="Modify" asp-route-dni="@bed.IdBed">Modificar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
