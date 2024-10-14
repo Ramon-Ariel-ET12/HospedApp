@@ -1,0 +1,41 @@
+@using HospedApp.Core.Entities;
+@model Room;
+@{
+    var texto = Model is null ? "Modificar Room" :  "Alta Room";
+    ViewData["Title"] = texto;
+}
+
+<form asp-controller="Room" asp-action="Upsert" method="post">
+    <div asp-validation-summary="All"></div>
+    @if (Model != null)
+    {
+        <div><input type="hidden" asp-for="@Model.IdRoom" /></div>
+    }
+    <div class="mb-3">
+        <label asp-for="Garage" class="form-label">Garage</label>
+        <input asp-for="Garage" class="form-control" placeholder="Ingrese su Garage" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PriceNight" class="form-label">PriceNight</label>
+        <input asp-for="PriceNight" class="form-control" placeholder="Ingrese su PriceNight" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Ingrese su Description" required />
+    </div>
+    <div class="mb-3">
+        @if (Model is null)
+        {
+            <button type="submit" class="btn btn-warning">@texto</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">@texto</button>
+        }
+    </div>
+</form>
+
+@if(TempData["Error"] != null)
+{
+    <p>@TempData["Error"]</p>
+}
