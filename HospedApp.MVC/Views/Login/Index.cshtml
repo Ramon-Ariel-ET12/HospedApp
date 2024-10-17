@@ -10,14 +10,15 @@
     <title>@ViewData["Title"] - Mi Proyecto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
 </head>
 <body>
     <div class="login-container">
-        <h1>Bienvenido!</h1>
+        <h1>HospedApp</h1>
 
         <form asp-controller="Login" asp-action="Login" method="post" class="login-form">
             <div class="form-group">
-                <label for="email">Ingrese su email</label>
+                <label for="email">Ingrese su correo</label>
                 <input type="text" name="email" class="form-input" placeholder="Correo electrónico" required>
             </div>
             
@@ -26,7 +27,7 @@
                 <input type="password" name="password" class="form-input" placeholder="Contraseña" required>
             </div>
 
-            <button type="submit" class="login-btn">Ingresar</button>
+            <button type="submit" class="login-btn">Iniciar Sesión</button>
         </form>
 
         @if (TempData["Message"] != null)
