@@ -25,10 +25,10 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <div class="btn-group">
-                        <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown">Client</a>
+                        <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown">Clientes</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " asp-controller="Client">Clients list</a></li>
-                            <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Register client</a></li>
+                            <li><a class="dropdown-item " asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
+                            <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
 
                     <a class="nav-link text-dark">Bienvenido, @FullName !</a>
                     <form asp-controller="Login" asp-action="Logout" method="post">
-                        <button type="submit" class="btn btn-danger">Logout</button>
+                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                     </form>
                 }
             </div>
@@ -58,7 +58,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - HospedApp.MVC - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - HospedApp - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
