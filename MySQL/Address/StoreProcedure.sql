@@ -11,7 +11,7 @@ DELIMITER $$
 
 CREATE PROCEDURE ModifyAddress (unIdAddress INT, unIdHotel INT, unDomicile VARCHAR(50), unPostalCode INT)
 BEGIN
-    UPDATE Hotel 
+    UPDATE Address 
     SET
         IdHotel = COALESCE(unIdHotel, IdHotel),
         Domicile = COALESCE(unDomicile, Domicile),
@@ -19,4 +19,3 @@ BEGIN
     WHERE IdAddress = unIdAddress;
 END $$
 #######################################################################################
-

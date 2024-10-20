@@ -1,6 +1,10 @@
+using System.Text;
 using HospedApp.Core;
 using HospedApp.Dapper;
 using HospedApp.MVC.Security.JsonWriteToken;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +13,37 @@ builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("HospedApp")!;
 
-builder.Services.AddTransient<IAdo, AdoDapper>(s=>new(connectionString));
+builder.Services.AddTransient<IAdo, AdoDapper>(s => new(connectionString));
 builder.Services.AddScoped<Jwt>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x => {
+        x.Cookie.Name = "MVC";
+        x.LoginPath = "/Login";
+    }).AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JwtToken:Issuer"],
+            ValidAudience = builder.Configuration["JwtToken:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtToken:Key"]!))
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                context.Token = context.Request.Cookies["AuthToken"];
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+
 
 var app = builder.Build();
 
@@ -27,6 +60,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

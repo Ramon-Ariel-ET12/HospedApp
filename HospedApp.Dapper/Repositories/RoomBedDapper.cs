@@ -43,6 +43,18 @@ public class RoomBedDapper
             throw new ConstraintException(ex.Message);;
         }
     }
+    public async Task ModifyRoomBed(RoomBed roomBed)
+    {
+        var parameters = ParametersRoomBed(roomBed);
+        try
+        {
+            await _connection.ExecuteAsync("ModifyRoomBed", parameters, commandType: CommandType.StoredProcedure);
+        }
+        catch (MySqlException ex)
+        {
+            throw new ConstraintException(ex.Message);;
+        }
+    }
     public async Task DeleteRoomBed(int IdRoom, int IdBed)
     {
         await _connection.ExecuteAsync(_RoomBedDelete, new { unIdRoom = IdRoom, unIdBed = IdBed });
@@ -51,6 +63,9 @@ public class RoomBedDapper
     public static DynamicParameters ParametersRoomBed(RoomBed roomBed)
     {
         var parameters = new DynamicParameters();
+        if (roomBed.IdRoomBed != 0)
+            parameters.Add("@unIdRoomBed", roomBed.IdRoomBed);
+        
         parameters.Add("@unIdRoom", roomBed.Room!.IdRoom);
         parameters.Add("@unIdBed", roomBed.Bed!.IdBed);
         parameters.Add("@unBedQuantity", roomBed.BedQuantity);

@@ -3,23 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using HospedApp.MVC.Models;
 using HospedApp.Core;
 using HospedApp.MVC.Security.JsonWriteToken;
-using HospedApp.MVC.Security.Cookies;
-using HospedApp.MVC.Decorators;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospedApp.MVC.Controllers;
-
-[AuthToken]
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IAdo Ado;
-    private readonly Jwt Jwt;
+    private readonly Jwt Jwt = new();
 
-    public HomeController(ILogger<HomeController> logger, IAdo ado, Jwt jwt)
+    public HomeController(ILogger<HomeController> logger, IAdo ado)
     {
         _logger = logger;
         Ado = ado;
-        Jwt = jwt;
     }
     public IActionResult Index() => View();
     public IActionResult Privacy() => View();

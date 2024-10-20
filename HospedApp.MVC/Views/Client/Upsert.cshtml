@@ -1,7 +1,7 @@
 @using HospedApp.Core.Entities;
 @model Client;
 @{
-    var texto = Model is null ? "Modificar Cliente" :  "Alta Cliente";
+    var texto = Model!.Name == null ? "Alta Cliente" : "Modificar Cliente";
     ViewData["Title"] = texto;
 }
 
@@ -11,47 +11,54 @@
     {
         <div><input type="hidden" asp-for="@Model.IdClient" /></div>
     }
-    <div class="mb-3">
-        <label asp-for="Dni" class="form-label">DNI</label>
-        <input asp-for="Dni" value="" class="form-control" placeholder="Ingrese su DNI" type="text" minlength="8" maxlength="8" required pattern="\d{8}" title="El dni debe contener 8 digitos" />
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label asp-for="Dni" class="form-label">DNI</label>
+            <input asp-for="Dni" class="form-control" placeholder="Ingrese su DNI" type="text" minlength="8"
+                maxlength="8" required pattern="\d{8}" title="El dni debe contener 8 digitos" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Name" class="form-label">Nombre</label>
+            <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="LastName" class="form-label">Apellido</label>
+            <input asp-for="LastName" class="form-control" placeholder="Ingrese su Apellido" required />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label asp-for="Sex" class="form-label">Sexo</label>
+            <select asp-for="Sex" class="form-select">
+                <option selected>Seleccione su sexo</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Pass" class="form-label">Contraseña</label>
+            @if (Model?.Name == null)
+            {
+                <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" required />
+            }
+            else
+            {
+                <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" />
+            }
+        </div>
     </div>
     <div class="mb-3">
-        <label asp-for="Name" class="form-label">Nombre</label>
-        <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="LastName" class="form-label">Apellido</label>
-        <input asp-for="LastName" class="form-control" placeholder="Ingrese su Apellido" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Sex" class="form-label">Sexo</label>
-        <select asp-for="Sex" class="form-select">
-            <option selected>Selecione su sexo</option>
-            <option value="M">Masculino</option>
-            <option value="F">Femenino</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label">Email</label>
-        <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Pass" class="form-label">Contrasena</label>
-        <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" required />
-    </div>
-    <div class="mb-3">
-        @if (Model is null)
-        {
-            <button type="submit" class="btn btn-warning">@texto</button>
-        }
-        else
+        @if (Model!.Name == null)
         {
             <button type="submit" class="btn btn-primary">@texto</button>
         }
+        else
+        {
+            <button type="submit" class="btn btn-warning">@texto</button>
+        }
     </div>
 </form>
-
-@if(TempData["Error"] != null)
-{
-    <p>@TempData["Error"]</p>
-}

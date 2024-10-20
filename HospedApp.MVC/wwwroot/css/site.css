@@ -16,10 +16,10 @@ body {
 }
 
 /* Efectos de enfoque para botones e inputs */
-.btn:focus, 
-.btn:active:focus, 
-.btn-link.nav-link:focus, 
-.form-control:focus, 
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
 .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -28,30 +28,44 @@ body {
 
 /* Para pantallas pequeñas */
 @media (max-width: 576px) {
-    .login-container {
-        padding: 15px;
-    }
+  .login-container {
+    padding: 15px;
+  }
 
-    .login-container h1 {
-        font-size: 1.5rem;
-    }
+  .login-container h1 {
+    font-size: 1.5rem;
+  }
 
-    .login-btn {
-        font-size: 1rem;
-    }
+  .login-btn {
+    font-size: 1rem;
+  }
 }
 
 /* Para pantallas grandes */
 @media (min-width: 1200px) {
-    .login-container {
-        padding: 30px;
-    }
+  .login-container {
+    padding: 30px;
+  }
 
-    .login-container h1 {
-        font-size: 2rem;
-    }
+  .login-container h1 {
+    font-size: 2rem;
+  }
 
-    .login-btn {
-        font-size: 1.25rem;
-    }
+  .login-btn {
+    font-size: 1.25rem;
+  }
+}
+
+
+.input {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  border-color: none;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }

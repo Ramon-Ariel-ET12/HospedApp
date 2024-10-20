@@ -5,15 +5,15 @@
 }
 
 <div>
-    <div>
+    <br>
+    <div class=" text-center">
         <h1>Buscar Clientes</h1>
+        <br>
     </div>
 
-    <div>
-        <input type="text" name="busqueda" placeholder="Buscar clientes..." />
-        <button>Buscar</button>
+    <div class="input-group mb-3 input">
+        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
     </div>
-
     <div>
         @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
@@ -23,7 +23,7 @@
         {
             <h3>Lista de Clientes</h3>
             <div>
-                <table>
+                <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Dni</th>
@@ -38,13 +38,13 @@
                         @foreach (var client in Model)
                         {
                             <tr>
-                                <th>@client.Dni</th>
+                                <td>@client.Dni</td>
                                 <td>@client.Name</td>
                                 <td>@client.LastName</td>
                                 <td>@client.Sex</td>
                                 <td>@client.Email</td>
-                                <td>
-                                    <a asp-action="Modify" asp-route-dni="@client.IdClient">Modificar</a>
+                                <td colspan="2">
+                                    <a asp-action="Modify" asp-route-id="@client.IdClient">Modificar</a>
                                 </td>
                             </tr>
                         }

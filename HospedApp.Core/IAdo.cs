@@ -44,6 +44,7 @@ public interface IAdo
     #region 'RoomBed'
     Task<List<RoomBed>> GetRoomBeds();
     Task CreateRoomBed(RoomBed roomBed);
+    Task ModifyRoomBed(RoomBed roomBed);
     Task DeleteRoomBed(int IdRoom, int IdBed);
     #endregion
 

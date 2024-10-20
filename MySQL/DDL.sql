@@ -44,6 +44,7 @@ CREATE TABLE Hotel (
 );
 
 CREATE TABLE RoomBed (
+    IdRoomBed INT,
     IdRoom INT,
     IdBed INT,
     BedQuantity TINYINT NOT NULL,

@@ -5,31 +5,32 @@
 }
 
 <div>
-    <div>
-        <h1>Buscar Hotels</h1>
+    <br>
+    <div class=" text-center">
+        <h1>Buscar hoteles</h1>
     </div>
+    <br>
 
-    <div>
-        <input type="text" name="busqueda" placeholder="Buscar hotels..." />
-        <button>Buscar</button>
+    <div class="input-group mb-3 input">
+        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
     </div>
-
     <div>
         @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
-            <p>No se encontraron hotels.</p>
+            <p>No se encontraron hoteles.</p>
         }
         else
         {
-            <h3>Lista de Hotels</h3>
+            <h3>Lista de hoteles</h3>
             <div>
-                <table>
+                <table class="table table-responsive ">
                     <thead>
                         <tr>
-                            <th scope="col">Name</th>
+                            <th scope="col">Hotel</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Web</th>
-                            <th scope="col">Star</th>
+                            <th scope="col">Sitio Web</th>
+                            <th scope="col">Estrella</th>
+                            <th scope="col">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +42,8 @@
                                 <td>@hotel.Web</td>
                                 <td>@hotel.Star</td>
                                 <td>
-                                    <a asp-action="Modify" asp-route-dni="@hotel.IdHotel">Modificar</a>
+                                    <a asp-action="Modify" asp-route-id="@hotel.IdHotel">Modificar</a>
+                                    <a asp-action="Detail" asp-route-id="@hotel.IdHotel">Detalle</a>
                                 </td>
                             </tr>
                         }

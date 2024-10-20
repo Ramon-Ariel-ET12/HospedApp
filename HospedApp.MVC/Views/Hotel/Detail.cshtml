@@ -1,44 +1,46 @@
 @using HospedApp.Core.Entities;
-@model IEnumerable<Bed>;
+@using HospedApp.Core.Entities.Relations
+@model Hotel;
 @{
-    ViewData["Title"] = "Beds";
+    ViewData["Title"] = "Hotels";
 }
 
 <div>
     <br>
     <div class=" text-center">
-        <h1>Buscar camas</h1>
-        <br>
+        <h1>Hotel @Model.Name</h1>
     </div>
+    <br>
 
     <div class="input-group mb-3 input">
         <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
     </div>
     <div>
-        @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
+        @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
-            <p>No se encontraron camas.</p>
+            <p>No se encontraron hoteles.</p>
         }
         else
         {
-            <h3>Lista de Camas</h3>
+            <h3>Lista del hotel</h3>
             <div>
                 <table class="table table-responsive ">
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Pueden dormir</th>
+                            <th scope="col">Domicilio</th>
+                            <th scope="col">Codigo postal</th>
                             <th scope="col">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var bed in Model)
+                        @foreach (var hotel in Model!.Addresses!)
                         {
                             <tr>
-                                <td>@bed.Name</td>
-                                <td>@bed.CanSleep</td>
+                                <td>@hotel.Domicile</td>
+                                <td>@hotel.PostalCode</td>
                                 <td>
-                                    <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
+                                    <a asp-action="ModifyAddress" asp-route-id="@hotel.IdAddress">Modificar</a>
+                                    <a asp-action="DetailAddress" asp-route-id="@hotel.IdAddress">Detalle</a>
                                 </td>
                             </tr>
                         }

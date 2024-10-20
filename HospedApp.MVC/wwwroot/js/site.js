@@ -1,4 +1,20 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.getElementById('searchInput').addEventListener('keyup', function() {
+    const searchValue = this.value.toLowerCase();
+    const table = document.querySelector('.table tbody');
+    const rows = table.querySelectorAll('tr');
 
-// Write your JavaScript code.
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        let rowContainsSearchValue = false;
+
+        for (let i = 0; i < cells.length - 1; i++) {
+            const cellText = cells[i].textContent.toLowerCase();
+            if (cellText.includes(searchValue)) {
+                rowContainsSearchValue = true;
+                break;
+            }
+        }
+
+        row.style.display = rowContainsSearchValue ? '' : 'none';
+    });
+});

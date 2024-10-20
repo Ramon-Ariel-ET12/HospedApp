@@ -1,4 +1,5 @@
 ﻿@using System.IdentityModel.Tokens.Jwt
+@using System.Security.Claims
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,41 +13,67 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header class="sticky-top">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">HospedApp</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-co using Microsoft.AspNetCore.Authentication.JwtBearer; <span
-                    class="navbar-toggler-icon"></span>
+                <a class="navbar-brand" href="/">HospedApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Clientes
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
+                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Camas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Index">Lista de camas</a></li>
+                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Register">Registrar nueva cama</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hoteles
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Index">Lista de hoteles</a></li>
+                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Register">Registrar nuevo hotel</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cuartos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Index">Lista de cuartos</a></li>
+                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Register">Registrar nuevo cuarto</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        var Name = User.FindFirstValue("Name");
+                        var LastName = User.FindFirstValue("LastName");
+                        var FullName = $"{LastName} {Name}";
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <div class="btn-group">
-                        <a class="nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown">Clientes</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
-                            <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
-                        </ul>
-                    </div>
+                        <a class="nav-link text-dark">Bienvenido, @FullName !</a>
+                        <form asp-controller="Login" asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                        </form>
+                    }
                 </div>
-
-
-                @if (Context.Request.Cookies.TryGetValue("JwtToken", out var token))
-                {
-                    var handler = new JwtSecurityTokenHandler();
-                    var JwtToken = handler.ReadJwtToken(token);
-                    var Name = JwtToken.Claims.FirstOrDefault(c => c.Type == "Name")?.Value.Replace("\"", "");
-                    var LastName = JwtToken.Claims.FirstOrDefault(c => c.Type == "LastName")?.Value.Replace("\"", "");
-                    var FullName = $"{LastName} {Name}";
-
-                    <a class="nav-link text-dark">Bienvenido, @FullName !</a>
-                    <form asp-controller="Login" asp-action="Logout" method="post">
-                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
-                    </form>
-                }
             </div>
         </nav>
     </header>

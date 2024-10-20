@@ -90,6 +90,7 @@ namespace HospedApp.Dapper
         #region 'RoomBed'
         public async Task<List<RoomBed>> GetRoomBeds() => await _roombedDapper.GetRoomBeds();
         public async Task CreateRoomBed(RoomBed roomBed) => await _roombedDapper.CreateRoomBed(roomBed);
+        public async Task ModifyRoomBed(RoomBed roomBed) => await _roombedDapper.ModifyRoomBed(roomBed);
         public async Task DeleteRoomBed(int IdRoom, int IdBed) => await _roombedDapper.DeleteRoomBed(IdRoom, IdBed);
         #endregion
 

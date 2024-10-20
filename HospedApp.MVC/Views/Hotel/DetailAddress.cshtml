@@ -1,53 +1,49 @@
 @using HospedApp.Core.Entities;
 @using HospedApp.Core.Entities.Relations
-@model IEnumerable<RoomBed>;
+@model IEnumerable<HotelRoom>;
 @{
-    ViewData["Title"] = "Rooms";
+    ViewData["Title"] = "Domicilio";
 }
 
 <div>
     <br>
     <div class=" text-center">
-        <h1>Buscar cuartos</h1>
+        <h1>Domicilio @ViewBag.Domicile</h1>
     </div>
     <br>
-
     <div class="input-group mb-3 input">
         <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        <a asp-action="SeeRoom" asp-route-id="@ViewBag.IdAddress" class="btn btn-primary">Agregar cuartos</a>
     </div>
     <div>
-        @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
+        @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron cuartos.</p>
         }
         else
         {
-            <h3>Lista de cuartos</h3>
+            <h3>Lista de cuartos del domicilio</h3>
             <div>
                 <table class="table table-responsive ">
                     <thead>
                         <tr>
-                            <th scope="col">Id del cuarto</th>
                             <th scope="col">Garage</th>
-                            <th scope="col">Cama</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Descripcion</th>
                             <th scope="col">Precio por noche</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Numero de cuarto del hotel</th>
                             <th scope="col">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var roomBed in Model)
+                        @foreach (var x in Model!)
                         {
                             <tr>
-                                <td>@roomBed.IdRoomBed</td>
-                                <td>@roomBed.Room!.Garage</td>
-                                <td>@roomBed.Bed!.Name</td>
-                                <td>@roomBed.BedQuantity</td>
-                                <td>@roomBed.Room.Description</td>
-                                <td>@roomBed.Room.PriceNight</td>
+                                <td>@x.Room!.Garage</td>
+                                <td>@x.Room!.PriceNight</td>
+                                <td>@x.Room!.Description</td>
+                                <td>@x.Number</td>
                                 <td>
-                                    <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
+                                    <a asp-controller="Room" asp-action="Modify" asp-route-id="@x.Room.IdRoom">Modificar</a>
                                 </td>
                             </tr>
                         }

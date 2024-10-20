@@ -1,7 +1,7 @@
 @using HospedApp.Core.Entities;
 @model Hotel;
 @{
-    var texto = Model is null ? "Modificar Hotel" :  "Alta Hotel";
+    var texto = Model!.Name != null ? "Modificar Hotel" : "Alta Hotel";
     ViewData["Title"] = texto;
 }
 
@@ -11,24 +11,28 @@
     {
         <div><input type="hidden" asp-for="@Model.IdHotel" /></div>
     }
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Nombre</label>
-        <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label">Nombre</label>
+            <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Web" class="form-label">Web</label>
+            <input asp-for="Web" class="form-control" placeholder="Ingrese su Web" required />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Star" class="form-label">Estrellas</label>
+            <input asp-for="Star" type="number" class="form-control" placeholder="Ingrese el número de estrellas" required min="1" max="5" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
+        </div>
     </div>
     <div class="mb-3">
-        <label asp-for="Web" class="form-label">Web</label>
-        <input asp-for="Web" class="form-control" placeholder="Ingrese su Web" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Star" class="form-label">Star</label>
-        <input asp-for="Star" class="form-control" placeholder="Ingrese su Star" required />
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label">Email</label>
-        <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
-    </div>
-    <div class="mb-3">
-        @if (Model is null)
+        @if (Model!.Name != null)
         {
             <button type="submit" class="btn btn-warning">@texto</button>
         }
@@ -39,7 +43,7 @@
     </div>
 </form>
 
-@if(TempData["Error"] != null)
+@if (TempData["Error"] != null)
 {
     <p>@TempData["Error"]</p>
 }

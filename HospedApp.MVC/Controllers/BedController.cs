@@ -1,31 +1,33 @@
-using System.Data;
 using HospedApp.Core;
 using HospedApp.Core.Entities;
-using HospedApp.Dapper;
-using HospedApp.MVC.Decorators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HospedApp.MVC.Controllers;
 
+[Authorize]
 public class BedController : Controller
 {
     private readonly IAdo Ado;
     public BedController(IAdo ado) => Ado = ado;
 
-    [AuthToken]
     [HttpGet]
-
     public async Task<IActionResult> Index()
     {
         var bed = await Ado.GetBeds();
-        return View(bed);
+        return View(bed.OrderByDescending(x => x.IdBed));
     }
 
-    [AuthToken]
     [HttpGet]
     public IActionResult Register(Bed bed) => View("Upsert", bed);
+    [HttpGet]
+    public async Task<IActionResult> Modify(int id)
+    {
+        var beds = await Ado.GetBeds();
+        var bed = beds.FirstOrDefault(x => x.IdBed == id);
+        return View("Upsert", bed);
+    }
 
-    [AuthToken]
     [HttpPost]
     public IActionResult Upsert(Bed bed)
     {
@@ -40,4 +42,3 @@ public class BedController : Controller
         return RedirectToAction("Index");
     }
 }
- 

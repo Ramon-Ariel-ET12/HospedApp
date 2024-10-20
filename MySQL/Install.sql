@@ -30,6 +30,7 @@ SOURCE Hotel/Insert.sql
 
 ##########################################
 
+SOURCE RoomBed/Trigger.sql
 SOURCE RoomBed/StoreProcedure.sql
 SOURCE RoomBed/Insert.sql
 
