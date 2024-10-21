@@ -30,8 +30,8 @@ public class ReservationDapper
 
     public async Task<List<Reservation>> GetReservations()
     {
-        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, RoomBed, Reservation>(_reservationQuery,
-        (reservation, client, hotel, address, roombed) =>
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Address, Hotel, RoomBed, Reservation>(_reservationQuery,
+        (reservation, client, address, hotel, roombed) =>
         {
             reservation.Client = client;
             reservation.Address = address;
@@ -45,13 +45,13 @@ public class ReservationDapper
     }
     public async Task<List<Reservation>> GetReservationsCancelled()
     {
-        var reservation = (await _connection.QueryAsync<Reservation, Client, Address, RoomBed, Hotel, Reservation>(_reservationCancelledQuery,
-        (reservation, client, address, roombed, hotel) =>
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Address, Hotel, RoomBed, Reservation>(_reservationCancelledQuery,
+        (reservation, client, address, hotel, roombed) =>
         {
             reservation.Client = client;
             reservation.Address = address;
-            reservation.RoomBed = roombed;
             reservation.Address!.Hotel = hotel;
+            reservation.RoomBed = roombed;
             return reservation;
         },
         splitOn: "IdClient, IdAddress, IdHotel, IdRoomBed"

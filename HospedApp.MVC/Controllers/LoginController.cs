@@ -21,7 +21,14 @@ public class LoginController : Controller
     }
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult Index() => View();
+    public IActionResult Index()
+    {
+        if (User.Identity!.IsAuthenticated)
+        {
+            return Redirect("/");
+        }
+        return View();
+    }
 
     [HttpPost]
     [AllowAnonymous]

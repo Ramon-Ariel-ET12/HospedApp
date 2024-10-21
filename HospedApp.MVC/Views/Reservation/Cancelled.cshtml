@@ -2,13 +2,13 @@
 @using HospedApp.Core.Entities.Relations
 @model IEnumerable<Reservation>;
 @{
-    ViewData["Title"] = "Reservas";
+    ViewData["Title"] = "Reservas canceladas";
 }
 
 <div>
     <br>
     <div class=" text-center">
-        <h1>Reservas</h1>
+        <h1>Reservas canceladas</h1>
     </div>
     <br>
 
@@ -18,11 +18,11 @@
     <div>
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
-            <p>No se encontraron reservas.</p>
+            <p>No se encontraron reservas canceladas.</p>
         }
         else
         {
-            <h3>Lista de reservas</h3>
+            <h3>Lista de reservas canceladas</h3>
             <div>
                 <table class="table table-responsive table-hover ">
                     <thead>
@@ -48,7 +48,6 @@
                                 <td>@reservation.EndDate</td>
                                 <td>
                                     <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
-                                    <a asp-controller="Reservation" asp-action="Cancell" asp-route-id="@reservation.IdReservation">Cancelar</a>
                                 </td>
                             </tr>
                         }
