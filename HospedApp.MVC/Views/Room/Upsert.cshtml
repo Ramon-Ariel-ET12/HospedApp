@@ -29,8 +29,13 @@
         </div>
         <div class="col-md-6">
             <label asp-for="Bed!.Name" class="form-label">Cama</label>
-            <input asp-for="Bed!.Name" type="text" class="form-control"
-                placeholder="Ingrese un nombre de la cama que aparece en la tabla" />
+            <select asp-for="Bed!.Name" class="form-select">
+                <option selected>Seleccione porfa</option>
+                @foreach (var bed in (IEnumerable<Bed>)ViewBag.Beds)
+                {
+                    <option value="@bed.Name">@bed.Name</option>
+                }
+            </select>
         </div>
         <div class="col-md-6">
             <label asp-for="BedQuantity" class="form-label">Cantidad de camas</label>
