@@ -78,6 +78,7 @@ public class RoomController : Controller
                 var room = await Ado.GetRooms();
                 var cuarto = room.MaxBy(x => x.IdRoom);
                 roomBed.Room!.IdRoom = cuarto!.IdRoom;
+                await Ado.ModifyRoom(roomBed.Room);
                 await Ado.ModifyRoomBed(roomBed);
                 return RedirectToAction("Index");
             }

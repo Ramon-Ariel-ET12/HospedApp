@@ -24,13 +24,15 @@
         {
             <h3>Lista de cuartos del domicilio</h3>
             <div>
-                <table class="table table-responsive ">
+                <table class="table table-responsive table-hover ">
                     <thead>
                         <tr>
                             <th scope="col">Garage</th>
                             <th scope="col">Precio por noche</th>
                             <th scope="col">Descripcion</th>
-                            <th scope="col">Numero de cuarto del hotel</th>
+                            <th scope="col">Cama</th>
+                            <th scope="col">Cantidad de cama</th>
+                            <th scope="col">Numero de cuarto</th>
                             <th scope="col">Acción</th>
                         </tr>
                     </thead>
@@ -38,12 +40,14 @@
                         @foreach (var x in Model!)
                         {
                             <tr>
-                                <td>@x.Room!.Garage</td>
-                                <td>@x.Room!.PriceNight</td>
-                                <td>@x.Room!.Description</td>
+                                <td>@x.RoomBed!.Room!.Garage</td>
+                                <td>@x.RoomBed.Room!.PriceNight</td>
+                                <td>@x.RoomBed.Room!.Description</td>
+                                <td>@x.RoomBed.Bed!.Name</td>
+                                <td>@x.RoomBed.BedQuantity</td>
                                 <td>@x.Number</td>
                                 <td>
-                                    <a asp-controller="Room" asp-action="Modify" asp-route-id="@x.Room.IdRoom">Modificar</a>
+                                    <a asp-controller="Room" asp-action="Modify" asp-route-id="@x.RoomBed.IdRoomBed">Modificar</a>
                                 </td>
                             </tr>
                         }

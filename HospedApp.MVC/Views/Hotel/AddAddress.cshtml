@@ -1,0 +1,40 @@
+@using HospedApp.Core.Entities;
+@using HospedApp.Core.Entities.Relations;
+@model Address;
+@{
+    var texto = Model != null ? "Modificar Direccion" : "Alta Direccion";
+    ViewData["Title"] = texto;
+}
+
+<form asp-controller="Hotel" asp-action="AddAddress" method="post">
+    <div asp-validation-summary="All"></div>
+    @if (Model != null)
+    {
+        <div><input type="hidden" asp-for="@Model.IdAddress" /></div>
+    }
+
+    <div><input type="hidden" asp-for="Hotel!.IdHotel" value="@ViewBag.IdHotel" /></div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Domicile" class="form-label">Domicilio</label>
+            <input asp-for="Domicile" type="text" class="form-control" placeholder="Ingrese el precio por noche" using
+                required min="0" />
+        </div>
+        <div class="col-md-6">
+            <label asp-for="PostalCode" class="form-label">Codigo postal</label>
+            <input asp-for="PostalCode" type="text" class="form-control"
+                placeholder="Ingrese un nombre de la cama que aparece en la tabla" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        @if (Model != null)
+        {
+            <button type="submit" class="btn btn-warning">@texto</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">@texto</button>
+        }
+    </div>
+</form>

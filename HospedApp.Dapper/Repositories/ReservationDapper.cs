@@ -1,6 +1,7 @@
 using System.Data;
 using Dapper;
 using HospedApp.Core.Entities;
+using HospedApp.Core.Entities.Relations;
 using MySqlConnector;
 
 namespace HospedApp.Dapper.Repositories;
@@ -11,49 +12,49 @@ public class ReservationDapper
     public ReservationDapper(IDbConnection connection) => _connection = connection;
 
     private readonly string _reservationQuery
-        = @"SELECT r.*, c.*, h.*, a.*, ro.* FROM Reservation r
-            INNER JOIN Client c ON r.IdClient = c.IdClient
-            INNER JOIN Hotel h ON r.IdHotel = h.IdHotel
+        = @"SELECT * FROM Reservation r
+            INNER JOIN Client c ON c.IdClient = r.IdClient
             INNER JOIN Address a ON a.IdAddress = r.IdAddress
-            INNER JOIN Room ro ON r.IdRoom = ro.IdRoom
+            INNER JOIN Hotel h ON h.IdHotel = a.IdHotel
+            INNER JOIN RoomBed ro ON ro.IdRoomBed = r.IdRoomBed
             WHERE r.Active = TRUE";
     private readonly string _reservationCancelledQuery
-        = @"SELECT r.*, c.*, h.*, a.*, ro.* FROM Reservation r
-            INNER JOIN Client c ON r.IdClient = c.IdClient
-            INNER JOIN Hotel h ON r.IdHotel = h.IdHotel
+        = @"SELECT * FROM Reservation r
+            INNER JOIN Client c ON c.IdClient = r.IdClient
             INNER JOIN Address a ON a.IdAddress = r.IdAddress
-            INNER JOIN Room ro ON r.IdRoom = ro.IdRoom
+            INNER JOIN Hotel h ON h.IdHotel = a.IdHotel
+            INNER JOIN RoomBed ro ON ro.IdRoomBed = r.IdRoomBed
             WHERE r.Active = FALSE";
     private readonly string _reservationCancel
         = @"UPDATE Reservation SET Active = FALSE WHERE IdReservation = @unIdReservation";
 
     public async Task<List<Reservation>> GetReservations()
     {
-        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationQuery, 
-        (reservation, client, hotel, address, room) =>
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, RoomBed, Reservation>(_reservationQuery,
+        (reservation, client, hotel, address, roombed) =>
         {
             reservation.Client = client;
-            reservation.Hotel = hotel;
             reservation.Address = address;
-            reservation.Room = room;
+            reservation.Address.Hotel = hotel;
+            reservation.RoomBed = roombed;
             return reservation;
         },
-        splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
+        splitOn: "IdClient, IdAddress, IdHotel, IdRoomBed"
         )).ToList();
         return reservation;
     }
     public async Task<List<Reservation>> GetReservationsCancelled()
     {
-        var reservation = (await _connection.QueryAsync<Reservation, Client, Hotel, Address, Room, Reservation>(_reservationCancelledQuery, 
-        (reservation, client, hotel, address, room) =>
+        var reservation = (await _connection.QueryAsync<Reservation, Client, Address, RoomBed, Hotel, Reservation>(_reservationCancelledQuery,
+        (reservation, client, address, roombed, hotel) =>
         {
             reservation.Client = client;
-            reservation.Hotel = hotel;
             reservation.Address = address;
-            reservation.Room = room;
+            reservation.RoomBed = roombed;
+            reservation.Address!.Hotel = hotel;
             return reservation;
         },
-        splitOn: "IdClient, IdHotel, IdAddress, IdRoom"
+        splitOn: "IdClient, IdAddress, IdHotel, IdRoomBed"
         )).ToList();
         return reservation;
     }
@@ -93,7 +94,7 @@ public class ReservationDapper
     }
     public async Task CancelReservation(int IdReservation)
     {
-        await _connection.ExecuteAsync(_reservationCancel, new { unIdReservation = IdReservation});
+        await _connection.ExecuteAsync(_reservationCancel, new { unIdReservation = IdReservation });
     }
 
     private static DynamicParameters ParametersReservation(Reservation reservation)
@@ -103,9 +104,8 @@ public class ReservationDapper
         if (reservation.IdReservation != 0)
             parameters.Add("@unIdReservation", reservation.IdReservation);
         parameters.Add("@unIdClient", reservation.Client!.IdClient);
-        parameters.Add("@unIdHotel", reservation.Hotel!.IdHotel);
         parameters.Add("@unIdAddress", reservation.Address!.IdAddress);
-        parameters.Add("@unIdRoom", reservation.Room!.IdRoom);
+        parameters.Add("@unIdRoomBed", reservation.RoomBed!.IdRoomBed);
         parameters.Add("@unStartDate", reservation.StartDate);
         parameters.Add("@unEndDate", reservation.EndDate);
         parameters.Add("@unClientComment", reservation.ClientComment);

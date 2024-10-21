@@ -17,18 +17,17 @@ namespace HospedApp.Test
         {
             var hotelroom = new HotelRoom()
             {
-                Hotel = new (){ IdHotel = 4},
                 Address = new(){ IdAddress = 13},
-                Room = new(){ IdRoom = 10},
+                RoomBed = new(){ IdRoomBed = 10},
             };
 
             await Ado.CreateHotelRoom(hotelroom);
 
             var hotelrooms = await Ado.GetHotelRooms();
 
-            var number = hotelrooms.Where(x => x.Hotel!.IdHotel == hotelroom.Hotel.IdHotel).Max(x => x.Number);
+            var number = hotelrooms.Where(x => x.Address!.IdAddress == hotelroom!.Address!.IdAddress).Max(x => x.Number);
 
-            await Ado.DeleteHotelRoom(hotelroom.Hotel.IdHotel, number);
+            await Ado.DeleteHotelRoom(hotelroom.Address.IdAddress, number);
         }
     }
 }

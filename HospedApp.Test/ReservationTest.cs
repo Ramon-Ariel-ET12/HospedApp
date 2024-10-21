@@ -1,4 +1,5 @@
 using HospedApp.Core.Entities;
+using HospedApp.Core.Entities.Relations;
 
 namespace HospedApp.Test;
 
@@ -18,12 +19,11 @@ public class ReservationTest : AdoTest
         var reservation = new Reservation()
         {
             Client = new Client() { IdClient = 1 },
-            Hotel = new Hotel() { IdHotel = 1 },
             Address = new Address() { IdAddress = 1 },
-            Room = new Room() { IdRoom = 1 },
-            StartDate = new(3000, 12, 1),
-            EndDate = new(3000, 12, 1),
-            ClientComment = "new DateOnly(2026, 12, 1)",
+            RoomBed = new RoomBed() { IdRoomBed = 1 },
+            StartDate = new(4000, 12, 1),
+            EndDate = new(4000, 12, 20),
+            ClientComment = "new DateOnly(4000, 12, 1)",
         };
 
         await Ado.CreateReservation(reservation);

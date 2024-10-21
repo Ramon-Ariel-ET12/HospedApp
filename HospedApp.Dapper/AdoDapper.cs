@@ -107,7 +107,7 @@ namespace HospedApp.Dapper
         #region 'HotelRoom'
         public async Task<List<HotelRoom>> GetHotelRooms() => await _hotelroomDapper.GetHotelRooms();
         public async Task CreateHotelRoom(HotelRoom hotelRoom) => await _hotelroomDapper.CreateHotelRoom(hotelRoom);
-        public async Task DeleteHotelRoom(int IdHotel, int RoomNumber) => await _hotelroomDapper.DeleteHotelRoom(IdHotel, RoomNumber);
+        public async Task DeleteHotelRoom(int IdAddress, int RoomNumber) => await _hotelroomDapper.DeleteHotelRoom(IdAddress, RoomNumber);
         #endregion
 
 

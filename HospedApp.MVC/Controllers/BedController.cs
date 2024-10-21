@@ -39,6 +39,12 @@ public class BedController : Controller
             Ado.CreateBed(bed);
             return RedirectToAction("Index");
         }
+        if (bed.IdBed != 0)
+        {
+            
+            Ado.ModifyBed(bed);
+            return RedirectToAction("Index");
+        }
         return RedirectToAction("Index");
     }
 }

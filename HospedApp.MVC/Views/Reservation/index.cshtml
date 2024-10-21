@@ -1,0 +1,59 @@
+@using HospedApp.Core.Entities;
+@using HospedApp.Core.Entities.Relations
+@model IEnumerable<Reservation>;
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<div>
+    <br>
+    <div class=" text-center">
+        <h1>Reservas</h1>
+    </div>
+    <br>
+
+    <div class="input-group mb-3 input">
+        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+    </div>
+    <div>
+        @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
+        {
+            <p>No se encontraron reservas.</p>
+        }
+        else
+        {
+            <h3>Lista de reservas</h3>
+            <div>
+                <table class="table table-responsive table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Hotel</th>
+                            <th scope="col">Domicilio</th>
+                            <th scope="col">Numero de cuarto</th>
+                            <th scope="col">Fecha de inicio</th>
+                            <th scope="col">Fecha de fin</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reservation in Model!)
+                        {
+                            <tr>
+                                <td>@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
+                                <td>@reservation.Address!.Domicile</td>
+                                <td>@reservation.RoomBed!.IdRoomBed</td>
+                                <td>@reservation.StartDate</td>
+                                <td>@reservation.EndDate</td>
+                                <td>
+                                    <a asp-action="Modify" asp-route-id="@reservation.IdReservation">Modificar</a>
+                                    <a asp-action="Detail" asp-route-id="@reservation.IdReservation">Detalle</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

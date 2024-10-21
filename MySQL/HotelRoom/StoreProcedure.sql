@@ -1,8 +1,8 @@
 DELIMITER $$
 
-CREATE PROCEDURE RegisterHotelRoom (unIdHotel INT, unIdAddress INT, unIdRoom INT)
+CREATE PROCEDURE RegisterHotelRoom (unIdAddress INT, unIdRoomBed INT)
 BEGIN
-    INSERT INTO HotelRoom (IdHotel, IdAddress, IdRoom)
-            VALUES (unIdHotel, unIdAddress, unIdRoom);
+    INSERT INTO HotelRoom (IdAddress, IdRoomBed)
+            VALUES (unIdAddress, unIdRoomBed);
 END $$
 

@@ -6,12 +6,14 @@ BEGIN
             VALUES  (unIdRoom, unIdBed, unBedQuantity);
 END $$
 
-
-
 DELIMITER $$
 
 CREATE PROCEDURE ModifyRoomBed (unIdRoomBed INT, unIdRoom INT, unIdBed INT, unBedQuantity TINYINT)
 BEGIN
-    INSERT INTO RoomBed (IdRoomBed, IdRoom, IdBed, BedQuantity)
-            VALUES  (unIdRoomBed, unIdRoom, unIdBed, unBedQuantity);
+    UPDATE RoomBed
+    SET
+        IdRoom = COALESCE(unIdRoom, IdRoom),
+        IdBed = COALESCE(unIdBed, IdBed),
+        BedQuantity = COALESCE(unBedQuantity, BedQuantity)
+    WHERE IdRoomBed = unIdRoomBed;
 END $$

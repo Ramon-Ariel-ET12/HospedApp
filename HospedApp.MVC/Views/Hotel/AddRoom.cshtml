@@ -2,24 +2,25 @@
 @using HospedApp.Core.Entities.Relations
 @model HotelRoom;
 @{
-    var texto = Model!.Address!.IdAddress != 0 ? "Agregar cuarto" : "Alta Hotel";
+    var texto = ViewBag.IdDirection != 0 ? "Agregar cuarto" : "Alta Hotel";
     ViewData["Title"] = texto;
+    Model!.Address!.IdAddress = ViewBag.IdDirection;
 }
 
 <form asp-controller="Hotel" asp-action="AddRoom" method="post">
     <div asp-validation-summary="All"></div>
     @if (Model != null)
     {
-        <div><input type="hidden" asp-for="@Model!.Address!.IdAddress" /></div>
+        <div><input type="hidden" asp-for="@Model.Address.IdAddress" value="@ViewBag.IdDirection"/></div>
     }
     <div class="row mb-3">
         <div class="col-md-6">
-            <label asp-for="Room!.IdRoom" class="form-label">Id del cuarto</label>
-            <input asp-for="Room!.IdRoom" value="" class="form-control" placeholder="Ingrese la id del cuarto que desea agregar" required />
+            <label asp-for="RoomBed!.IdRoomBed" class="form-label">Id del cuarto</label>
+            <input asp-for="RoomBed!.IdRoomBed" value="" class="form-control" placeholder="Ingrese la id del cuarto que desea agregar" required />
         </div>
     </div>
     <div class="mb-3">
-        @if (Model!.Address!.IdAddress != 0)
+        @if (ViewBag.IdDirection != 0)
         {
             <button type="submit" class="btn btn-warning">@texto</button>
         }
@@ -39,23 +40,27 @@
     <div>
         <h3>Lista de cuarto</h3>
         <div style="max-height: 300px; overflow-y: auto;">
-            <table class="table table-bordered">
+            <table class="table table-responsive table-hover">
                 <thead class="table-light">
                     <tr>
                         <th scope="col">Id del cuarto</th>
                         <th scope="col">Garage</th>
                         <th scope="col">Precio por noche</th> 
                         <th scope="col">Descripcion</th>
+                        <th scope="col">Cama</th>
+                        <th scope="col">Cantidad de camas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var x in (IEnumerable<Room>)ViewBag.Rooms)
+                    @foreach (var x in (IEnumerable<RoomBed>)ViewBag.Rooms)
                     {
                         <tr>
-                            <td>@x.IdRoom</td>
-                            <td>@x.Garage</td>
-                            <td>@x.PriceNight</td>
-                            <td>@x.Description</td>
+                            <td>@x.IdRoomBed</td>
+                            <td>@x.Room!.Garage</td>
+                            <td>@x.Room.PriceNight</td>
+                            <td>@x.Room.Description</td>
+                            <td>@x.Bed!.Name</td>
+                            <td>@x.BedQuantity</td>
                         </tr>
                     }
                 </tbody>

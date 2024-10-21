@@ -1,31 +1,40 @@
--- Reservas para los personajes
-CALL RegisterReservation(1, 1, 1, 1, '2024-10-10', '2024-10-15', '¡Este lugar es increíble! No puedo esperar para relajarme aquí, Kamehameha!');
-CALL RegisterReservation(2, 1, 1, 2, '2024-10-18', '2024-10-21', 'Espero que este hotel tenga un buen Wi-Fi, necesito ver mis correos.');
-CALL RegisterReservation(3, 1, 2, 3, '2024-10-12', '2024-10-17', 'Voy a disfrutar de este viaje, ¡prepárense para ver mi mejor lucha!');
-CALL RegisterReservation(4, 1, 2, 4, '2024-10-15', '2024-10-20', 'Reservé la suite de lujo, ¡no puedo esperar a mostrarles el diseño!');
-CALL RegisterReservation(5, 1, 3, 5, '2024-10-20', '2024-10-25', '¡Espero que tengan ensaladas deliciosas y un buen gimnasio!');
-CALL RegisterReservation(6, 2, 6, 1, '2024-10-25', '2024-10-30', 'Deben tener pastel de cangrejo, ¡será un gran viaje!');
-CALL RegisterReservation(7, 2, 7, 3, '2024-10-14', '2024-10-19', '¡Esta es la oportunidad perfecta para relajarme y no hacer nada!');
-CALL RegisterReservation(8, 2, 8, 5, '2024-10-22', '2024-10-27', 'Un viaje a la playa sería genial, ¡necesito tiempo para mí!');
-CALL RegisterReservation(9, 1, 1, 1, '2024-10-11', '2024-10-16', '¡Qué divertido será explorar nuevas aventuras aquí!');
-CALL RegisterReservation(10, 1, 1, 2, '2024-10-17', '2024-10-22', '¡Espero que el hotel tenga muchos snacks para picar!');
-CALL RegisterReservation(11, 3, 9, 7, '2024-10-30', '2024-11-05', '¿Puedo llevar a Pikachu conmigo? ¡Quiero una habitación llena de diversión!');
-CALL RegisterReservation(12, 4, 11, 11, '2024-10-03', '2024-10-10', 'No puedo esperar a hacer nuevos amigos en este lugar, ¡qué emoción!');
-CALL RegisterReservation(13, 5, 16, 1, '2024-10-05', '2024-10-08', 'Este es un gran lugar para tomar un descanso de la caza de pokémon.');
-CALL RegisterReservation(14, 4, 12, 14, '2024-10-09', '2024-10-12', 'No puedo esperar a ver qué hay de nuevo en este hotel, ¡espero muchas sorpresas!');
-CALL RegisterReservation(15, 4, 13, 15, '2024-10-19', '2024-10-23', '¡Un lugar donde puedo disfrutar de la paz, estoy listo!');
-CALL RegisterReservation(16, 8, 26, 1, '2024-10-11', '2024-10-17', 'Un hotel en la ciudad sería perfecto para tener una aventura inolvidable.');
-CALL RegisterReservation(17, 6, 19, 7, '2024-10-18', '2024-10-22', '¡Espero que haya muchas actividades aquí para mantenerme ocupado!');
-CALL RegisterReservation(18, 7, 21, 12, '2024-10-12', '2024-10-16', 'Un nuevo viaje, un nuevo destino. ¡Estoy listo para la aventura!');
-CALL RegisterReservation(19, 8, 24, 17, '2024-10-03', '2024-10-05', '¿Puede alguien decirle al gerente que estoy aquí? ¡Estoy ansioso por empezar mi aventura!');
-CALL RegisterReservation(20, 6, 18, 5, '2024-10-15', '2024-10-20', 'Estoy listo para experimentar la mejor vida en este hotel!');
-CALL RegisterReservation(21, 1, 1, 1, '2025-10-11', '2025-10-14', 'La aventura está aquí, ¡el lugar es perfecto para un viaje emocionante!');
-CALL RegisterReservation(22, 2, 6, 2, '2024-10-08', '2024-10-12', '¡He traído mis mejores películas, espero que el hotel tenga una buena TV!');
-CALL RegisterReservation(23, 6, 19, 8, '2024-10-04', '2024-10-10', 'Por favor, asegúrense de que haya un buen lugar para entrenar, ¡tengo que estar listo!');
-CALL RegisterReservation(24, 5, 16, 2, '2024-10-22', '2024-10-27', 'No puedo esperar para relajarme en la piscina, ¡será un gran momento!');
-CALL RegisterReservation(25, 5, 15, 19, '2024-10-16', '2024-10-20', 'Un lugar ideal para descansar y reflexionar sobre mi vida.');
-CALL RegisterReservation(26, 6, 20, 5, '2024-10-20', '2024-10-25', 'Las vistas deben ser geniales, ¡realmente necesito escapar!');
-CALL RegisterReservation(27, 7, 21, 11, '2024-10-01', '2024-10-05', 'El viaje comienza ahora, ¡nada como una buena aventura para inspirarse!');
-CALL RegisterReservation(28, 7, 22, 14, '2024-10-12', '2024-10-15', '¡Espero que haya buena comida y un buen spa!');
-CALL RegisterReservation(29, 8, 27, 3, '2024-10-14', '2024-10-19', 'El mundo es un lugar hermoso, ¡me alegra haber hecho esta reserva!');
-CALL RegisterReservation(30, 9, 29, 7, '2024-10-06', '2024-10-11', '¡Un lugar para crear recuerdos inolvidables, estoy emocionado!');
+-- Reservas para Goku y Vegeta
+CALL RegisterReservation(1, 1, 1, '2024-11-01', '2024-11-10', 'Entrenamiento intensivo para la próxima batalla');
+CALL RegisterReservation(3, 3, 2, '2024-11-05', '2024-11-12', 'Aumentar mi poder saiyan, nada más importa');
+
+-- Reservas para Bulma y Piccolo
+CALL RegisterReservation(4, 4, 3, '2024-11-03', '2024-11-09', 'Reunión científica para desarrollar nuevas cápsulas');
+CALL RegisterReservation(5, 5, 5, '2024-11-07', '2024-11-15', 'Meditación y entrenamiento en Namek');
+
+-- Reservas para la familia Simpson
+CALL RegisterReservation(6, 6, 3, '2024-11-10', '2024-11-17', '¡Vacaciones familiares, no hacer nada en absoluto!');
+CALL RegisterReservation(7, 7, 2, '2024-11-12', '2024-11-20', 'Relajarme después de lidiar con Homero todo el año');
+CALL RegisterReservation(8, 8, 3, '2024-11-14', '2024-11-21', 'Preparar nuevas bromas para la escuela');
+CALL RegisterReservation(9, 9, 2, '2024-11-16', '2024-11-23', 'Leer libros, tocar el saxofón y disfrutar de la paz');
+
+-- Reserva para Nelson Muntz
+CALL RegisterReservation(10, 10, 3, '2024-11-18', '2024-11-24', 'No molesten, estoy buscando mi próxima broma');
+
+-- Reservas para personajes de Dragon Ball y Pokémon
+CALL RegisterReservation(11, 11, 2, '2024-11-20', '2024-11-27', 'Entrenamiento de combate oscuro');
+CALL RegisterReservation(12, 12, 1, '2024-11-22', '2024-11-29', 'Viaje para relajarme después de entrenar con Goku');
+CALL RegisterReservation(13, 13, 4, '2024-11-25', '2024-12-02', '¡Capturar Pokémon y ganar todas las ligas!');
+CALL RegisterReservation(14, 14, 5, '2024-11-27', '2024-12-05', '¡Entrenar a los mejores Pokémon de tipo agua!');
+
+-- Reservas para personajes varios
+CALL RegisterReservation(15, 15, 3, '2024-11-29', '2024-12-07', 'Relajarse y hablar sobre Pokémon con Ash');
+CALL RegisterReservation(16, 16, 2, '2024-12-01', '2024-12-08', '¡Ser un héroe es agotador, necesito una pausa!');
+CALL RegisterReservation(17, 17, 1, '2024-12-03', '2024-12-10', 'Pasar desapercibido y disfrutar de una estancia tranquila');
+
+-- Reservas para personajes animados
+CALL RegisterReservation(18, 18, 4, '2024-12-05', '2024-12-12', 'Amo mis scooby snacks y este lugar parece tener buenos');
+CALL RegisterReservation(19, 19, 5, '2024-12-07', '2024-12-14', 'Este sitio parece estar embrujado... ¡Perfecto!');
+CALL RegisterReservation(20, 5, 5, '2024-12-09', '2024-12-16', 'Debo entrenar más y descubrir los secretos de la fuerza');
+
+-- Reservas para personajes de Disney
+CALL RegisterReservation(21, 1, 1, '2024-12-11', '2024-12-18', 'Magia y diversión, ¡vamos allá!');
+CALL RegisterReservation(22, 2, 1, '2024-12-13', '2024-12-20', 'Que empiece la aventura de los patos');
+CALL RegisterReservation(23, 3, 4, '2024-12-15', '2024-12-22', '¿Qué hay de nuevo viejo? Vacaciones perfectas');
+
+-- Reservas para McLovin
+CALL RegisterReservation(24, 4, 3, '2024-12-17', '2024-12-24', 'Porque soy McLovin, y voy a pasar las mejores vacaciones');

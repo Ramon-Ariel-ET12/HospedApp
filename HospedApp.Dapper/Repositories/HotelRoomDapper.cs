@@ -10,26 +10,30 @@ public class HotelRoomDapper
 {
     private readonly IDbConnection _connection;
     public HotelRoomDapper(IDbConnection connection) => _connection = connection;
+    private readonly string _HotelRoomDelete
+        = @"DELETE FROM HotelRoom WHERE IdAddress = @unIdAddress AND Number = @unRoomNumber";
 
     private readonly string _HotelRoomQuery
-        = @"SELECT hr.*, h.*, a.*, r.* FROM HotelRoom hr
-            INNER JOIN Hotel h ON h.IdHotel = hr.IdHotel
-            INNER JOIN Address a ON a.IdAddress = hr.IdAddress
-            INNER JOIN Room r ON r.IdRoom = hr.IdRoom";
-    private readonly string _HotelRoomDelete
-        = @"DELETE FROM HotelRoom WHERE IdHotel = @unIdhotel AND Number = @unRoomNumber";
+        = @"SELECT * FROM HotelRoom hr 
+        INNER JOIN Address a ON a.IdAddress = hr.IdAddress 
+        INNER JOIN RoomBed ro ON ro.IdRoomBed = hr.IdRoomBed
+        INNER JOIN Room r ON r.IdRoom = ro.IdRoom
+        INNER JOIN Bed b ON b.IdBed = ro.IdBed
+        INNER JOIN Hotel h ON h.IdHotel = a.IdHotel";
 
     public async Task<List<HotelRoom>> GetHotelRooms()
     {
-        var hotelroom = (await _connection.QueryAsync<HotelRoom, Hotel, Address, Room, HotelRoom>(_HotelRoomQuery,
-            (hotelroom, hotel, address, room) =>
+        var hotelroom = (await _connection.QueryAsync<HotelRoom, Address, RoomBed, Room, Bed, Hotel, HotelRoom>(_HotelRoomQuery,
+            (hotelroom, address, roombed, room, bed, hotel) =>
             {
-                hotelroom.Hotel = hotel;
                 hotelroom.Address = address;
-                hotelroom.Room = room;
+                hotelroom.RoomBed = roombed;
+                hotelroom.RoomBed.Room = room;
+                hotelroom.RoomBed.Bed = bed;
+                hotelroom.Address.Hotel = hotel;
                 return hotelroom;
             },
-            splitOn: "IdHotel, IdAddress, IdRoom"
+            splitOn: "IdAddress, IdRoomBed, IdRoom, IdBed, IdHotel"
         )).ToList();
         return hotelroom;
     }
@@ -45,18 +49,17 @@ public class HotelRoomDapper
             throw new ConstraintException(ex.Message); ;
         }
     }
-    public async Task DeleteHotelRoom(int IdHotel, int RoomNumber)
+    public async Task DeleteHotelRoom(int IdAddress, int RoomNumber)
     {
-        await _connection.ExecuteAsync(_HotelRoomDelete, new { unIdHotel = IdHotel, unRoomNumber = RoomNumber });
+        await _connection.ExecuteAsync(_HotelRoomDelete, new { unIdAddress = IdAddress, unRoomNumber = RoomNumber });
     }
 
     public static DynamicParameters ParametersHotelRoom(HotelRoom hotelRoom)
     {
         var parameters = new DynamicParameters();
 
-        parameters.Add("@unIdHotel", hotelRoom.Hotel!.IdHotel);
         parameters.Add("@unIdAddress", hotelRoom.Address!.IdAddress);
-        parameters.Add("@unIdRoom", hotelRoom.Room!.IdRoom);
+        parameters.Add("@unIdRoomBed", hotelRoom.RoomBed!.IdRoomBed);
 
         return parameters;
     }

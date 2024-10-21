@@ -2,8 +2,7 @@ namespace HospedApp.Core.Entities.Relations;
 
 public class HotelRoom
 {
-    public Hotel? Hotel { get; set; }
     public Address? Address { get; set; }
-    public Room? Room { get; set; }
+    public RoomBed? RoomBed { get; set; }
     public byte Number { get; set; }
 }
