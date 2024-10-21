@@ -112,9 +112,6 @@ public class HotelController : Controller
         var hotel = hotels.FirstOrDefault(x => x.IdHotel == id);
         return View("Upsert", hotel);
     }
-
-
-
     [HttpPost]
     public async Task<IActionResult> Upsert(Hotel hotel)
     {
