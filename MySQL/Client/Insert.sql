@@ -28,3 +28,14 @@ CALL RegisterClient(91098765, 'Mickey', 'Mouse', 'M', 'mickey.mouse@example.com'
 CALL RegisterClient(10987654, 'Donald', 'Duck', 'M', 'donald.duck@example.com', 'Quack2024');
 CALL RegisterClient(12345670, 'Bugs', 'Bunny', 'M', 'bugs.bunny@example.com', 'WhatsUpDoc');
 CALL RegisterClient(34567891, 'McLovin', '', 'M', 'mclovin.si.yo.soy.mclovin@example.com', 'asi es soy mclovin');
+CALL RegisterClient(10000001, 'Óscar', 'Córdoba', 'M', 'oscar.cordoba@example.com', 'Password1');
+CALL RegisterClient(10000002, 'Hugo', 'Ibarra', 'M', 'hugo.ibarra@example.com', 'Password2');
+CALL RegisterClient(10000003, 'Jorge', 'Bermúdez', 'M', 'jorge.bermudez@example.com', 'Password3');
+CALL RegisterClient(10000004, 'Walter', 'Samuel', 'M', 'walter.samuel@example.com', 'Password4');
+CALL RegisterClient(10000005, 'Juan', 'Riquelme', 'M', 'juan.riquelme@example.com', 'Password5');
+CALL RegisterClient(10000006, 'Marcelo', 'Delgado', 'M', 'marcelo.delgado@example.com', 'Password6');
+CALL RegisterClient(10000007, 'Guillermo', 'Barros Schelotto', 'M', 'guillermo.schelotto@example.com', 'Password7');
+CALL RegisterClient(10000008, 'Martín', 'Palermo', 'M', 'martin.palermo@example.com', 'Password8');
+CALL RegisterClient(10000009, 'Sebastián', 'Battaglia', 'M', 'sebastian.battaglia@example.com', 'Password9');
+CALL RegisterClient(10000010, 'Diego', 'Cagna', 'M', 'diego.cagna@example.com', 'Password10');
+CALL RegisterClient(10000011, 'Luis', 'Duran', 'M', 'Luis.Duran@example.com', 'Password11');

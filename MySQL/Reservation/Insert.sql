@@ -38,3 +38,16 @@ CALL RegisterReservation(23, 3, 4, '2024-12-15', '2024-12-22', '¿Qué hay de nu
 
 -- Reservas para McLovin
 CALL RegisterReservation(24, 4, 3, '2024-12-17', '2024-12-24', 'Porque soy McLovin, y voy a pasar las mejores vacaciones');
+
+-- Reservas para la plantilla de Boca 2001
+CALL RegisterReservation(31, 1, 1, '2024-12-01', '2024-12-08', '¡Vamos Boca, que no ni no!');
+CALL RegisterReservation(32, 1, 2, '2024-12-02', '2024-12-09', 'La Bombonera no tiembla, late.');
+CALL RegisterReservation(33, 2, 1, '2024-12-03', '2024-12-10', '¡Dale Bo, dale Bo, dale Boca!');
+CALL RegisterReservation(34, 2, 3, '2024-12-04', '2024-12-11', 'El que no salta, abandonó.');
+CALL RegisterReservation(35, 3, 2, '2024-12-05', '2024-12-12', 'Boca es pueblo, Boca es carnaval.');
+CALL RegisterReservation(36, 3, 4, '2024-12-06', '2024-12-13', '¡Boca, mi buen amigo!');
+CALL RegisterReservation(37, 4, 1, '2024-12-07', '2024-12-14', 'La mitad más uno.');
+CALL RegisterReservation(38, 4, 3, '2024-12-08', '2024-12-15', '¡Boca Juniors, un sentimiento!');
+CALL RegisterReservation(39, 5, 2, '2024-12-09', '2024-12-16', '¡Boca, te llevo en el alma!');
+CALL RegisterReservation(40, 5, 5, '2024-12-10', '2024-12-17', '¡Boca, el único grande!');
+CALL RegisterReservation(41, 5, 5, '2024-12-18', '2024-12-20', '¡Estoy emocionado por reservar para poder corregir exámenes y trabajos de mis alumnos!');
