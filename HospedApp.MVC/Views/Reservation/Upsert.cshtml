@@ -27,9 +27,9 @@
             <label asp-for="Address!.Domicile" class="form-label">Domicilio del hotel</label>
             <select asp-for="Address!.IdAddress" class="form-select" id="addressSelect" onchange="filterRoomBeds()">
                 <option selected>Seleccione porfa</option>
-                @foreach (var x in (IEnumerable<HotelRoom>)ViewBag.HotelRoom)
+                @foreach (var x in (IEnumerable<Address>)ViewBag.Domicile)
                 {
-                    <option value="@x.Address!.IdAddress">@string.Concat(x.Address!.Hotel!.Name,": ", x.Address!.Domicile)</option>
+                    <option value="@x!.IdAddress">@string.Concat(x!.Hotel!.Name,": ", x!.Domicile)</option>
                 }
             </select>
         </div>
