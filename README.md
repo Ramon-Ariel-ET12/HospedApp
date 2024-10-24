@@ -45,7 +45,6 @@ Antes de comenzar, asegúrate de tener instalados los siguientes componentes en 
 - **[ASP.NET MVC](https://dotnet.microsoft.com/apps/aspnet/mvc)** - Framework para estructurar la aplicación siguiendo el patrón Modelo-Vista-Controlador (MVC).
 - **[MySQL](https://www.mysql.com/)** - Base de datos relacional para almacenar la información.
 - **[Dapper](https://github.com/DapperLib/Dapper)** - Micro ORM utilizado para facilitar el acceso a la base de datos.
-- **[MySqlConnector](https://mysqlconnector.net/)** - Conector asíncrono ADO.NET para interactuar con MySQL desde .NET.
 - **[Bootstrap](https://getbootstrap.com/)** - Framework CSS utilizado para dar estilo y estructura a la interfaz.
 
 ## Autores ✒️
