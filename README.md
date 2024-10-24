@@ -53,3 +53,9 @@ Antes de comenzar, asegúrate de tener instalados los siguientes componentes en 
 * **Ramon-Ariel-ET12** - *Desarrollo Full-Stack* - [Ramon-Ariel-ET12](https://github.com/Ramon-Ariel-ET12)
 * **NoeliaAT** - *Desarrollo Back-End* - [NoeliaAT](https://github.com/NoeliaAT)
 * **ElJonsu** - *Diseñador de interfaces* - [ElJonsu](https://github.com/ElJonsu)
+
+## Desventajas del proyecto
+### 1. Uso masivo de memoria:
+El proyecto en si al consultar la base de datos, al consultar una tabla, no trae en si en un dato especifico, sino que trae todos los datos de la tabla, en caso de una relacion traerá también en esa tabla, lo que termina causando que el navegador del usuario utilice más recursos.
+### 2. Manipulación de datos:
+Al tener los datos extraidos de la base de datos, tenes que ordenarlo de mayor a menor (asi mostrando los más recientes), lo que se deberia hacerse al momento de hacer una consulta sql (traer datos de la base de datos), también aplicando el uso de JavaScript, en momentos de una dependencia de un select a otro select, tambien en la barra de busqueda que su función es ocultar los datos del usuario cuando el valor de la busqueda que no corresponda a un valor de un dato de la tabla.
