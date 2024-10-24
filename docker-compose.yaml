@@ -2,7 +2,7 @@ services:
   db:
     build:
       context: ./MySQL
-    image: MySQL-image
+    image: mysql-image
     restart: always
     environment:
         - MYSQL_ROOT_PASSWORD=root
@@ -12,7 +12,7 @@ services:
   webapi:
       build:
         context: ./
-      image: MVC-image
+      image: mvc-image
       restart: always
       environment:
         - ConnectionStrings__HospedApp=Server=db;Database=HospedApp;Username=root;Password=root
