@@ -1,0 +1,22 @@
+services:
+  db:
+    build:
+      context: ./MySQL
+    image: MySQL-image
+    restart: always
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+
+  webapi:
+      build:
+        context: ./
+      image: MVC-image
+      restart: always
+      environment:
+        - ConnectionStrings__HospedApp=Server=db;Database=HospedApp;Username=root;Password=root
+      ports:
+        - 5000:5000
+      depends_on:
+        - db
