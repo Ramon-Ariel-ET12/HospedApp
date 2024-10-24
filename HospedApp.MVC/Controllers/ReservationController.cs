@@ -29,6 +29,7 @@ public class ReservationController : Controller
         ViewBag.Domicile = await Ado.GetAddresses();
         ViewBag.Hotel = await Ado.GetHotels();
         ViewBag.Client = await Ado.GetClients();
+        ViewBag.HotelRoom = await Ado.GetHotelRooms();
         var ordenado = await Ado.GetRoomBeds();
         ViewBag.RoomBed = ordenado.OrderByDescending(x => x.IdRoomBed);
         return View("Upsert", reservation);

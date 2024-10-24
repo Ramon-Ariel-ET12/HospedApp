@@ -28,6 +28,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Cliente</th>
+                            <th scope="col">Comentario del cliente</th>
                             <th scope="col">Hotel</th>
                             <th scope="col">Domicilio</th>
                             <th scope="col">Numero de cuarto</th>
@@ -41,11 +42,12 @@
                         {
                             <tr>
                                 <td>@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
+                                <td>@reservation.ClientComment</td>
                                 <td>@reservation.Address!.Hotel!.Name</td>
                                 <td>@reservation.Address!.Domicile</td>
                                 <td>@reservation.RoomBed!.IdRoomBed</td>
-                                <td>@reservation.StartDate</td>
-                                <td>@reservation.EndDate</td>
+                                <td>@reservation.StartDate!.Value.ToShortDateString()</td>
+                                <td>@reservation.EndDate!.Value.ToShortDateString()</td>
                                 <td>
                                     <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
                                     <a asp-controller="Reservation" asp-action="Cancell" asp-route-id="@reservation.IdReservation">Cancelar</a>

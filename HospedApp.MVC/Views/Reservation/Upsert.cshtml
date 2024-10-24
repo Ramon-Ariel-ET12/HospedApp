@@ -25,12 +25,11 @@
         </div>
         <div class="col-md-6">
             <label asp-for="Address!.Domicile" class="form-label">Domicilio del hotel</label>
-            using HospedApp.Core.Entities.Relations;
-            <select asp-for="Address!.IdAddress" class="form-select">
+            <select asp-for="Address!.IdAddress" class="form-select" id="addressSelect" onchange="filterRoomBeds()">
                 <option selected>Seleccione porfa</option>
-                @foreach (var x in (IEnumerable<Address>)ViewBag.Domicile)
+                @foreach (var x in (IEnumerable<HotelRoom>)ViewBag.HotelRoom)
                 {
-                    <option value="@x.IdAddress">@string.Concat(x.Domicile)</option>
+                    <option value="@x.Address!.IdAddress">@string.Concat(x.Address!.Hotel!.Name,": ", x.Address!.Domicile)</option>
                 }
             </select>
         </div>
@@ -38,22 +37,41 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
-            <label asp-for="StartDate" class="form-label">Fecha de incio</label>
-            <input asp-for="StartDate" type="date" class="form-select">
-        </div>
-        <div class="col-md-6">
-            <label asp-for="EndDate" class="form-label">Fecha de fin</label>
-            <input asp-for="EndDate" type="date" class="form-select">
+            <label asp-for="RoomBed!.IdRoomBed" class="form-label">Cuarto</label>
+            <select asp-for="RoomBed!.IdRoomBed" class="form-select" id="roomBedSelect">
+                <option selected>Seleccione un cuarto</option>
+                @foreach (var HotelRoom in (IEnumerable<HotelRoom>)ViewBag.HotelRoom)
+                {
+                    <option value="@HotelRoom.RoomBed!.IdRoomBed" data-address-id="@HotelRoom.Address!.IdAddress">
+                        @string.Concat("Nro: ",HotelRoom.RoomBed!.IdRoomBed," ", HotelRoom!.RoomBed!.Room!.Description)
+                    </option>
+                }
+            </select>
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
-            <label asp-for="RoomBed!.IdRoomBed" class="form-label">Cuarto</label>
-            <input asp-for="RoomBed!.IdRoomBed" class="form-select">
+            <label asp-for="StartDate" class="form-label">Fecha de inicio</label>
+            <input id="StartDate" asp-for="StartDate" type="date" class="form-select" min="@DateTime.Now.ToString("yyyy-MM-dd")" required onchange="validateDates()">
         </div>
+        <div class="col-md-6">
+            <label asp-for="EndDate" class="form-label">Fecha de fin</label>
+            <input id="EndDate" asp-for="EndDate" type="date" class="form-select" min="@DateTime.Now.ToString("yyyy-MM-dd")" required onchange="validateDates()">
+        </div>
+        <script>
+            function validateDates() {
+                var startDate = new Date(document.getElementById('StartDate').value);
+                var endDate = new Date(document.getElementById('EndDate').value);
+                if (startDate > endDate) {
+                    alert("La fecha de inicio no puede ser posterior a la fecha de fin.");
+                    document.getElementById('StartDate').value = '';
+                    document.getElementById('EndDate').value = '';
+                }
+            }
+        </script>
     </div>
     <div class="mb-3">
-        <label asp-for="ClientComment" class="form-label">Description</label>
+        <label asp-for="ClientComment" class="form-label">Descripcion</label>
         <textarea asp-for="ClientComment" class="form-control" placeholder="Ingrese su descripción" required
             style="height: 100px;"></textarea>
     </div>
@@ -88,6 +106,7 @@
             <table class="table table-bordered">
                 <thead class="table-light">
                     <tr>
+                        <th scope="col">Domicilios</th>
                         <th scope="col">Numero de cuarto</th>
                         <th scope="col">Garage</th>
                         <th scope="col">Cama</th>
@@ -97,15 +116,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var roombed in (IEnumerable<RoomBed>)ViewBag.RoomBed)
+                    @foreach (var HotelRoom in (IEnumerable<HotelRoom>)ViewBag.HotelRoom)
                     {
                         <tr>
-                            <td>@roombed.IdRoomBed</td>
-                            <td>@roombed!.Room!.Garage</td>
-                            <td>@roombed!.Bed!.Name</td>
-                            <td>@roombed!.BedQuantity</td>
-                            <td>@roombed!.Room.Description</td>
-                            <td>@roombed!.Room.PriceNight</td>
+                            <td>@string.Concat(HotelRoom!.Address!.Hotel!.Name,": ", HotelRoom.Address!.Domicile)</td>
+                            <td>@HotelRoom!.RoomBed!.IdRoomBed</td>
+                            <td>@HotelRoom!.RoomBed.Room!.Garage</td>
+                            <td>@HotelRoom!.RoomBed.Bed!.Name</td>
+                            <td>@HotelRoom!.RoomBed.BedQuantity</td>
+                            <td>@HotelRoom!.RoomBed.Room.Description</td>
+                            <td>@HotelRoom!.RoomBed.Room.PriceNight</td>
                         </tr>
                     }
                 </tbody>
@@ -113,3 +133,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    function filterRoomBeds() {
+        const addressSelect = document.getElementById("addressSelect");
+        const roomBedSelect = document.getElementById("roomBedSelect");
+        const selectedAddressId = addressSelect.value;
+
+        roomBedSelect.selectedIndex = 0;
+
+        if (selectedAddressId === "") {
+            Array.from(roomBedSelect.options).forEach(option => {
+                option.style.display = "none";
+            });
+            return;
+        }
+
+        Array.from(roomBedSelect.options).forEach(option => {
+            const addressId = option.getAttribute("data-address-id");
+            option.style.display = (addressId === selectedAddressId || option.value === "") ? "block" : "none";
+        });
+    }
+
+    window.onload = filterRoomBeds;
+</script>
