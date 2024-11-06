@@ -1,64 +1,88 @@
 @using HospedApp.Core.Entities;
 @model Client;
+
 @{
     var texto = Model!.Name == null ? "Alta Cliente" : "Modificar Cliente";
     ViewData["Title"] = texto;
 }
 
-<form asp-controller="Client" asp-action="Upsert" method="post">
-    <div asp-validation-summary="All"></div>
-    @if (Model != null)
-    {
-        <div><input type="hidden" asp-for="@Model.IdClient" /></div>
-    }
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label asp-for="Dni" class="form-label">DNI</label>
-            <input asp-for="Dni" class="form-control" placeholder="Ingrese su DNI" type="text" minlength="8"
-                maxlength="8" required pattern="\d{8}" title="El dni debe contener 8 digitos" />
-        </div>
-        <div class="col-md-4">
-            <label asp-for="Name" class="form-label">Nombre</label>
-            <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
-        </div>
-        <div class="col-md-4">
-            <label asp-for="LastName" class="form-label">Apellido</label>
-            <input asp-for="LastName" class="form-control" placeholder="Ingrese su Apellido" required />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/tablas.css"> <!-- Enlaza tu archivo CSS -->
+</head>
+<body>
+    <div class="main-container"> <!-- Contenedor principal para centrar el contenido -->
+        <div class="container">
+            <form asp-controller="Client" asp-action="Upsert" method="post" class="formulario">
+                <h2 class="text-center">@texto</h2>
+                <div asp-validation-summary="All"></div>
+
+                @if (Model != null)
+                {
+                    <input type="hidden" asp-for="@Model.IdClient" />
+                }
+
+                <div class="mb-3">
+                    <label asp-for="Dni" class="form-label">DNI</label>
+                    <input asp-for="Dni" class="form-control" placeholder="Ingrese su DNI" type="text" minlength="8"
+                           maxlength="8" required pattern="\d{8}" title="El DNI debe contener 8 dígitos" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Nombre</label>
+                    <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label">Apellido</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Ingrese su Apellido" required />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Sex" class="form-label">Sexo</label>
+                    <select asp-for="Sex" class="form-select">
+                        <option selected>Seleccione su sexo</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Pass" class="form-label">Contraseña</label>
+                    @if (Model?.Name == null)
+                    {
+                        <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" required />
+                    }
+                    else
+                    {
+                        <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" />
+                    }
+                </div>
+
+                <div class="text-center mb-3">
+                    @if (Model!.Name == null)
+                    {
+                        <button type="submit" class="btn btn-primary">@texto</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-warning">@texto</button>
+                    }
+                </div>
+            </form>
         </div>
     </div>
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label asp-for="Sex" class="form-label">Sexo</label>
-            <select asp-for="Sex" class="form-select">
-                <option selected>Seleccione su sexo</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label asp-for="Email" class="form-label">Email</label>
-            <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
-        </div>
-        <div class="col-md-4">
-            <label asp-for="Pass" class="form-label">Contraseña</label>
-            @if (Model?.Name == null)
-            {
-                <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" required />
-            }
-            else
-            {
-                <input asp-for="Pass" class="form-control" type="password" placeholder="Ingrese su Contraseña" />
-            }
-        </div>
-    </div>
-    <div class="mb-3">
-        @if (Model!.Name == null)
-        {
-            <button type="submit" class="btn btn-primary">@texto</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-warning">@texto</button>
-        }
-    </div>
-</form>
+
+    <!-- Enlaza tu archivo JS si es necesario -->
+    <script src="/js/tablas.js"></script> 
+</body>
+</html>

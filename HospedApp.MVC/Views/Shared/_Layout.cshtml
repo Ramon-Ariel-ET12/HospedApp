@@ -2,7 +2,6 @@
 @using System.Security.Claims
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,97 +10,103 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HospedApp.MVC.styles.css" asp-append-version="true" />
 </head>
-
 <body>
-    <header class="sticky-top">
+    <div class="page-container"> <!-- Contenedor principal para estructura flexbox -->
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">HospedApp</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <!-- Opciones del menú desplegable para Clientes, Camas, Hoteles, Cuartos y Reservas -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Clientes
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Camas
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Bed" asp-action="Index">Lista de camas</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Bed" asp-action="Register">Registrar nueva cama</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hoteles
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Lista de hoteles</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Hotel" asp-action="Register">Registrar nuevo hotel</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Cuartos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Room" asp-action="Index">Lista de cuartos</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Room" asp-action="Register">Registrar nuevo cuarto</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Reservas
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Index">Lista de reservas</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Cancelled">Lista de reservas canceladas</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Register">Registrar nueva reserva</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- Manejo de autenticación de usuario -->
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            var Name = User.FindFirstValue("Name");
+                            var LastName = User.FindFirstValue("LastName");
+                            var FullName = $"{LastName} {Name}";
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">HospedApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Clientes
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
-                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Camas
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Index">Lista de camas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Register">Registrar nueva cama</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hoteles
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Index">Lista de hoteles</a></li>
-                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Register">Registrar nuevo hotel</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Cuartos
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Index">Lista de cuartos</a></li>
-                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Register">Registrar nuevo cuarto</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Reservas
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Index">Lista de reservas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Cancelled">Lista de reservas canceladas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Register">Registrar nueva reserva</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    @if (User.Identity!.IsAuthenticated)
-                    {
-                        var Name = User.FindFirstValue("Name");
-                        var LastName = User.FindFirstValue("LastName");
-                        var FullName = $"{LastName} {Name}";
-
-                        <a class="nav-link text-dark">Bienvenido, @FullName !</a>
-                        <form asp-controller="Login" asp-action="Logout" method="post">
-                            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
-                        </form>
-                    }
+                            <a class="nav-link text-dark">Bienvenido, @FullName!</a>
+                            <form asp-controller="Login" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                            </form>
+                        }
+                    </div>
                 </div>
+            </nav>
+        </header>
+
+        <!-- Contenido principal -->
+        <div class="container main-content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <!-- Footer posicionado al final de la página -->
+        <footer class="footer border-top text-muted">
+            <div class="container">
+                &copy; 2024 - HospedApp - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - HospedApp - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>
