@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Clientes";
 }
-    <link rel="stylesheet" href="~/css/listas.css">
-    <link rel="stylesheet" href="~/css/site.css">
-    
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
+
 <div>
     <br>
     <div class="text-center">
@@ -40,12 +40,12 @@
                         @foreach (var client in Model)
                         {
                             <tr>
-                                <td>@client.Dni</td>
-                                <td>@client.Name</td>
-                                <td>@client.LastName</td>
-                                <td>@client.Sex</td>
-                                <td>@client.Email</td>
-                                <td colspan="2">
+                                <td data-label="Dni">@client.Dni</td>
+                                <td data-label="Nombre">@client.Name</td>
+                                <td data-label="Apellido">@client.LastName</td>
+                                <td data-label="Sex">@client.Sex</td>
+                                <td data-label="Email">@client.Email</td>
+                                <td data-label="Acción" colspan="2">
                                     <a asp-action="Modify" asp-route-id="@client.IdClient">Modificar</a>
                                 </td>
                             </tr>

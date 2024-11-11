@@ -16,20 +16,6 @@
   color: #007bff;
 }
 
-/*Footer */
-.footer {
-  position: relative;
-  width: 100%;
-  line-height: 60px;
-  background-color: #000000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  text-align: center;
-  z-index: 1000;
-  color: #ffffff
-}
-
 /* Estilos adicionales para el layout */
 .a.navbar-brand {
   white-space: normal;
