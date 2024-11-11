@@ -6,92 +6,101 @@
     ViewData["Title"] = texto;
 }
 
-<form asp-controller="Room" asp-action="Upsert" method="post">
-    <div asp-validation-summary="All"></div>
-    @if (Model != null)
-    {
-        <div><input type="hidden" asp-for="@Model.IdRoomBed" /></div>
-    }
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="~/css/site.css">
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Room!.Garage" class="form-label">Garage</label>
-            <select asp-for="Room!.Garage" class="form-select">
-                <option selected>Seleccione porfa</option>
-                <option value="CON">Con garage</option>
-                <option value="SIN">Sin garage</option>
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label asp-for="Room!.PriceNight" class="form-label">Price per Night</label>
-            <input asp-for="Room!.PriceNight" type="number" class="form-control"
-                placeholder="Ingrese el precio por noche" using required min="0" />
-        </div>
-        <div class="col-md-6">
-            <label asp-for="Bed!.Name" class="form-label">Cama</label>
-            <select asp-for="Bed!.Name" class="form-select">
-                <option selected>Seleccione porfa</option>
-                @foreach (var bed in (IEnumerable<Bed>)ViewBag.Beds)
+<div class="main-container">
+    <div class="container">
+        <form asp-controller="Room" asp-action="Upsert" method="post" class="formulario">
+            <h2 class="text-center">@texto</h2>
+            <div asp-validation-summary="All"></div>
+
+            @if (Model != null)
+            {
+                <input type="hidden" asp-for="@Model.IdRoomBed" />
+            }
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Room!.Garage" class="form-label">Garage</label>
+                    <select asp-for="Room!.Garage" class="form-select">
+                        <option selected>Seleccione porfa</option>
+                        <option value="CON">Con garage</option>
+                        <option value="SIN">Sin garage</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Room!.PriceNight" class="form-label">Price per Night</label>
+                    <input asp-for="Room!.PriceNight" type="number" class="form-control"
+                        placeholder="Ingrese el precio por noche" required min="0" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Bed!.Name" class="form-label">Cama</label>
+                    <select asp-for="Bed!.Name" class="form-select">
+                        <option selected>Seleccione porfa</option>
+                        @foreach (var bed in (IEnumerable<Bed>)ViewBag.Beds)
+                        {
+                            <option value="@bed.Name">@bed.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="BedQuantity" class="form-label">Cantidad de camas</label>
+                    <input asp-for="BedQuantity" type="text" class="form-control"
+                        placeholder="Ingrese la cantidad de cama que contendrá el cuarto" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Room!.Description" class="form-label">Descripcion</label>
+                <textarea asp-for="Room!.Description" class="form-control" placeholder="Ingrese su descripción" required
+                    style="height: 100px;"></textarea>
+            </div>
+
+            <div class="text-center mb-3">
+                @if (Model!.IdRoomBed != 0)
                 {
-                    <option value="@bed.Name">@bed.Name</option>
+                    <button type="submit" class="btn btn-warning">@texto</button>
                 }
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label asp-for="BedQuantity" class="form-label">Cantidad de camas</label>
-            <input asp-for="BedQuantity" type="text" class="form-control"
-                placeholder="Ingrese la cantidad de cama que contendrá el cuarto" />
-        </div>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Room!.Description" class="form-label">Descripcion</label>
-        <textarea asp-for="Room!.Description" class="form-control" placeholder="Ingrese su descripción" required
-            style="height: 100px;"></textarea>
-    </div>
+                else
+                {
+                    <button type="submit" class="btn btn-primary">@texto</button>
+                }
+            </div>
+        </form>
 
-    <div class="mb-3">
-        @if (Model!.IdRoomBed != 0)
-        {
-            <button type="submit" class="btn btn-warning">@texto</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-primary">@texto</button>
-        }
-    </div>
-</form>
+        <div>
+            <br>
 
-<div>
-    <br>
+            <div class="input-group mb-3 input">
+                <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+            </div>
 
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
-    </div>
-
-    <div>
-        <h3>Lista de Camas</h3>
-        <div style="max-height: 300px; overflow-y: auto;">
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Pueden dormir</th>
-                        <th scope="col">Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var bed in (IEnumerable<Bed>)ViewBag.Beds)
-                    {
-                        <tr>
-                            <td>@bed.Name</td>
-                            <td>@bed.CanSleep</td>
-                            <td>
-                                <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            <div>
+                <h3>Lista de Camas</h3>
+                <div style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Pueden dormir</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var bed in (IEnumerable<Bed>)ViewBag.Beds)
+                            {
+                                <tr>
+                                    <td>@bed.Name</td>
+                                    <td>@bed.CanSleep</td>
+                                    <td>
+                                        <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

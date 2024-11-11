@@ -5,30 +5,41 @@
     ViewData["Title"] = texto;
 }
 
-<form asp-controller="Bed" asp-action="Upsert" method="post">
-    <div asp-validation-summary="All"></div>
-    @if (Model != null)
-    {
-        <div><input type="hidden" asp-for="@Model.IdBed" /></div>
-    }
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Name" class="form-label">Name</label>
-            <input asp-for="Name" class="form-control" placeholder="Ingrese su nombre" required />
-        </div>
-        <div class="col-md-6">
-            <label asp-for="CanSleep" class="form-label">CanSleep</label>
-            <input asp-for="CanSleep" class="form-control" placeholder="Cuántos duermen" required/>
-        </div>
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="~/css/site.css">
+
+<div class="main-container">
+    <div class="container">
+        <form asp-controller="Bed" asp-action="Upsert" method="post" class="formulario">
+            <h2 class="text-center">@texto</h2>
+            <div asp-validation-summary="All"></div>
+
+            @if (Model != null)
+            {
+                <input type="hidden" asp-for="@Model.IdBed" />
+            }
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label">Nombre</label>
+                    <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre de la cama" required />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="CanSleep" class="form-label">Cantidad de Personas que Duermen</label>
+                    <input asp-for="CanSleep" class="form-control" placeholder="Ingrese la cantidad de personas que duermen" required />
+                </div>
+            </div>
+
+            <div class="text-center mb-3">
+                @if (Model!.Name != null)
+                {
+                    <button type="submit" class="btn btn-warning">@texto</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary">@texto</button>
+                }
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-        @if (Model!.Name != null)
-        {
-            <button type="submit" class="btn btn-warning">@texto</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-primary">@texto</button>
-        }
-    </div>
-</form>
+</div>

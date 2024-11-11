@@ -1,21 +1,21 @@
 ﻿@using System.IdentityModel.Tokens.Jwt
 @using System.Security.Claims
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HospedApp.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HospedApp.MVC.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/_Layout.cshtml.css">
+    <link rel="stylesheet" href="~/css/site.css">
+
 </head>
-
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header class="sticky-top">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">HospedApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -25,13 +25,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Opciones del menú desplegable para Clientes, Camas, Hoteles, Cuartos y Reservas -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Clientes
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
-                                <li><a class="dropdown-item " asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
+                                <li><a class="dropdown-item" asp-controller="Client" asp-action="Index">Lista de clientes</a></li>
+                                <li><a class="dropdown-item" asp-controller="Client" asp-action="Register">Registrar nuevo cliente</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -39,8 +40,8 @@
                                 Camas
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Index">Lista de camas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Bed" asp-action="Register">Registrar nueva cama</a></li>
+                                <li><a class="dropdown-item" asp-controller="Bed" asp-action="Index">Lista de camas</a></li>
+                                <li><a class="dropdown-item" asp-controller="Bed" asp-action="Register">Registrar nueva cama</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -48,8 +49,8 @@
                                 Hoteles
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Index">Lista de hoteles</a></li>
-                                <li><a class="dropdown-item " asp-controller="Hotel" asp-action="Register">Registrar nuevo hotel</a></li>
+                                <li><a class="dropdown-item" asp-controller="Hotel" asp-action="Index">Lista de hoteles</a></li>
+                                <li><a class="dropdown-item" asp-controller="Hotel" asp-action="Register">Registrar nuevo hotel</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -57,8 +58,8 @@
                                 Cuartos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Index">Lista de cuartos</a></li>
-                                <li><a class="dropdown-item " asp-controller="Room" asp-action="Register">Registrar nuevo cuarto</a></li>
+                                <li><a class="dropdown-item" asp-controller="Room" asp-action="Index">Lista de cuartos</a></li>
+                                <li><a class="dropdown-item" asp-controller="Room" asp-action="Register">Registrar nuevo cuarto</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -66,19 +67,20 @@
                                 Reservas
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Index">Lista de reservas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Cancelled">Lista de reservas canceladas</a></li>
-                                <li><a class="dropdown-item " asp-controller="Reservation" asp-action="Register">Registrar nueva reserva</a></li>
+                                <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Index">Lista de reservas</a></li>
+                                <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Cancelled">Lista de reservas canceladas</a></li>
+                                <li><a class="dropdown-item" asp-controller="Reservation" asp-action="Register">Registrar nueva reserva</a></li>
                             </ul>
                         </li>
                     </ul>
+                    <!-- Manejo de autenticación de usuario -->
                     @if (User.Identity!.IsAuthenticated)
                     {
                         var Name = User.FindFirstValue("Name");
                         var LastName = User.FindFirstValue("LastName");
                         var FullName = $"{LastName} {Name}";
 
-                        <a class="nav-link text-dark">Bienvenido, @FullName !</a>
+                        <a class="nav-link text-light">Bienvenido, @FullName!</a> <!-- Cambia a text-light para un esquema de colores oscuros -->
                         <form asp-controller="Login" asp-action="Logout" method="post">
                             <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                         </form>
@@ -87,21 +89,25 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    
+    <!-- Contenido principal -->
+    <div class="container main-content flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <!-- Pie de página -->
+    <footer class="footer border-top text-muted mt-auto">
+        <div role="footer" class="ftr">
             &copy; 2024 - HospedApp - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>

@@ -1,71 +1,56 @@
-/* Estilos Globales */
-html {
-  font-size: 14px;
-  position: relative;
-  min-height: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
+/* Estilos generales */
 body {
-  margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #373737;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Efectos de enfoque para botones e inputs */
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.main-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* -------------------- Responsividad -------------------- */
-
-/* Para pantallas pequeñas */
-@media (max-width: 576px) {
-  .login-container {
-    padding: 15px;
-  }
-
-  .login-container h1 {
-    font-size: 1.5rem;
-  }
-
-  .login-btn {
-    font-size: 1rem;
-  }
-}
-
-/* Para pantallas grandes */
-@media (min-width: 1200px) {
-  .login-container {
+.container {
+    width: 100%;
+    max-width: 10000px;
+    background-color: #272727;
     padding: 30px;
-  }
-
-  .login-container h1 {
-    font-size: 2rem;
-  }
-
-  .login-btn {
-    font-size: 1.25rem;
-  }
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
 }
 
-
-.input {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  border-color: none;
+.footer {
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    line-height: 30px;
+    background-color: #2b2b2b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000;
+    color: #000000;
 }
 
-.table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
 }
