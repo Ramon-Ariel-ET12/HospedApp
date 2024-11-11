@@ -1,71 +1,47 @@
-/* Estilos Globales */
-html {
-  font-size: 14px;
-  position: relative;
-  min-height: 100%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
+/* Estilos generales */
 body {
-  margin-bottom: 60px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Efectos de enfoque para botones e inputs */
-.btn:focus,
-.btn:active:focus,
-.btn-link.nav-link:focus,
-.form-control:focus,
-.form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.main-container {
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* -------------------- Responsividad -------------------- */
-
-/* Para pantallas pequeñas */
-@media (max-width: 576px) {
-  .login-container {
-    padding: 15px;
-  }
-
-  .login-container h1 {
-    font-size: 1.5rem;
-  }
-
-  .login-btn {
-    font-size: 1rem;
-  }
-}
-
-/* Para pantallas grandes */
-@media (min-width: 1200px) {
-  .login-container {
+.container{
+    background-color: #202020;
     padding: 30px;
-  }
-
-  .login-container h1 {
-    font-size: 2rem;
-  }
-
-  .login-btn {
-    font-size: 1.25rem;
-  }
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.footer{
+    background-color:rgb(37, 37, 37);
+    padding: 10px;
+    
 }
 
-
-.input {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  border-color: none;
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
 }
 
-.table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
 }

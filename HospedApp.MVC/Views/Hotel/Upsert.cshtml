@@ -5,45 +5,55 @@
     ViewData["Title"] = texto;
 }
 
-<form asp-controller="Hotel" asp-action="Upsert" method="post">
-    <div asp-validation-summary="All"></div>
-    @if (Model != null)
-    {
-        <div><input type="hidden" asp-for="@Model.IdHotel" /></div>
-    }
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Name" class="form-label">Nombre</label>
-            <input asp-for="Name" class="form-control" placeholder="Ingrese su Nombre" required />
-        </div>
-        <div class="col-md-6">
-            <label asp-for="Web" class="form-label">Web</label>
-            <input asp-for="Web" class="form-control" placeholder="Ingrese su Web" required />
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label asp-for="Star" class="form-label">Estrellas</label>
-            <input asp-for="Star" type="number" class="form-control" placeholder="Ingrese el número de estrellas" required min="1" max="5" />
-        </div>
-        <div class="col-md-6">
-            <label asp-for="Email" class="form-label">Email</label>
-            <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese su Email" required />
-        </div>
-    </div>
-    <div class="mb-3">
-        @if (Model!.Name != null)
-        {
-            <button type="submit" class="btn btn-warning">@texto</button>
-        }
-        else
-        {
-            <button type="submit" class="btn btn-primary">@texto</button>
-        }
-    </div>
-</form>
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="~/css/site.css">
 
-@if (TempData["Error"] != null)
-{
-    <p>@TempData["Error"]</p>
-}
+<div class="main-container">
+    <div class="container">
+        <form asp-controller="Hotel" asp-action="Upsert" method="post" class="formulario">
+            <h2 class="text-center">@texto</h2>
+            <div asp-validation-summary="All"></div>
+
+            @if (Model != null)
+            {
+                <input type="hidden" asp-for="@Model.IdHotel" />
+            }
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label">Nombre</label>
+                    <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre del hotel" required />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Web" class="form-label">Sitio Web</label>
+                    <input asp-for="Web" class="form-control" placeholder="Ingrese el sitio web del hotel" required />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="Star" class="form-label">Estrellas</label>
+                    <input asp-for="Star" type="number" class="form-control" placeholder="Ingrese el número de estrellas" required min="1" max="5" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Ingrese el email del hotel" required />
+                </div>
+            </div>
+            <div class="text-center mb-3">
+                @if (Model!.Name != null)
+                {
+                    <button type="submit" class="btn btn-warning">@texto</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary">@texto</button>
+                }
+            </div>
+        </form>
+
+        @if (TempData["Error"] != null)
+        {
+            <p class="text-danger">@TempData["Error"]</p>
+        }
+    </div>
+</div>
