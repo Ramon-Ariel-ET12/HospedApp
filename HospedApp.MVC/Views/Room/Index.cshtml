@@ -4,13 +4,12 @@
 @{
     ViewData["Title"] = "Rooms";
 }
-
 <link rel="stylesheet" href="~/css/listas.css">
 <link rel="stylesheet" href="~/css/site.css">
 
 <div>
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Buscar cuartos</h1>
     </div>
     <br>
@@ -27,7 +26,7 @@
         {
             <h3>Lista de cuartos</h3>
             <div>
-                <table class="table table-responsive table-hover ">
+                <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Id del cuarto</th>
@@ -43,13 +42,13 @@
                         @foreach (var roomBed in Model)
                         {
                             <tr>
-                                <td>@roomBed.IdRoomBed</td>
-                                <td>@roomBed.Room!.Garage</td>
-                                <td>@roomBed.Bed!.Name</td>
-                                <td>@roomBed.BedQuantity</td>
-                                <td>@roomBed.Room.Description</td>
-                                <td>@roomBed.Room.PriceNight</td>
-                                <td>
+                                <td data-label="Id del cuarto">@roomBed.IdRoomBed</td>
+                                <td data-label="Garage">@roomBed.Room!.Garage</td>
+                                <td data-label="Cama">@roomBed.Bed!.Name</td>
+                                <td data-label="Cantidad">@roomBed.BedQuantity</td>
+                                <td data-label="Descripcion">@roomBed.Room.Description</td>
+                                <td data-label="Precio por noche">@roomBed.Room.PriceNight</td>
+                                <td data-label="Acción">
                                     <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
                                 </td>
                             </tr>

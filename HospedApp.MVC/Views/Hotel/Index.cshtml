@@ -3,13 +3,12 @@
 @{
     ViewData["Title"] = "Hotels";
 }
-
 <link rel="stylesheet" href="~/css/listas.css">
 <link rel="stylesheet" href="~/css/site.css">
 
 <div>
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Buscar hoteles</h1>
     </div>
     <br>
@@ -26,7 +25,7 @@
         {
             <h3>Lista de hoteles</h3>
             <div>
-                <table class="table table-responsive table-hover ">
+                <table class="table table-responsive table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Hotel</th>
@@ -40,11 +39,11 @@
                         @foreach (var hotel in Model)
                         {
                             <tr>
-                                <td>@hotel.Name</td>
-                                <td>@hotel.Email</td>
-                                <td>@hotel.Web</td>
-                                <td>@hotel.Star</td>
-                                <td>
+                                <td data-label="Hotel">@hotel.Name</td>
+                                <td data-label="Email">@hotel.Email</td>
+                                <td data-label="Sitio Web">@hotel.Web</td>
+                                <td data-label="Estrella">@hotel.Star</td>
+                                <td data-label="Acción">
                                     <a asp-action="Modify" asp-route-id="@hotel.IdHotel">Modificar</a>
                                     <a asp-action="Detail" asp-route-id="@hotel.IdHotel">Detalle</a>
                                 </td>

@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Beds";
 }
-    <link rel="stylesheet" href="~/css/listas.css">
-    <link rel="stylesheet" href="~/css/site.css">
-    
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
+
 <div>
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Buscar camas</h1>
         <br>
     </div>
@@ -37,9 +37,9 @@
                         @foreach (var bed in Model)
                         {
                             <tr>
-                                <td>@bed.Name</td>
-                                <td>@bed.CanSleep</td>
-                                <td>
+                                <td data-label="Nombre">@bed.Name</td>
+                                <td data-label="Pueden dormir">@bed.CanSleep</td>
+                                <td data-label="Acción">
                                     <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
                                 </td>
                             </tr>

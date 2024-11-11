@@ -8,7 +8,8 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-collapse: collapse;
-    table-layout: auto; /* Permite que el navegador ajuste automáticamente el ancho de las columnas */
+    table-layout: auto;
+    /* Permite que el navegador ajuste automáticamente el ancho de las columnas */
 }
 
 .table th,
@@ -19,7 +20,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px; /* Ajusta según tus necesidades */
+    max-width: 200px;
+    /* Ajusta según tus necesidades */
 }
 
 .table thead th {
@@ -40,6 +42,20 @@
 
 .table a:hover {
     text-decoration: underline;
+}
+
+/* Responsividad para tablas */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.9rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 9px;
+        width: 100vw;
+        /* Ajusta según tus necesidades */
+    }
 }
 
 @media (max-width: 480px) {
@@ -66,28 +82,31 @@
     .table tr {
         border: 1px solid #333;
         margin-bottom: 10px;
-        padding: 10px; /* Añade padding para mejorar la legibilidad */
+        padding: 10px;
+        /* Añade padding para mejorar la legibilidad */
     }
 
     .table td {
         border: none;
         border-bottom: 1px solid #333;
         position: relative;
-        padding-left: 50%;
+        padding-left: 45%;
         white-space: normal;
         text-align: left;
-        padding: 6px 0; /* Añade padding para mejorar la legibilidad */
+        padding: 6px 10;
+        /* Añade padding para mejorar la legibilidad */
     }
 
     .table td:before {
         position: absolute;
         top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
+        left: 1px;
+        width: 15%;
+        padding-right: 40%;
         white-space: nowrap;
         text-align: left;
-        font-weight: 600;
+        font-weight: 6000;
+        margin-right: 2px;
         content: attr(data-label);
     }
 }
