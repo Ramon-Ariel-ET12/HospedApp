@@ -1,4 +1,4 @@
-/* Estilos para las tablas */
+/* Estilos generales para las tablas */
 .table {
     width: 100%;
     margin-bottom: 1rem;
@@ -9,9 +9,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-collapse: collapse;
     table-layout: auto;
-    /* Permite que el navegador ajuste automáticamente el ancho de las columnas */
 }
 
+/* Estilos para las celdas de la tabla */
 .table th,
 .table td {
     padding: 12px;
@@ -21,20 +21,22 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
-    /* Ajusta según tus necesidades */
 }
 
+/* Estilos para el encabezado de la tabla */
 .table thead th {
     background-color: #333;
     color: #ffffff;
     font-weight: 600;
 }
 
+/* Estilos para el efecto hover en las filas de la tabla */
 .table tbody tr:hover {
     background-color: #d0d0d0;
     cursor: pointer;
 }
 
+/* Estilos para los enlaces dentro de la tabla */
 .table a {
     color: #007bff;
     text-decoration: none;
@@ -44,69 +46,45 @@
     text-decoration: underline;
 }
 
-/* Responsividad para tablas */
+/* Estilos para hacer la tabla responsive */
 @media (max-width: 768px) {
-    .table {
-        font-size: 0.9rem;
-    }
-
-    .table th,
-    .table td {
-        padding: 9px;
-        width: 100vw;
-        /* Ajusta según tus necesidades */
-    }
-}
-
-@media (max-width: 480px) {
-    .table {
-        font-size: 0.8rem;
-        display: block;
+    .table-responsive {
         overflow-x: auto;
     }
 
-    .table thead,
-    .table tbody,
-    .table th,
-    .table td,
-    .table tr {
+    .table-responsive table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-responsive thead {
+        display: none;
+    }
+
+    .table-responsive tbody tr {
         display: block;
-    }
-
-    .table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    .table tr {
+        margin-bottom: 1rem;
         border: 1px solid #333;
-        margin-bottom: 10px;
-        padding: 10px;
-        /* Añade padding para mejorar la legibilidad */
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
 
-    .table td {
-        border: none;
+    .table-responsive tbody td {
+        display: block;
+        text-align: right;
+        padding: 12px;
         border-bottom: 1px solid #333;
-        position: relative;
-        padding-left: 45%;
-        white-space: normal;
-        text-align: left;
-        padding: 6px 10;
-        /* Añade padding para mejorar la legibilidad */
     }
 
-    .table td:before {
-        position: absolute;
-        top: 6px;
-        left: 1px;
-        width: 15%;
-        padding-right: 40%;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: 6000;
-        margin-right: 2px;
+    .table-responsive tbody td::before {
         content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    .table-responsive tbody td:last-child {
+        border-bottom: 0;
     }
 }
