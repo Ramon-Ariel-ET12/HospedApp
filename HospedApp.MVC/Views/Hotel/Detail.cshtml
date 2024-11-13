@@ -4,19 +4,24 @@
 @{
     ViewData["Title"] = "Hotels";
 }
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
 
-<div>
+<div class="container">
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Hotel @Model.Name</h1>
+        <br>
     </div>
-    <br>
-
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
-        <a asp-action="RegisterAddress" asp-route-id="@Model.IdHotel" class="btn btn-primary">Agregar domicilio</a>
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <a asp-action="RegisterAddress" asp-route-id="@Model.IdHotel" class="btn btn-primary">Agregar domicilio</a>
+        </div>
     </div>
-    <div>
+    <div class="overflow-x-auto">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron hoteles.</p>
@@ -24,29 +29,23 @@
         else
         {
             <h3>Lista del hotel</h3>
-            <div>
-                <table class="table table-responsive table-hover ">
-                    <thead>
-                        <tr>
-                            <th scope="col">Domicilio</th>
-                            <th scope="col">Codigo postal</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var address in Model!.Addresses!)
-                        {
-                            <tr>
-                                <td>@address.Domicile</td>
-                                <td>@address.PostalCode</td>
-                                <td>
-                                    <a asp-action="ModifyAddress" asp-route-id="@address.IdAddress">Modificar</a>
-                                    <a asp-action="DetailAddress" asp-route-id="@address.IdAddress">Detalle</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="container ds">
+                <div class="row">
+                    <div class="col-2 d-none d-sm-block">Domicilio</div>
+                    <div class="col-2 d-none d-sm-block">Codigo postal</div>
+                    <div class="col-2 d-none d-sm-block">Acción</div>
+                </div>
+                @foreach (var address in Model!.Addresses!)
+                {
+                    <div class="row">
+                        <div class="col-12 col-md-2" data-label="Domicilio">@address.Domicile</div>
+                        <div class="col-12 col-md-2" data-label="Codigo postal">@address.PostalCode</div>
+                        <div class="col-12 col-md-2" data-label="Acción">
+                            <a asp-action="ModifyAddress" asp-route-id="@address.IdAddress">Modificar</a>
+                            <a asp-action="DetailAddress" asp-route-id="@address.IdAddress">Detalle</a>
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>

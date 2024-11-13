@@ -25,10 +25,25 @@
 - **Reservas**: Permite reservar cuartos en un hotel, especificando el período de la estancia (fecha de inicio y fin), asegurando la disponibilidad para el cliente.
 
 ## Comenzando 🚀
+Clonar el repositorio
 
 ```
 git clone https://github.com/Ramon-Ariel-ET12/HospedApp/
 ```
+
+Una vez ubicado en la carpeta MySQL iniciar la conexion a la base de datos
+```
+mysql -u [Nombre de usuario] -p
+```
+Inicializar los scripts
+```
+source Install.sql
+```
+Iniciar el proyecto
+```
+dotnet run
+```
+
 
 ### Pre-requisitos 📋
 
