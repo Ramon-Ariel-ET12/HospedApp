@@ -10,10 +10,17 @@
         text-align: right;
         font-weight: 400;
         color: #ffffff;
+        white-space: nowrap; /* Evitar que el contenido se divida en varias líneas */
+        overflow: hidden; /* Ocultar contenido que excede el ancho */
+        text-overflow: ellipsis; /* Mostrar puntos suspensivos para contenido oculto */
     }
 
     .table-responsive tbody td:last-child {
         border-bottom: 0;
+    }
+
+    .container.ds .row {
+        margin-bottom: 1rem; /* Espacio entre filas en pantallas pequeñas */
     }
 }
 
@@ -36,6 +43,9 @@
     border-right: 1px solid #444;
     text-align: center; /* Centrar el contenido */
     flex: 1; /* Asegurar que los divs se ajusten al contenido */
+    white-space: nowrap; /* Evitar que el contenido se divida en varias líneas */
+    overflow: hidden; /* Ocultar contenido que excede el ancho */
+    text-overflow: ellipsis; /* Mostrar puntos suspensivos para contenido oculto */
 }
 
 .container.ds .row > div:last-child {
