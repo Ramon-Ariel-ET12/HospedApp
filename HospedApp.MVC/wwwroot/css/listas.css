@@ -83,6 +83,17 @@
         font-weight: bold;
         color: #ffffff;
     }
+    .col-12::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #ffffff;
+    }
+    .col-12{
+        text-align: right;
+        font-weight: 400;
+        color: #ffffff;
+    }
 
     .table-responsive tbody td:last-child {
         border-bottom: 0;
