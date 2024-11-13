@@ -6,17 +6,18 @@
 <link rel="stylesheet" href="~/css/listas.css">
 <link rel="stylesheet" href="~/css/site.css">
 
-<div>
+<div class="container">
     <br>
     <div class="text-center">
-        <h1>Buscar camas</h1>
+        <h1>Buscar Camas</h1>
         <br>
     </div>
-
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
     </div>
-    <div>
+    <div class="overflow-x-auto">
         @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron camas.</p>
@@ -24,28 +25,22 @@
         else
         {
             <h3>Lista de Camas</h3>
-            <div>
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Pueden dormir</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var bed in Model)
-                        {
-                            <tr>
-                                <td data-label="Nombre">@bed.Name</td>
-                                <td data-label="Pueden dormir">@bed.CanSleep</td>
-                                <td data-label="Acción">
-                                    <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="container ds">
+                <div class="row">
+                    <div class="col-2 d-none d-sm-block">Nombre</div>
+                    <div class="col-2 d-none d-sm-block">Pueden dormir</div>
+                    <div class="col-2 d-none d-sm-block">Acción</div>
+                </div>
+                @foreach (var bed in Model)
+                {
+                    <div class="row">
+                        <div class="col-12 col-md-2" data-label="Nombre">@bed.Name</div>
+                        <div class="col-12 col-md-2" data-label="Pueden dormir">@bed.CanSleep</div>
+                        <div class="col-12 col-md-2" data-label="Acción">
+                            <a asp-action="Modify" asp-route-id="@bed.IdBed">Modificar</a>
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>

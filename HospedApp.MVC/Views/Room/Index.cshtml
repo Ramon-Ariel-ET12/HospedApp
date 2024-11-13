@@ -7,54 +7,49 @@
 <link rel="stylesheet" href="~/css/listas.css">
 <link rel="stylesheet" href="~/css/site.css">
 
-<div>
+<div class="container">
     <br>
     <div class="text-center">
-        <h1>Buscar cuartos</h1>
+        <h1>Buscar Cuartos</h1>
+        <br>
     </div>
-    <br>
-
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
     </div>
-    <div>
+    <div class="overflow-x-auto">
         @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron cuartos.</p>
         }
         else
         {
-            <h3>Lista de cuartos</h3>
-            <div>
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Id del cuarto</th>
-                            <th scope="col">Garage</th>
-                            <th scope="col">Cama</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Precio por noche</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var roomBed in Model)
-                        {
-                            <tr>
-                                <td data-label="Id del cuarto">@roomBed.IdRoomBed</td>
-                                <td data-label="Garage">@roomBed.Room!.Garage</td>
-                                <td data-label="Cama">@roomBed.Bed!.Name</td>
-                                <td data-label="Cantidad">@roomBed.BedQuantity</td>
-                                <td data-label="Descripcion">@roomBed.Room.Description</td>
-                                <td data-label="Precio por noche">@roomBed.Room.PriceNight</td>
-                                <td data-label="Acción">
-                                    <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <h3>Lista de Cuartos</h3>
+            <div class="container ds">
+                <div class="row">
+                    <div class="col-2 d-none d-sm-block">Id del cuarto</div>
+                    <div class="col-2 d-none d-sm-block">Garage</div>
+                    <div class="col-2 d-none d-sm-block">Cama</div>
+                    <div class="col-2 d-none d-sm-block">Cantidad</div>
+                    <div class="col-2 d-none d-sm-block">Descripcion</div>
+                    <div class="col-2 d-none d-sm-block">Precio por noche</div>
+                    <div class="col-2 d-none d-sm-block">Acción</div>
+                </div>
+                @foreach (var roomBed in Model)
+                {
+                    <div class="row">
+                        <div class="col-12 col-md-2" data-label="Id del cuarto">@roomBed.IdRoomBed</div>
+                        <div class="col-12 col-md-2" data-label="Garage">@roomBed.Room!.Garage</div>
+                        <div class="col-12 col-md-2" data-label="Cama">@roomBed.Bed!.Name</div>
+                        <div class="col-12 col-md-2" data-label="Cantidad">@roomBed.BedQuantity</div>
+                        <div class="col-12 col-md-2" data-label="Descripcion">@roomBed.Room.Description</div>
+                        <div class="col-12 col-md-2" data-label="Precio por noche">@roomBed.Room.PriceNight</div>
+                        <div class="col-12 col-md-2" data-label="Acción">
+                            <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>

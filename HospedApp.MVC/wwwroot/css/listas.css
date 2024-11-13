@@ -1,95 +1,12 @@
-/* Estilos generales para las tablas */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #ffffff;
-    background-color: #1e1e1e;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    border-collapse: collapse;
-    table-layout: auto;
-}
-
-/* Estilos para las celdas de la tabla */
-.table th,
-.table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
-}
-
-/* Estilos para el encabezado de la tabla */
-.table thead th {
-    background-color: #333;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-/* Estilos para el efecto hover en las filas de la tabla */
-.table tbody tr:hover {
-    background-color: #d0d0d0;
-    cursor: pointer;
-}
-
-/* Estilos para los enlaces dentro de la tabla */
-.table a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.table a:hover {
-    text-decoration: underline;
-}
-
 /* Estilos para hacer la tabla responsive */
 @media (max-width: 768px) {
-    .table-responsive {
-        overflow-x: auto;
-    }
-
-    .table-responsive table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .table-responsive thead {
-        display: none;
-    }
-
-    .table-responsive tbody tr {
-        display: block;
-        margin-bottom: 1rem;
-        border: 1px solid #333;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    .table-responsive tbody td {
-        display: block;
-        text-align: right;
-        padding: 12px;
-        border-bottom: 1px solid #333;
-    }
-
-    .table-responsive tbody td::before {
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-        color: #ffffff;
-    }
     .col-12::before {
         content: attr(data-label);
         float: left;
         font-weight: bold;
         color: #ffffff;
     }
-    .col-12{
+    .col-12 {
         text-align: right;
         font-weight: 400;
         color: #ffffff;
@@ -97,5 +14,98 @@
 
     .table-responsive tbody td:last-child {
         border-bottom: 0;
+    }
+}
+
+/* Estilos para la tabla en pantallas grandes */
+.container.ds .row {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #444;
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.container.ds .row:first-child {
+    border-top: 1px solid #444;
+    background-color: #2b2b2b;
+}
+
+.container.ds .row > div {
+    padding: 0.75rem;
+    border-right: 1px solid #444;
+    text-align: center; /* Centrar el contenido */
+    flex: 1; /* Asegurar que los divs se ajusten al contenido */
+}
+
+.container.ds .row > div:last-child {
+    border-right: 0;
+}
+
+.container.ds .row:first-child > div {
+    font-weight: bold;
+}
+
+/* Estilos para el dark mode */
+body {
+    background-color: #1c2833;
+    color: #ffffff;
+}
+
+.container {
+    background-color: #2b2b2b;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.text-center {
+    color: #ffffff;
+}
+
+.form-control {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.form-control::placeholder {
+    color: #bdc3c7;
+}
+
+.form-control:focus {
+    background-color: #34495e;
+    color: #ffffff;
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+/* Estilos adicionales para pantallas pequeñas */
+@media (max-width: 768px) {
+    .container.ds .row {
+        flex-direction: column;
+    }
+
+    .container.ds .row > div {
+        border-right: none;
+        border-bottom: 1px solid #444;
+        text-align: right;
+    }
+
+    .container.ds .row > div:last-child {
+        border-bottom: none;
+    }
+
+    .container.ds .row:first-child > div {
+        background-color: #34495e;
     }
 }

@@ -7,17 +7,18 @@
 <link rel="stylesheet" href="~/css/listas.css">
 <link rel="stylesheet" href="~/css/site.css">
 
-<div>
+<div class="container">
     <br>
     <div class="text-center">
         <h1>Reservas canceladas</h1>
+        <br>
     </div>
-    <br>
-
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
     </div>
-    <div>
+    <div class="overflow-x-auto">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron reservas canceladas.</p>
@@ -25,36 +26,30 @@
         else
         {
             <h3>Lista de reservas canceladas</h3>
-            <div>
-                <table class="table table-responsive table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Hotel</th>
-                            <th scope="col">Domicilio</th>
-                            <th scope="col">Numero de cuarto</th>
-                            <th scope="col">Fecha de inicio</th>
-                            <th scope="col">Fecha de fin</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var reservation in Model!)
-                        {
-                            <tr>
-                                <td data-label="Cliente">@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
-                                <td data-label="Hotel">@reservation.Address!.Hotel!.Name</td>
-                                <td data-label="Domicilio">@reservation.Address!.Domicile</td>
-                                <td data-label="Numero de cuarto">@reservation.RoomBed!.IdRoomBed</td>
-                                <td data-label="Fecha de inicio">@reservation.StartDate!.Value.ToShortDateString()</td>
-                                <td data-label="Fecha de fin">@reservation.EndDate!.Value.ToShortDateString()</td>
-                                <td data-label="Acción">
-                                    <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="container ds">
+                <div class="row">
+                    <div class="col-2 d-none d-sm-block">Cliente</div>
+                    <div class="col-2 d-none d-sm-block">Hotel</div>
+                    <div class="col-2 d-none d-sm-block">Domicilio</div>
+                    <div class="col-2 d-none d-sm-block">Numero de cuarto</div>
+                    <div class="col-2 d-none d-sm-block">Fecha de inicio</div>
+                    <div class="col-2 d-none d-sm-block">Fecha de fin</div>
+                    <div class="col-2 d-none d-sm-block">Acción</div>
+                </div>
+                @foreach (var reservation in Model!)
+                {
+                    <div class="row">
+                        <div class="col-12 col-md-2" data-label="Cliente">@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</div>
+                        <div class="col-12 col-md-2" data-label="Hotel">@reservation.Address!.Hotel!.Name</div>
+                        <div class="col-12 col-md-2" data-label="Domicilio">@reservation.Address!.Domicile</div>
+                        <div class="col-12 col-md-2" data-label="Numero de cuarto">@reservation.RoomBed!.IdRoomBed</div>
+                        <div class="col-12 col-md-2" data-label="Fecha de inicio">@reservation.StartDate!.Value.ToShortDateString()</div>
+                        <div class="col-12 col-md-2" data-label="Fecha de fin">@reservation.EndDate!.Value.ToShortDateString()</div>
+                        <div class="col-12 col-md-2" data-label="Acción">
+                            <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>
