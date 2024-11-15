@@ -73,14 +73,14 @@
                             </ul>
                         </li>
                     </ul>
-                    <!-- Manejo de autenticación de usuario -->
+                    
                     @if (User.Identity!.IsAuthenticated)
                     {
                         var Name = User.FindFirstValue("Name");
                         var LastName = User.FindFirstValue("LastName");
                         var FullName = $"{LastName} {Name}";
 
-                        <a class="nav-link text-light">Bienvenido, @FullName!</a> <!-- Cambia a text-light para un esquema de colores oscuros -->
+                        <a class="nav-link text-light">Bienvenido, @FullName!</a>
                         <form asp-controller="Login" asp-action="Logout" method="post">
                             <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                         </form>

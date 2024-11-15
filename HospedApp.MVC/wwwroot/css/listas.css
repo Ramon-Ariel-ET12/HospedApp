@@ -1,93 +1,104 @@
-/* Estilos para las tablas */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #ffffff;
-    background-color: #1e1e1e;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    border-collapse: collapse;
-    table-layout: auto; /* Permite que el navegador ajuste automáticamente el ancho de las columnas */
+/* Estilos generales */
+body {
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
 }
 
-.table th,
-.table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-    white-space: nowrap;
+.container h1, .container h3 {
+    color: #f8f8f8;
+}
+
+/* Caja de búsqueda */
+#searchInput {
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: 1px solid #5a5a5a;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4), inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+}
+
+#searchInput::placeholder {
+    color: #a8a8a8;
+}
+
+#searchInput:focus {
+    border-color: #7a7a7a;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Tabla de clientes */
+.table {
+    background-color: #3a3a3a;
+    color: #e8e8e8;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px; /* Ajusta según tus necesidades */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.table thead {
+    background-color: #4a4a4a;
+    color: #f5f5f5;
+    box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.4);
 }
 
 .table thead th {
-    background-color: #333;
-    color: #ffffff;
-    font-weight: 600;
+    padding: 12px;
+    border-bottom: 2px solid #5a5a5a;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #3c3c3c;
 }
 
 .table tbody tr:hover {
-    background-color: #d0d0d0;
-    cursor: pointer;
+    background-color: #4e4e4e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.table tbody td, .table tbody th {
+    padding: 12px;
+    border-top: 1px solid #5a5a5a;
 }
 
 .table a {
-    color: #007bff;
+    color: #c2c2c2;
     text-decoration: none;
 }
 
 .table a:hover {
+    color: #f0f0f0;
     text-decoration: underline;
 }
 
-@media (max-width: 480px) {
+/* Mensaje de "No se encontraron clientes" */
+p {
+    color: #e8e8e8;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Encabezados y subtítulos */
+.text-center h1, .text-center h3 {
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor para desplazamiento en dispositivos móviles */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
     .table {
-        font-size: 0.8rem;
-        display: block;
-        overflow-x: auto;
-    }
-
-    .table thead,
-    .table tbody,
-    .table th,
-    .table td,
-    .table tr {
-        display: block;
-    }
-
-    .table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    .table tr {
-        border: 1px solid #333;
-        margin-bottom: 10px;
-        padding: 10px; /* Añade padding para mejorar la legibilidad */
-    }
-
-    .table td {
-        border: none;
-        border-bottom: 1px solid #333;
-        position: relative;
-        padding-left: 50%;
-        white-space: normal;
-        text-align: left;
-        padding: 6px 0; /* Añade padding para mejorar la legibilidad */
-    }
-
-    .table td:before {
-        position: absolute;
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: 600;
-        content: attr(data-label);
+        width: 100%; 
     }
 }

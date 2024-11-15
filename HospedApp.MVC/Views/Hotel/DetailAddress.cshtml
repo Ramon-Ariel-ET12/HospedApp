@@ -5,17 +5,28 @@
     ViewData["Title"] = "Domicilio";
 }
 
-<div>
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
+
+<div class="container">
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Domicilio @ViewBag.Domicile</h1>
+        <br>
     </div>
-    <br>
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
-        <a asp-action="SeeRoom" asp-route-id="@ViewBag.IdAddress" class="btn btn-primary">Agregar cuartos</a>
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
     </div>
-    <div>
+    
+    <div class="row justify-content-center">
+        <div class="mb-3 col-12 col-md-4 text-center">
+            <a asp-action="SeeRoom" asp-route-id="@ViewBag.IdAddress" class="btn btn-primary">Agregar cuartos</a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron cuartos.</p>
@@ -23,37 +34,35 @@
         else
         {
             <h3>Lista de cuartos del domicilio</h3>
-            <div>
-                <table class="table table-responsive table-hover ">
-                    <thead>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Garage</th>
+                        <th>Precio por noche</th>
+                        <th>Descripción</th>
+                        <th>Cama</th>
+                        <th>Cantidad de cama</th>
+                        <th>Número de cuarto</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in Model)
+                    {
                         <tr>
-                            <th scope="col">Garage</th>
-                            <th scope="col">Precio por noche</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Cama</th>
-                            <th scope="col">Cantidad de cama</th>
-                            <th scope="col">Numero de cuarto</th>
-                            <th scope="col">Acción</th>
+                            <td>@x.RoomBed!.Room!.Garage</td>
+                            <td>@x.RoomBed.Room!.PriceNight</td>
+                            <td>@x.RoomBed.Room!.Description</td>
+                            <td>@x.RoomBed.Bed!.Name</td>
+                            <td>@x.RoomBed.BedQuantity</td>
+                            <td>@x.Number</td>
+                            <td>
+                                <a asp-controller="Room" asp-action="Modify" asp-route-id="@x.RoomBed.IdRoomBed">Modificar</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var x in Model!)
-                        {
-                            <tr>
-                                <td>@x.RoomBed!.Room!.Garage</td>
-                                <td>@x.RoomBed.Room!.PriceNight</td>
-                                <td>@x.RoomBed.Room!.Description</td>
-                                <td>@x.RoomBed.Bed!.Name</td>
-                                <td>@x.RoomBed.BedQuantity</td>
-                                <td>@x.Number</td>
-                                <td>
-                                    <a asp-controller="Room" asp-action="Modify" asp-route-id="@x.RoomBed.IdRoomBed">Modificar</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>

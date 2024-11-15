@@ -4,58 +4,57 @@
 @{
     ViewData["Title"] = "Reservas canceladas";
 }
-    <link rel="stylesheet" href="~/css/listas.css">
-    <link rel="stylesheet" href="~/css/site.css">
-    
-<div>
-    <br>
-    <div class=" text-center">
-        <h1>Reservas canceladas</h1>
-    </div>
-    <br>
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
 
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h1>Lista de Reservas Canceladas</h1>
+        <br>
     </div>
-    <div>
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
+    </div>
+
+    <div class="table-responsive">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron reservas canceladas.</p>
         }
         else
         {
-            <h3>Lista de reservas canceladas</h3>
-            <div>
-                <table class="table table-responsive table-hover ">
-                    <thead>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Hotel</th>
+                        <th>Domicilio</th>
+                        <th>Numero de cuarto</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model!)
+                    {
                         <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Hotel</th>
-                            <th scope="col">Domicilio</th>
-                            <th scope="col">Numero de cuarto</th>
-                            <th scope="col">Fecha de inicio</th>
-                            <th scope="col">Fecha de fin</th>
-                            <th scope="col">Acción</th>
+                            <td>@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
+                            <td>@reservation.Address!.Hotel!.Name</td>
+                            <td>@reservation.Address!.Domicile</td>
+                            <td>@reservation.RoomBed!.IdRoomBed</td>
+                            <td>@reservation.StartDate!.Value.ToShortDateString()</td>
+                            <td>@reservation.EndDate!.Value.ToShortDateString()</td>
+                            <td>
+                                <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var reservation in Model!)
-                        {
-                            <tr>
-                                <td>@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
-                                <td>@reservation.Address!.Hotel!.Name</td>
-                                <td>@reservation.Address!.Domicile</td>
-                                <td>@reservation.RoomBed!.IdRoomBed</td>
-                                <td>@reservation.StartDate</td>
-                                <td>@reservation.EndDate</td>
-                                <td>
-                                    <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>

@@ -4,50 +4,56 @@
 @{
     ViewData["Title"] = "Hotels";
 }
+<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/site.css">
 
-<div>
+<div class="container">
     <br>
-    <div class=" text-center">
+    <div class="text-center">
         <h1>Hotel @Model.Name</h1>
+        <br>
     </div>
-    <br>
-
-    <div class="input-group mb-3 input">
-        <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
-        <a asp-action="RegisterAddress" asp-route-id="@Model.IdHotel" class="btn btn-primary">Agregar domicilio</a>
+    <div class="row justify-content-center">
+        <div class="mb-3 input col-12 col-md-4 align-self-center">
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
+        </div>
     </div>
-    <div>
+    <div class="row justify-content-center">
+        <div class="mb-3 col-12 col-md-4 text-center">
+            <a asp-action="RegisterAddress" asp-route-id="@Model.IdHotel" class="btn btn-primary">Agregar domicilio</a>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron hoteles.</p>
         }
         else
         {
-            <h3>Lista del hotel</h3>
-            <div>
-                <table class="table table-responsive table-hover ">
-                    <thead>
+            <h3>Lista de domicilios del hotel</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Domicilio</th>
+                        <th>Código postal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var address in Model.Addresses)
+                    {
                         <tr>
-                            <th scope="col">Domicilio</th>
-                            <th scope="col">Codigo postal</th>
-                            <th scope="col">Acción</th>
+                            <td>@address.Domicile</td>
+                            <td>@address.PostalCode</td>
+                            <td>
+                                <a asp-action="ModifyAddress" asp-route-id="@address.IdAddress">Modificar</a> |
+                                <a asp-action="DetailAddress" asp-route-id="@address.IdAddress">Detalle</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var address in Model!.Addresses!)
-                        {
-                            <tr>
-                                <td>@address.Domicile</td>
-                                <td>@address.PostalCode</td>
-                                <td>
-                                    <a asp-action="ModifyAddress" asp-route-id="@address.IdAddress">Modificar</a>
-                                    <a asp-action="DetailAddress" asp-route-id="@address.IdAddress">Detalle</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>
