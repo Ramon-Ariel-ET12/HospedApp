@@ -10,17 +10,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden; /* Asegura que no haya scroll horizontal */
+    overflow-x: hidden;
 }
 
 .main-container {
     flex: 1;
     width: 100%;
-    max-width: 550px; /* Ajustado para un valor más razonable */
+    max-width: 550px;
     margin: 0 auto;
     padding: 35px;
     box-sizing: border-box;
-    background-color: #272727; /* Fondo del contenido */
+    background-color: #272727;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     overflow-x: auto;
 }

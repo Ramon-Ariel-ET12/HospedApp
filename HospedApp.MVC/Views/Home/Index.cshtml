@@ -2,10 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-<link rel="stylesheet" href="~/css/listas.css">
+<link rel="stylesheet" href="~/css/index.css">
 <link rel="stylesheet" href="~/css/site.css">
 
-<div class="text-center">
-    <h1 class="display-4">HospedApp</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="dashboard">
+    <h1>Bienvenido, Este es el resumen del Mes</h1>
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>Ocupación Actual</h3>
+            <p>80% Habitaciones Ocupadas</p>
+        </div>
+        <div class="stat-card">
+            <h3>Ingresos del Mes</h3>
+            <p>$150,000</p>
+        </div>
+        <div class="stat-card">
+            <h3>Próximos Check-Ins</h3>
+            <p>15</p>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <h2>Accesos Rápidos</h2>
+    <a href="/Reservation/Register" class="btn btn-primary">Nueva Reserva</a>
+    <a href="/Room/Index" class="btn btn-secondary">Gestión de Habitaciones</a>
+    <a href="/Client/Index" class="btn btn-secondary">Gestión de Clientes</a>
+    </div>
+
 </div>

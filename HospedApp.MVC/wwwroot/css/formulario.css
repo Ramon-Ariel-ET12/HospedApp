@@ -32,7 +32,7 @@ body {
     border-spacing: 0;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 100%;
 }
 
@@ -43,8 +43,8 @@ body {
 }
 
 .table th {
-    color: #dcdcdc; /* Un gris claro para mejorar la visibilidad */
-    background-color: #4a4a4a; /* Fondo oscuro para las cabeceras */
+    color: #dcdcdc;
+    background-color: #4a4a4a;
     padding: 12px;
     border-bottom: 2px solid #5a5a5a;
 }
@@ -85,10 +85,10 @@ p {
     margin-top: 20px;
 }
 
-/* Contenedor para desplazamiento en dispositivos móviles */
+
 .table-responsive {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en móviles */
+    -webkit-overflow-scrolling: touch; 
 }
 
 /* Estilo del formulario */
@@ -114,7 +114,7 @@ p {
     margin-bottom: 5px;
     display: block;
     color: #ffffff;
-    line-height: 1.5; /* Alineación adecuada */
+    line-height: 1.5;
 }
 
 .formulario input,
@@ -122,9 +122,9 @@ p {
 .formulario textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #5a5a5a;  /* Cambio a borde gris */
+    border: 1px solid #5a5a5a;  
     border-radius: 8px;
-    background-color: #3a3a3a;  /* Fondo oscuro similar al de las tablas */
+    background-color: #3a3a3a;
     color: #f0f0f0;
     font-family: 'Montserrat', sans-serif;
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
@@ -175,7 +175,7 @@ p {
 /* Responsividad para tablas y formularios */
 @media (max-width: 768px) {
     .table {
-        width: 100%; /* Asegura que la tabla ocupe todo el ancho dentro del contenedor de desplazamiento */
+        width: 100%;
     }
 
     .formulario input,

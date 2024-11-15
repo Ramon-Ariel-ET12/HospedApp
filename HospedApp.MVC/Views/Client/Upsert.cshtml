@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css">
     
 <body>
-    <div class="main-container"> <!-- Contenedor principal para centrar el contenido -->
+    <div class="main-container">
         <div class="container">
             <form asp-controller="Client" asp-action="Upsert" method="post" class="formulario">
                 <h2 class="text-center">@texto</h2>
@@ -40,7 +40,7 @@
                 <div class="mb-3">
                     <label asp-for="Sex" class="form-label">Sexo</label>
                     <select asp-for="Sex" class="form-select">
-                        <option selected>Seleccione su sexo</option>
+                        <option selected>Seleccionar</option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
                     </select>
