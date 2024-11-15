@@ -123,8 +123,8 @@ h1 {
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los botones horizontalmente */
-    justify-content: center; /* Asegura que se alineen en el centro también verticalmente */
+    align-items: center;
+    justify-content: center; 
 }
 
 .quick-actions h2 {
@@ -134,15 +134,15 @@ h1 {
 }
 
 .quick-actions .btn {
-    margin: 10px 0; /* Margen en todos los lados del botón */
+    margin: 10px 0; 
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: block;
-    width: 200px; /* Fija un tamaño consistente para todos los botones */
-    text-align: center; /* Asegura que el texto se centre dentro del botón */
+    width: 200px;
+    text-align: center;
 }
 
 .quick-actions .btn-primary {
@@ -176,7 +176,7 @@ h1 {
     }
 
     .quick-actions .btn {
-        width: 100%; /* En pantallas pequeñas, los botones ocupan todo el ancho */
+        width: 100%;
         margin-bottom: 10px;
     }
 }
