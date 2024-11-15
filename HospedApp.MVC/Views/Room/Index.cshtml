@@ -18,7 +18,8 @@
             <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
         </div>
     </div>
-    <div class="overflow-x-auto">
+    
+    <div class="table-responsive">
         @if (Model.Count() == 0 && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron cuartos.</p>
@@ -26,31 +27,35 @@
         else
         {
             <h3>Lista de Cuartos</h3>
-            <div class="container ds">
-                <div class="row">
-                    <div class="col-2 d-none d-sm-block">Id del cuarto</div>
-                    <div class="col-2 d-none d-sm-block">Garage</div>
-                    <div class="col-2 d-none d-sm-block">Cama</div>
-                    <div class="col-2 d-none d-sm-block">Cantidad</div>
-                    <div class="col-2 d-none d-sm-block">Descripcion</div>
-                    <div class="col-2 d-none d-sm-block">Precio por noche</div>
-                    <div class="col-2 d-none d-sm-block">Acción</div>
-                </div>
-                @foreach (var roomBed in Model)
-                {
-                    <div class="row">
-                        <div class="col-12 col-md-2" data-label="Id del cuarto">@roomBed.IdRoomBed</div>
-                        <div class="col-12 col-md-2" data-label="Garage">@roomBed.Room!.Garage</div>
-                        <div class="col-12 col-md-2" data-label="Cama">@roomBed.Bed!.Name</div>
-                        <div class="col-12 col-md-2" data-label="Cantidad">@roomBed.BedQuantity</div>
-                        <div class="col-12 col-md-2" data-label="Descripcion">@roomBed.Room.Description</div>
-                        <div class="col-12 col-md-2" data-label="Precio por noche">@roomBed.Room.PriceNight</div>
-                        <div class="col-12 col-md-2" data-label="Acción">
-                            <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
-                        </div>
-                    </div>
-                }
-            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id del cuarto</th>
+                        <th>Garage</th>
+                        <th>Cama</th>
+                        <th>Cantidad</th>
+                        <th>Descripcion</th>
+                        <th>Precio por noche</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var roomBed in Model)
+                    {
+                        <tr>
+                            <td>@roomBed.IdRoomBed</td>
+                            <td>@roomBed.Room!.Garage</td>
+                            <td>@roomBed.Bed!.Name</td>
+                            <td>@roomBed.BedQuantity</td>
+                            <td>@roomBed.Room.Description</td>
+                            <td>@roomBed.Room.PriceNight</td>
+                            <td>
+                                <a asp-action="Modify" asp-route-id="@roomBed.IdRoomBed">Modificar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>

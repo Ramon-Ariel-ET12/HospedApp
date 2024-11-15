@@ -8,8 +8,8 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - Mi Proyecto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/login.css" />
 </head>
@@ -21,12 +21,12 @@
         <form asp-controller="Login" asp-action="Login" method="post" class="login-form">
             <div class="form-group">
                 <label for="email">Ingrese su correo</label>
-                <input type="text" name="email" class="form-input" placeholder="Correo electrónico" required>
+                <input type="text" name="email" class="form-input" placeholder="Correo electrónico" required />
             </div>
 
             <div class="form-group">
                 <label for="password">Ingrese su contraseña</label>
-                <input type="password" name="password" class="form-input" placeholder="Contraseña" required>
+                <input type="password" name="password" class="form-input" placeholder="Contraseña" required />
             </div>
 
             <button type="submit" class="login-btn">Iniciar Sesión</button>

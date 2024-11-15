@@ -19,15 +19,14 @@
                 <input type="hidden" asp-for="@Model.IdBed" />
             }
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label asp-for="Name" class="form-label">Nombre</label>
-                    <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre de la cama" required />
-                </div>
-                <div class="col-md-6">
-                    <label asp-for="CanSleep" class="form-label">Cantidad de Personas que Duermen</label>
-                    <input asp-for="CanSleep" class="form-control" placeholder="Ingrese la cantidad de personas que duermen" required />
-                </div>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Nombre</label>
+                <input asp-for="Name" class="form-control" placeholder="Ingrese el nombre de la cama" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CanSleep" class="form-label">Cantidad de Personas que Duermen</label>
+                <input asp-for="CanSleep" class="form-control" placeholder="Ingrese la cantidad de personas que duermen" required />
             </div>
 
             <div class="text-center mb-3">

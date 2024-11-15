@@ -18,42 +18,47 @@
             <input id="searchInput" type="text" class="form-control" placeholder="Buscar">
         </div>
     </div>
-    <div class="overflow-x-auto">
+
+    <div class="table-responsive">
         @if (Model == null && Context.Request.RouteValues.ContainsKey("Index"))
         {
             <p>No se encontraron reservas.</p>
         }
         else
         {
-            <h3>Lista de reservas</h3>
-            <div class="container ds">
-                <div class="row">
-                    <div class="col-2 d-none d-sm-block">Cliente</div>
-                    <div class="col-2 d-none d-sm-block">Comentario del cliente</div>
-                    <div class="col-2 d-none d-sm-block">Hotel</div>
-                    <div class="col-2 d-none d-sm-block">Domicilio</div>
-                    <div class="col-2 d-none d-sm-block">Numero de cuarto</div>
-                    <div class="col-2 d-none d-sm-block">Fecha de inicio</div>
-                    <div class="col-2 d-none d-sm-block">Fecha de fin</div>
-                    <div class="col-2 d-none d-sm-block">Acción</div>
-                </div>
-                @foreach (var reservation in Model!)
-                {
-                    <div class="row">
-                        <div class="col-12 col-md-2" data-label="Cliente">@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</div>
-                        <div class="col-12 col-md-2" data-label="Comentario del cliente">@reservation.ClientComment</div>
-                        <div class="col-12 col-md-2" data-label="Hotel">@reservation.Address!.Hotel!.Name</div>
-                        <div class="col-12 col-md-2" data-label="Domicilio">@reservation.Address!.Domicile</div>
-                        <div class="col-12 col-md-2" data-label="Numero de cuarto">@reservation.RoomBed!.IdRoomBed</div>
-                        <div class="col-12 col-md-2" data-label="Fecha de inicio">@reservation.StartDate!.Value.ToShortDateString()</div>
-                        <div class="col-12 col-md-2" data-label="Fecha de fin">@reservation.EndDate!.Value.ToShortDateString()</div>
-                        <div class="col-12 col-md-2" data-label="Acción">
-                            <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a>
-                            <a asp-controller="Reservation" asp-action="Cancell" asp-route-id="@reservation.IdReservation">Cancelar</a>
-                        </div>
-                    </div>
-                }
-            </div>
+            <h3>Lista de Reservas</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Comentario del cliente</th>
+                        <th>Hotel</th>
+                        <th>Domicilio</th>
+                        <th>Numero de cuarto</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model!)
+                    {
+                        <tr>
+                            <td>@string.Concat(reservation.Client!.LastName, " ", reservation.Client!.Name)</td>
+                            <td>@reservation.ClientComment</td>
+                            <td>@reservation.Address!.Hotel!.Name</td>
+                            <td>@reservation.Address!.Domicile</td>
+                            <td>@reservation.RoomBed!.IdRoomBed</td>
+                            <td>@reservation.StartDate!.Value.ToShortDateString()</td>
+                            <td>@reservation.EndDate!.Value.ToShortDateString()</td>
+                            <td>
+                                <a asp-controller="Hotel" asp-action="DetailAddress" asp-route-id="@reservation.Address.IdAddress">Detalle</a> |
+                                <a asp-controller="Reservation" asp-action="Cancell" asp-route-id="@reservation.IdReservation">Cancelar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>
